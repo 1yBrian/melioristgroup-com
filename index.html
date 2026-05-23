@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meliorist Group — The better version is already there.</title>
+<meta name="description" content="Meliorist Group is the practice of Meliorism 2.0 — the philosophy that the better version of a person, a business, or a life is already present. The work is clearing what hides it.">
+<meta property="og:title" content="Meliorist Group — The better version is already there.">
+<meta property="og:description" content="A philosophy and practice for trainers, advisors, and business owners who want their work to count — not just perform.">
+<meta property="og:url" content="https://melioristgroup.com">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ── Reset ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Design System ── */
+:root {
+  --forest:       #1a3d2e;
+  --forest-mid:   #2d5c46;
+  --forest-hi:    #3d7a5c;
+  --forest-pale:  #e8f0eb;
+  --moss:         #4a6e52;
+  --gold:         #b8965a;
+  --gold-hi:      #d4af72;
+  --gold-dim:     rgba(184,150,90,0.25);
+  --cream:        #faf7f2;
+  --warm:         #f4efe4;
+  --white:        #ffffff;
+  --text:         #1a1a14;
+  --text-mid:     #3a3a2e;
+  --text-muted:   #7a7a6a;
+  --border:       rgba(26,61,46,0.12);
+  --border-gold:  rgba(184,150,90,0.3);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4 {
+  font-family: 'Spectral', Georgia, serif;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── Navigation ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(26,61,46,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,150,90,0.2);
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-mark {
+  font-family: 'Spectral', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-hi);
+  letter-spacing: 0.02em;
+}
+
+.nav-mark span {
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(250,247,242,0.75);
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--gold-hi); }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  background: var(--forest);
+  display: flex;
+  align-items: center;
+  padding: 100px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(45,92,70,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 80% 30%, rgba(184,150,90,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 860px;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.4s forwards;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-hi);
+  font-weight: 400;
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: rgba(250,247,242,0.72);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.6s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.8s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--forest);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover { background: var(--gold-hi); transform: translateY(-1px); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(250,247,242,0.3);
+  color: rgba(250,247,242,0.85);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold-hi);
+}
+
+/* ── Scroll indicator ── */
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(250,247,242,0.4);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.5s forwards;
+}
+
+.scroll-line {
+  width: 36px;
+  height: 1px;
+  background: rgba(250,247,242,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--gold);
+  animation: scanline 2s ease 2s infinite;
+}
+
+/* ── Section base ── */
+section { padding: 100px 40px; }
+
+.section-inner { max-width: 900px; margin: 0 auto; }
+
+/* ── Frame section ── */
+.frame-section {
+  background: var(--cream);
+  padding: 100px 40px;
+}
+
+.frame-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+  margin-bottom: 24px;
+}
+
+.frame-section h2 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 300;
+  color: var(--forest);
+  margin-bottom: 28px;
+  line-height: 1.25;
+}
+
+.frame-section h2 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--forest-mid);
+}
+
+.frame-body {
+  max-width: 640px;
+}
+
+.frame-body p {
+  font-size: 1.1rem;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+  line-height: 1.75;
+}
+
+.frame-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--forest);
+  border-bottom: 1px solid var(--border-gold);
+  padding-bottom: 2px;
+  margin-top: 8px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.frame-link:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── Pull quote ── */
+.pull-quote {
+  background: var(--forest);
+  padding: 80px 40px;
+}
+
+.pull-quote blockquote {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pull-quote blockquote p {
+  font-family: 'Spectral', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.pull-quote blockquote cite {
+  font-size: 0.85rem;
+  font-style: normal;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Five W's teaser ── */
+.ws-section {
+  background: var(--warm);
+  padding: 100px 40px;
+}
+
+.ws-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  margin: 48px 0 40px;
+}
+
+.w-card {
+  background: var(--white);
+  padding: 32px 20px 28px;
+  position: relative;
+  border-top: 3px solid transparent;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.w-card:hover {
+  border-color: var(--forest-mid);
+  transform: translateY(-3px);
+}
+
+.w-symbol {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.w-name {
+  font-family: 'Spectral', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 8px;
+}
+
+.w-desc {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ── Paths section ── */
+.paths-section {
+  background: var(--cream);
+  padding: 100px 40px;
+}
+
+.paths-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 48px;
+}
+
+.path-card {
+  background: var(--white);
+  padding: 44px 32px;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.path-card:hover { border-color: var(--gold); }
+
+.path-num {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.path-card h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 14px;
+}
+
+.path-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.path-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--forest-mid);
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.path-link:hover { color: var(--gold); }
+
+/* ── Signal-OS strip ── */
+.signal-strip {
+  background: var(--forest-mid);
+  padding: 64px 40px;
+}
+
+.signal-strip-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.signal-strip h3 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--cream);
+}
+
+.signal-strip h3 em { font-style: italic; color: var(--gold-hi); }
+
+.signal-strip p {
+  font-size: 0.95rem;
+  color: rgba(250,247,242,0.65);
+  margin-top: 6px;
+  max-width: 440px;
+}
+
+.signal-strip a {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--gold);
+  color: var(--gold-hi);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 13px 24px;
+  border-radius: 2px;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, color 0.2s;
+}
+
+.signal-strip a:hover {
+  background: var(--gold);
+  color: var(--forest);
+}
+
+/* ── Footer ── */
+footer {
+  background: var(--forest);
+  padding: 56px 40px;
+  border-top: 1px solid rgba(184,150,90,0.15);
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-mark {
+  font-family: 'Spectral', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold-hi);
+  margin-bottom: 10px;
+}
+
+.footer-tagline {
+  font-size: 0.85rem;
+  color: rgba(250,247,242,0.45);
+  font-style: italic;
+  max-width: 220px;
+  line-height: 1.5;
+}
+
+.footer-links {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.footer-col h4 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.footer-col li a {
+  font-size: 0.88rem;
+  color: rgba(250,247,242,0.55);
+  transition: color 0.2s;
+}
+
+.footer-col li a:hover { color: rgba(250,247,242,0.9); }
+
+.footer-bottom {
+  max-width: 900px;
+  margin: 40px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(250,247,242,0.08);
+  font-size: 0.78rem;
+  color: rgba(250,247,242,0.3);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scanline {
+  0%   { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ── Reveal on scroll ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  section, .frame-section, .pull-quote, .paths-section, .ws-section { padding: 72px 24px; }
+  .hero { padding: 100px 24px 72px; }
+  .ws-grid { grid-template-columns: repeat(2, 1fr); }
+  .w-card:last-child { grid-column: 1 / -1; }
+  .paths-grid { grid-template-columns: 1fr; }
+  .signal-strip { padding: 48px 24px; }
+  footer { padding: 48px 24px; }
+  .footer-inner { flex-direction: column; gap: 32px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="/" class="nav-mark">Meliorist <span>Group</span></a>
+  <ul class="nav-links">
+    <li><a href="/meliorism">Philosophy</a></li>
+    <li><a href="/origins">Origins</a></li>
+    <li><a href="/you">The Five W's</a></li>
+    <li><a href="/work-with-brian">Work Together</a></li>
+    <li><a href="/signal-os">Signal-OS</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Meliorism 2.0</p>
+    <h1>There is nothing<br><em>fundamentally broken</em><br>about you.</h1>
+    <p class="hero-sub">
+      The better version — of your work, your leadership, your life — is already present.
+      The work is not addition. It is precision removal of what hides it.
+    </p>
+    <div class="hero-actions">
+      <a href="/meliorism" class="btn-primary">The Philosophy →</a>
+      <a href="/you" class="btn-ghost">Explore the Five W's</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- The Frame -->
+<div class="frame-section">
+  <div class="section-inner">
+    <p class="frame-label reveal">What we're doing here</p>
+    <h2 class="reveal">Meliorism is the bet that<br>the world can be <em>made better</em>.</h2>
+    <div class="frame-body">
+      <p class="reveal">The original insight is old: human effort matters. The world is not fixed. What is, is not what must be. That is Meliorism 1.0 — and it is still true.</p>
+      <p class="reveal">The deeper layer is what changes everything. The better version is not something you build toward. It is already latent — in a person, in a practice, in a business, in a community. The work is not construction. It is <em>revelation</em>.</p>
+      <p class="reveal">Michelangelo said he did not sculpt. He removed everything that wasn't David. That is the whole practice in one sentence.</p>
+      <a href="/meliorism" class="frame-link reveal">Read the full philosophy →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Pull Quote -->
+<div class="pull-quote">
+  <blockquote>
+    <p>"You don't build a better self. You uncover the one that was always there — by removing what was never really you."</p>
+    <cite>— Brian Oney</cite>
+  </blockquote>
+</div>
+
+<!-- The Five W's -->
+<div class="ws-section">
+  <div class="section-inner">
+    <p class="frame-label reveal">A framework for the whole life</p>
+    <h2 class="reveal" style="font-family:'Spectral',serif; font-size:clamp(1.9rem,4vw,2.6rem); font-weight:300; color:var(--forest); margin-bottom:20px; line-height:1.25;">The Five W's</h2>
+    <p class="reveal" style="color:var(--text-muted); max-width:520px; margin-bottom:0;">
+      Five areas of life where the better version is already waiting. Not a scorecard — a lens. Where's the most friction right now?
+    </p>
+
+    <div class="ws-grid">
+      <div class="w-card reveal">
+        <span class="w-symbol">💪</span>
+        <div class="w-name">Wellness</div>
+        <p class="w-desc">Physical health, sleep, the body as foundation. When this is broken, nothing else fully works.</p>
+      </div>
+      <div class="w-card reveal">
+        <span class="w-symbol">❤️</span>
+        <div class="w-name">With-ness</div>
+        <p class="w-desc">Relationships, presence, the quality of being with the people who matter most.</p>
+      </div>
+      <div class="w-card reveal">
+        <span class="w-symbol">💰</span>
+        <div class="w-name">Wealth</div>
+        <p class="w-desc">Income, financial health, creating value that outlives each engagement — not extracting it.</p>
+      </div>
+      <div class="w-card reveal">
+        <span class="w-symbol">🧠</span>
+        <div class="w-name">Wisdom</div>
+        <p class="w-desc">Knowledge that compounds. Learning that changes how you see, not just what you know.</p>
+      </div>
+      <div class="w-card reveal">
+        <span class="w-symbol">✨</span>
+        <div class="w-name">Wonder</div>
+        <p class="w-desc">Joy, creative energy, play. The W that keeps the others honest. Without it, the rest is performance.</p>
+      </div>
+    </div>
+
+    <a href="/you" class="frame-link reveal">Explore what's possible in each W →</a>
+  </div>
+</div>
+
+<!-- Three Paths -->
+<div class="paths-section">
+  <div class="section-inner">
+    <p class="frame-label reveal">Ways to go deeper</p>
+    <h2 class="reveal" style="font-family:'Spectral',serif; font-size:clamp(1.9rem,4vw,2.6rem); font-weight:300; color:var(--forest); line-height:1.25;">Three ways to engage<br><em>with the work</em>.</h2>
+
+    <div class="paths-grid">
+      <div class="path-card reveal">
+        <span class="path-num">Advisory</span>
+        <h3>One-on-one with Brian</h3>
+        <p>Strategic advisory for business owners who want a partner who finds the real problem — not just the one presenting itself. Limited availability.</p>
+        <a href="/work-with-brian" class="path-link">Learn more →</a>
+      </div>
+      <div class="path-card reveal">
+        <span class="path-num">Community</span>
+        <h3>Cracking the Code</h3>
+        <p>Weekly sessions for business owners growing in an AI-accelerated world. Live Mondays 9AM. A room of people doing the actual work.</p>
+        <a href="https://ctcsp.com" target="_blank" rel="noopener" class="path-link">Join the room →</a>
+      </div>
+      <div class="path-card reveal">
+        <span class="path-num">Daily Briefing</span>
+        <h3>Signal-OS</h3>
+        <p>Applied research for practitioners — trainers, coaches, educators, leaders. A different visual world every issue. Built on peer-reviewed research.</p>
+        <a href="/signal-os" class="path-link">Explore Signal-OS →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Signal-OS Strip -->
+<div class="signal-strip">
+  <div class="signal-strip-inner">
+    <div>
+      <h3>Join <em>Signal-OS</em> — the daily briefing.</h3>
+      <p>Research for the room you're in. Delivered each morning to practitioners who want their methods to keep working.</p>
+    </div>
+    <a href="https://signal-os.org" target="_blank" rel="noopener">Read today's issue →</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-mark">Meliorist Group</div>
+      <p class="footer-tagline">The better version is already there. The work is clearing what hides it.</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Philosophy</h4>
+        <ul>
+          <li><a href="/meliorism">What is Meliorism 2.0</a></li>
+          <li><a href="/origins">Inspirations & Origins</a></li>
+          <li><a href="/you">The Five W's</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Work</h4>
+        <ul>
+          <li><a href="/work-with-brian">Work with Brian</a></li>
+          <li><a href="https://ctcsp.com" target="_blank" rel="noopener">CTCSP</a></li>
+          <li><a href="/signal-os">Signal-OS</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://brianoney.com" target="_blank" rel="noopener">brianoney.com</a></li>
+          <li><a href="https://meliorism.substack.com" target="_blank" rel="noopener">Substack</a></li>
+          <li><a href="mailto:brian@melioristgroup.com">brian@melioristgroup.com</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Meliorist Group · Brian Oney · San Francisco, CA
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+  { threshold: 0.12 }
+);
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

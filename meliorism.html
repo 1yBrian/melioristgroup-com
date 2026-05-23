@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is Meliorism 2.0 — Meliorist Group</title>
+<meta name="description" content="Meliorism 2.0 is the philosophy that the better version of a person, practice, or world is already present — and that the work is precision removal of what hides it. The Michelangelo Effect in practice.">
+<meta property="og:title" content="What is Meliorism 2.0">
+<meta property="og:description" content="Not optimism. Not hustle. Precision. The better version is already there.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --forest:       #1a3d2e;
+  --forest-mid:   #2d5c46;
+  --forest-hi:    #3d7a5c;
+  --forest-pale:  #e8f0eb;
+  --gold:         #b8965a;
+  --gold-hi:      #d4af72;
+  --cream:        #faf7f2;
+  --warm:         #f4efe4;
+  --white:        #ffffff;
+  --text:         #1a1a14;
+  --text-mid:     #3a3a2e;
+  --text-muted:   #7a7a6a;
+  --border:       rgba(26,61,46,0.12);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.7; color: var(--text); background: var(--cream); }
+
+h1, h2, h3, h4 { font-family: 'Spectral', Georgia, serif; line-height: 1.2; font-weight: 600; }
+a { color: inherit; text-decoration: none; }
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(26,61,46,0.97); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,150,90,0.2);
+  padding: 0 40px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-mark { font-family: 'Spectral', serif; font-size: 1.05rem; font-weight: 600; color: var(--gold-hi); letter-spacing: 0.02em; }
+.nav-mark span { font-weight: 300; opacity: 0.8; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 0.85rem; font-weight: 500; color: rgba(250,247,242,0.75); letter-spacing: 0.03em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold-hi); }
+
+/* Page header */
+.page-header {
+  background: var(--forest);
+  padding: 140px 40px 80px;
+}
+.page-header-inner { max-width: 760px; }
+.page-eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.page-header h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 300; color: var(--cream); line-height: 1.15; margin-bottom: 24px; }
+.page-header h1 em { font-style: italic; color: var(--gold-hi); }
+.page-header .lead { font-size: 1.15rem; color: rgba(250,247,242,0.7); max-width: 540px; font-weight: 300; line-height: 1.75; }
+
+/* Reading body */
+.reading { padding: 80px 40px; background: var(--cream); }
+.reading-inner { max-width: 680px; margin: 0 auto; }
+
+.reading h2 {
+  font-size: 1.7rem; font-weight: 400; color: var(--forest);
+  margin: 60px 0 20px; line-height: 1.3;
+}
+.reading h2:first-of-type { margin-top: 0; }
+
+.reading p { color: var(--text-mid); margin-bottom: 20px; line-height: 1.8; font-size: 1.05rem; }
+
+.reading em { font-style: italic; }
+
+.reading strong { font-weight: 600; color: var(--text); }
+
+/* Pull quote inline */
+.inline-quote {
+  border-left: 3px solid var(--gold);
+  padding: 20px 28px;
+  margin: 40px 0;
+  background: var(--warm);
+}
+.inline-quote p {
+  font-family: 'Spectral', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--forest);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Section break */
+.section-divider {
+  display: flex; align-items: center; gap: 16px;
+  margin: 60px 0 40px;
+  color: var(--text-muted); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.section-divider::before, .section-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* The two architectures visual */
+.architecture {
+  background: var(--forest);
+  padding: 72px 40px;
+}
+.arch-inner { max-width: 760px; margin: 0 auto; }
+.arch-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; }
+.arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.arch-card { background: rgba(255,255,255,0.05); padding: 36px 28px; border-top: 2px solid rgba(184,150,90,0.3); }
+.arch-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--gold-hi); margin-bottom: 12px; letter-spacing: 0.02em; }
+.arch-card p { font-size: 0.95rem; color: rgba(250,247,242,0.65); line-height: 1.65; }
+.arch-arrow { text-align: center; padding: 28px; color: rgba(250,247,242,0.3); font-size: 1.8rem; display: flex; align-items: center; justify-content: center; }
+
+/* Applications grid */
+.applications { padding: 80px 40px; background: var(--warm); }
+.app-inner { max-width: 900px; margin: 0 auto; }
+.app-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 40px; }
+.app-card { background: var(--white); padding: 36px 28px; }
+.app-num { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+.app-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--forest); margin-bottom: 10px; }
+.app-card p { font-size: 0.93rem; color: var(--text-muted); line-height: 1.65; }
+
+/* Big quote */
+.big-quote { background: var(--forest-mid); padding: 80px 40px; text-align: center; }
+.big-quote blockquote { max-width: 640px; margin: 0 auto; }
+.big-quote p { font-family: 'Spectral', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.55; margin-bottom: 20px; }
+.big-quote cite { font-size: 0.83rem; font-style: normal; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* Nav between pages */
+.page-nav { padding: 60px 40px; background: var(--cream); border-top: 1px solid var(--border); }
+.page-nav-inner { max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.page-nav-link { display: flex; flex-direction: column; gap: 4px; }
+.page-nav-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.page-nav-title { font-family: 'Spectral', serif; font-size: 1.1rem; font-weight: 400; color: var(--forest); transition: color 0.2s; }
+.page-nav-title:hover { color: var(--gold); }
+
+/* Footer */
+footer { background: var(--forest); padding: 40px; border-top: 1px solid rgba(184,150,90,0.15); }
+.footer-simple { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-simple .mark { font-family: 'Spectral', serif; font-size: 1rem; font-weight: 600; color: var(--gold-hi); }
+.footer-simple .copy { font-size: 0.8rem; color: rgba(250,247,242,0.3); }
+.footer-simple nav { background: none; position: static; border: none; padding: 0; height: auto; gap: 20px; }
+.footer-simple nav a { font-size: 0.83rem; color: rgba(250,247,242,0.5); transition: color 0.2s; }
+.footer-simple nav a:hover { color: rgba(250,247,242,0.9); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 700px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .page-header { padding: 120px 24px 60px; }
+  .reading, .applications { padding: 60px 24px; }
+  .architecture { padding: 60px 24px; }
+  .arch-grid { grid-template-columns: 1fr; }
+  .app-grid { grid-template-columns: 1fr; }
+  .big-quote, .page-nav { padding: 60px 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-mark">Meliorist <span>Group</span></a>
+  <ul class="nav-links">
+    <li><a href="/meliorism" style="color:var(--gold-hi);">Philosophy</a></li>
+    <li><a href="/origins">Origins</a></li>
+    <li><a href="/you">The Five W's</a></li>
+    <li><a href="/work-with-brian">Work Together</a></li>
+    <li><a href="/signal-os">Signal-OS</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">The Philosophy</p>
+    <h1>What is<br><em>Meliorism 2.0</em>?</h1>
+    <p class="lead">Not optimism. Not hustle. Not self-help. A precise philosophical claim — and a method of working that follows from it.</p>
+  </div>
+</div>
+
+<div class="reading">
+  <div class="reading-inner">
+
+    <h2 class="reveal">Start with Meliorism 1.0.</h2>
+    <p class="reveal">The original idea is not new. Philosophers and reformers in the late 19th century named it: the world is not fixed. Human effort matters. What is does not have to be what must be.</p>
+    <p class="reveal">This was a radical claim in a world shaped by both religious fatalism ("God's will") and secular determinism ("history's tide"). Meliorism said: <em>neither</em>. The world's direction depends on what people decide to do in it. Not optimism — optimism assumes improvement will arrive. Meliorism says improvement requires decision and effort.</p>
+    <p class="reveal">Meliorism 1.0 is still true. It underpins every social reform movement, every business built on genuine value, every person who chose to try. It is the founding premise.</p>
+
+    <div class="section-divider reveal">The deeper layer</div>
+
+    <h2 class="reveal">The 2.0 shift changes everything.</h2>
+    <p class="reveal">Here is where the philosophy takes a turn that most people miss.</p>
+    <p class="reveal">The standard Meliorist frame is additive: find what's broken, apply effort, make it better. Build toward a better version. This is entirely reasonable — and it is the root of most coaching, advising, and personal development.</p>
+    <p class="reveal"><strong>Meliorism 2.0 says the better version is not something you build toward. It is already latent.</strong></p>
+    <p class="reveal">In a person, in a practice, in a company, in a community — the better version is present. It is being suppressed, obscured, distracted from, or buried under accumulated noise. The work is not addition. The work is <em>precision removal</em> of what hides it.</p>
+
+    <div class="inline-quote reveal">
+      <p>"The sculpture was always in the marble. I merely removed everything that was not David."</p>
+    </div>
+
+    <p class="reveal">Michelangelo did not claim to create. He claimed to <em>reveal</em>. The figure was already there — fully present, fully itself — before he picked up the chisel. His work was removal. Careful, precise, disciplined removal.</p>
+    <p class="reveal">That is the whole practice. That is what distinguishes Meliorism 2.0 from every version of self-help that tells you to add more — more habits, more systems, more goals, more identity. Meliorism 2.0 asks: what is already working that you are covering up? What are you adding that isn't actually you?</p>
+
+    <div class="section-divider reveal">The method</div>
+
+    <h2 class="reveal">Subtraction, not construction.</h2>
+    <p class="reveal">This is not passive. Removal requires more precision than addition. The sculptor who takes too much destroys the figure. You have to see what is there before you can clear what is not.</p>
+    <p class="reveal">The first discipline is <em>witnessing</em> — seeing a person, a business, or a situation without the overlay of your assumptions about what they should become. You are not looking for a gap to fill. You are looking for what is already present and not yet visible to them.</p>
+    <p class="reveal">The second discipline is <em>discernment</em> — knowing what to remove and what to protect. Most people under pressure add. They add activity, explanation, structure, strategy. Meliorism 2.0 asks what is generating friction that doesn't belong. What is noise? What is fear wearing the costume of responsibility?</p>
+    <p class="reveal">The third discipline is <em>patience</em>. Revelation takes longer than construction, and the results are less controllable — because you are uncovering something real, not building something designed.</p>
+  </div>
+</div>
+
+<!-- The Two Architectures -->
+<div class="architecture">
+  <div class="arch-inner">
+    <p class="arch-label reveal">The two movements</p>
+    <div class="arch-grid">
+      <div class="arch-card reveal">
+        <h3>Intrinsic · The Self</h3>
+        <p>Worth already exists in every person. Improvement is the act of revealing it — by removing conditioning, false beliefs, and accumulated noise. Inward work. The book.</p>
+      </div>
+      <div class="arch-card reveal">
+        <h3>Meliorism · The Shared World</h3>
+        <p>Businesses, markets, communities, code — these can be built better. The same subtractive logic applies. Outward work. The practice. The brand.</p>
+      </div>
+    </div>
+    <p style="color:rgba(250,247,242,0.45); font-size:0.9rem; margin-top:24px; font-style:italic; text-align:center;" class="reveal">
+      The individual finds what's already there — then brings it into the spaces they share with others. That's where the building begins.
+    </p>
+  </div>
+</div>
+
+<!-- Applications -->
+<div class="applications">
+  <div class="app-inner">
+    <p class="frame-label reveal" style="font-size:0.78rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest-mid);">What this looks like in practice</p>
+    <h2 class="reveal" style="font-family:'Spectral',serif;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:300;color:var(--forest);line-height:1.25;margin-bottom:0;">Meliorism 2.0 across domains.</h2>
+
+    <div class="app-grid">
+      <div class="app-card reveal">
+        <span class="app-num">People</span>
+        <h3>Advisory & Coaching</h3>
+        <p>The role is not to build someone. It is to stand beside them while they find what they already knew — and help them stop doing the things that are covering it up. The Michelangelo Move.</p>
+      </div>
+      <div class="app-card reveal">
+        <span class="app-num">Business</span>
+        <h3>Strategic Work</h3>
+        <p>Most businesses trying to grow are actually carrying things they stopped needing years ago. The best version of the company already exists inside the current one. Strategy is finding and removing what doesn't belong.</p>
+      </div>
+      <div class="app-card reveal">
+        <span class="app-num">Code</span>
+        <h3>codeworth</h3>
+        <p>Software doesn't need ethical principles added on top. It needs the extractive assumptions removed from the default. A developer standard for code that honors human worth — built on subtraction, not compliance.</p>
+      </div>
+      <div class="app-card reveal">
+        <span class="app-num">Community</span>
+        <h3>Governance & Civic Work</h3>
+        <p>Radical transparency doesn't add accountability — it removes the fog that lets unaccountability persist. The work of improving institutions is almost always a clearing operation, not a construction project.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Big quote -->
+<div class="big-quote">
+  <blockquote>
+    <p>"There is nothing fundamentally broken about you. That is not a comfort. It is a working premise — and it changes what you are actually trying to do."</p>
+    <cite>— Brian Oney</cite>
+  </blockquote>
+</div>
+
+<!-- Page navigation -->
+<div class="page-nav">
+  <div class="page-nav-inner">
+    <a href="/" class="page-nav-link">
+      <span class="page-nav-label">← Back</span>
+      <span class="page-nav-title">Home</span>
+    </a>
+    <a href="/origins" class="page-nav-link" style="text-align:right;">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">Inspirations & Origins</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-simple">
+    <span class="mark">Meliorist Group</span>
+    <nav>
+      <a href="/meliorism">Philosophy</a>
+      <a href="/origins">Origins</a>
+      <a href="/you">Five W's</a>
+      <a href="/work-with-brian">Work Together</a>
+    </nav>
+    <span class="copy">© 2026 Brian Oney</span>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+  { threshold: 0.1 }
+);
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

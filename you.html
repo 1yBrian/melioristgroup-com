@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Five W's — Meliorist Group</title>
+<meta name="description" content="Wellness. With-ness. Wealth. Wisdom. Wonder. Five dimensions of a full life — and what Meliorism 2.0 does with each of them.">
+<meta property="og:title" content="The Five W's — Meliorist Group">
+<meta property="og:description" content="The Five W's aren't goals to achieve. They're dimensions of a life already underway — and the question is what's obscuring each one.">
+<meta property="og:url" content="https://melioristgroup.com/you">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ── Reset ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Design System ── */
+:root {
+  --forest:       #1a3d2e;
+  --forest-mid:   #2d5c46;
+  --forest-hi:    #3d7a5c;
+  --forest-pale:  #e8f0eb;
+  --moss:         #4a6e52;
+  --gold:         #b8965a;
+  --gold-hi:      #d4af72;
+  --gold-dim:     rgba(184,150,90,0.25);
+  --cream:        #faf7f2;
+  --warm:         #f4efe4;
+  --white:        #ffffff;
+  --text:         #1a1a14;
+  --text-mid:     #3a3a2e;
+  --text-muted:   #7a7a6a;
+  --border:       rgba(26,61,46,0.12);
+  --border-gold:  rgba(184,150,90,0.3);
+
+  /* W colors */
+  --w-wellness:  #2d6a4f;
+  --w-withness:  #c77dff;
+  --w-wealth:    #b8965a;
+  --w-wisdom:    #457b9d;
+  --w-wonder:    #e07a5f;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--cream);
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Spectral', Georgia, serif;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── Navigation ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(26,61,46,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,150,90,0.2);
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-mark {
+  font-family: 'Spectral', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-hi);
+  letter-spacing: 0.02em;
+}
+
+.nav-mark span { font-weight: 300; opacity: 0.8; }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(250,247,242,0.75);
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--gold-hi); }
+
+/* ── Hero ── */
+.hero {
+  min-height: 80vh;
+  background: var(--forest);
+  display: flex;
+  align-items: center;
+  padding: 120px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 60%, rgba(45,92,70,0.5) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 90% 20%, rgba(184,150,90,0.09) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Five W dots floating in hero */
+.hero-orbs {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeUp 1.2s ease 1s forwards;
+}
+
+.hero-orb {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Spectral', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.02em;
+}
+
+.orb-wellness { background: var(--w-wellness); }
+.orb-withness { background: var(--w-withness); }
+.orb-wealth   { background: var(--w-wealth); color: var(--forest); }
+.orb-wisdom   { background: var(--w-wisdom); }
+.orb-wonder   { background: var(--w-wonder); }
+
+.hero-inner {
+  max-width: 700px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.18;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.4s forwards;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-hi);
+  font-weight: 400;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: rgba(250,247,242,0.68);
+  max-width: 540px;
+  line-height: 1.75;
+  font-weight: 300;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.6s forwards;
+}
+
+.hero-note {
+  font-size: 0.85rem;
+  color: rgba(250,247,242,0.4);
+  font-style: italic;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.9s forwards;
+}
+
+/* ── Main ── */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+/* ── Premise ── */
+.premise {
+  padding: 100px 0 72px;
+  border-bottom: 1px solid var(--border);
+}
+
+.premise-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.premise h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  color: var(--forest);
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+
+.premise h2 em { font-style: italic; color: var(--forest-mid); }
+
+.premise p {
+  color: var(--text-mid);
+  margin-bottom: 20px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.premise-callout {
+  padding: 28px 32px;
+  background: var(--warm);
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+}
+
+.premise-callout p {
+  font-family: 'Spectral', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--forest);
+  line-height: 1.6;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+/* ── W Sections ── */
+.ws-section {
+  padding: 80px 0;
+}
+
+.ws-header {
+  margin-bottom: 64px;
+  max-width: 600px;
+}
+
+.ws-header h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  color: var(--forest);
+  margin-bottom: 14px;
+}
+
+.ws-header p {
+  color: var(--text-muted);
+}
+
+/* ── W Card ── */
+.w-card {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  min-height: 320px;
+}
+
+.w-card-sidebar {
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.w-card-sidebar::after {
+  content: attr(data-letter);
+  position: absolute;
+  bottom: -20px;
+  right: -12px;
+  font-family: 'Spectral', serif;
+  font-size: 9rem;
+  font-weight: 700;
+  opacity: 0.1;
+  line-height: 1;
+  color: white;
+  pointer-events: none;
+}
+
+.w-wellness .w-card-sidebar { background: var(--w-wellness); }
+.w-withness .w-card-sidebar { background: var(--w-withness); }
+.w-wealth   .w-card-sidebar { background: var(--w-wealth); }
+.w-wisdom   .w-card-sidebar { background: var(--w-wisdom); }
+.w-wonder   .w-card-sidebar { background: var(--w-wonder); }
+
+.w-card-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 8px;
+}
+
+.w-card-title {
+  font-family: 'Spectral', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.w-card-subtitle {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  font-style: italic;
+  font-family: 'Spectral', serif;
+}
+
+.w-card-question {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.w-card-question p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.72);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.w-card-body {
+  padding: 40px 40px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.w-card-description {
+  color: var(--text-mid);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+.w-card-description p { margin-bottom: 14px; }
+.w-card-description p:last-child { margin-bottom: 0; }
+
+/* Experiment box */
+.experiment {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.experiment-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.experiment-label::before {
+  content: '⬡';
+  font-size: 0.9rem;
+  color: var(--gold);
+}
+
+.experiment-title {
+  font-family: 'Spectral', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 8px;
+}
+
+.experiment p {
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.experiment-prompt {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--forest-pale);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 0.85rem;
+  color: var(--forest);
+  font-style: italic;
+}
+
+/* ── The Subtraction Invitation ── */
+.subtraction {
+  padding: 80px 0 100px;
+  border-top: 1px solid var(--border);
+}
+
+.subtraction-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.subtraction h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  color: var(--forest);
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+
+.subtraction h2 em { font-style: italic; color: var(--forest-mid); }
+
+.subtraction p {
+  color: var(--text-mid);
+  margin-bottom: 18px;
+  line-height: 1.75;
+  font-size: 1.02rem;
+}
+
+.subtraction-prompts {
+  padding: 40px;
+  background: var(--forest);
+  border-radius: 2px;
+}
+
+.subtraction-prompts p {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.prompt-list {
+  list-style: none;
+}
+
+.prompt-list li {
+  font-family: 'Spectral', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: rgba(250,247,242,0.82);
+  font-weight: 300;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(250,247,242,0.08);
+  line-height: 1.55;
+}
+
+.prompt-list li:last-child { border-bottom: none; }
+
+.prompt-list li::before {
+  content: '— ';
+  color: var(--gold);
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* ── CTA ── */
+.cta-strip {
+  border-top: 1px solid var(--border);
+  padding: 80px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.cta-strip h2 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--forest);
+  margin-bottom: 10px;
+}
+
+.cta-strip p { color: var(--text-muted); font-size: 0.95rem; }
+
+.cta-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.btn-forest {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--forest);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 13px 22px;
+  border-radius: 2px;
+  transition: background 0.2s;
+  letter-spacing: 0.02em;
+  text-align: center;
+  justify-content: center;
+}
+
+.btn-forest:hover { background: var(--forest-mid); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 13px 22px;
+  border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+  text-align: center;
+  justify-content: center;
+}
+
+.btn-outline:hover { border-color: var(--forest-mid); color: var(--forest); }
+
+/* ── Footer ── */
+footer {
+  background: var(--forest);
+  color: rgba(250,247,242,0.6);
+  padding: 48px 40px;
+  text-align: center;
+}
+
+footer .footer-mark {
+  font-family: 'Spectral', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold-hi);
+  margin-bottom: 16px;
+}
+
+footer p { font-size: 0.82rem; margin-bottom: 6px; }
+footer a { color: rgba(250,247,242,0.5); transition: color 0.2s; }
+footer a:hover { color: var(--gold-hi); }
+
+/* ── Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { gap: 20px; }
+  .nav-links li:nth-child(n+4) { display: none; }
+
+  .hero { padding: 100px 20px 64px; min-height: 60vh; }
+  .hero-orbs { display: none; }
+  main { padding: 0 20px; }
+
+  .premise-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .w-card {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .w-card-sidebar {
+    padding: 32px 24px;
+    min-height: 160px;
+  }
+
+  .w-card-body { padding: 28px 24px; }
+
+  .subtraction-inner { grid-template-columns: 1fr; gap: 40px; }
+
+  .cta-strip { grid-template-columns: 1fr; }
+  .cta-links { flex-direction: row; flex-wrap: wrap; }
+
+  footer { padding: 40px 20px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a class="nav-mark" href="/">Meliorist <span>Group</span></a>
+  <ul class="nav-links">
+    <li><a href="/meliorism.html">Philosophy</a></li>
+    <li><a href="/origins.html">Origins</a></li>
+    <li><a href="/you.html" class="active">The Five W's</a></li>
+    <li><a href="/work-with-brian.html">Work Together</a></li>
+    <li><a href="https://signal-os.org" target="_blank">Signal-OS ↗</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <!-- Floating W orbs -->
+  <div class="hero-orbs" aria-hidden="true">
+    <div class="hero-orb orb-wellness">W</div>
+    <div class="hero-orb orb-withness">W</div>
+    <div class="hero-orb orb-wealth">W</div>
+    <div class="hero-orb orb-wisdom">W</div>
+    <div class="hero-orb orb-wonder">W</div>
+  </div>
+
+  <div class="hero-inner">
+    <p class="hero-eyebrow">The Five W's</p>
+    <h1>This is not a self-help<br>checklist. It's a map of<br>what's <em>already yours.</em></h1>
+    <p class="hero-sub">Wellness. With-ness. Wealth. Wisdom. Wonder. Five dimensions of a full life — not goals to achieve, but domains to clear. Each one holds something that is already there, waiting for the right obstacle to be removed.</p>
+    <p class="hero-note">Scroll to find which W is calling you right now.</p>
+  </div>
+</section>
+
+<!-- Main -->
+<main>
+
+  <!-- Premise -->
+  <section class="premise">
+    <div class="premise-grid">
+      <div class="reveal">
+        <p class="section-label">The premise</p>
+        <h2>You are not a project<br>to be <em>completed.</em></h2>
+        <p>Most improvement frameworks treat you like something unfinished. They hand you a list of attributes to acquire and check off. Build this habit. Develop this skill. Cultivate this mindset.</p>
+        <p>The Five W's operate from a different premise entirely. You are already whole. Each W is a dimension of that wholeness — and what the work actually looks like is identifying what has been obscuring that dimension, and removing it.</p>
+        <p>This is not passive. The removal requires attention, honesty, and often courage. But the frame changes what you're actually doing — from building something from scratch to clearing something that's already there.</p>
+      </div>
+      <div class="reveal">
+        <div class="premise-callout">
+          <p>"The Five W's are not rungs on a ladder. They are rooms in a house you already live in — and the question is which one has the door stuck."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Five W's Diagram -->
+  <section style="padding: 80px 0 40px; border-bottom: 1px solid var(--border);">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;" class="reveal">
+      <div>
+        <p class="section-label">The Framework</p>
+        <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 400; color: var(--forest); margin-bottom: 20px;">Five dimensions.<br>One foundation.</h2>
+        <p style="color: var(--text-mid); line-height: 1.75; margin-bottom: 16px;">The Five W's are not a ladder to climb or a scorecard to optimize. They are five dimensions of a life that is already in motion — each one a domain where something latent is waiting to be revealed.</p>
+        <p style="color: var(--text-mid); line-height: 1.75; margin-bottom: 16px;">Meliorism 2.0 brings the same Michelangelo logic to each: the better version is already present. The work is clearing what obscures it.</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; font-style: italic;">Scroll down to find the W that is most alive for you right now.</p>
+      </div>
+      <div style="display: flex; justify-content: center;">
+        <img src="images/five-ws.svg" alt="The Five W's of Meliorism 2.0 — Wisdom, Wealth, Wonder, Wellness, With-ness" style="width: 100%; max-width: 460px; height: auto;">
+      </div>
+    </div>
+  </section>
+
+  <!-- The Five W Cards -->
+  <section class="ws-section">
+    <div class="ws-header reveal">
+      <p class="section-label">The Five Dimensions</p>
+      <h2>Pick the W that's calling you.</h2>
+      <p>Each card is a dimension, a question, and one experiment you can run this week — no commitment required.</p>
+    </div>
+
+    <!-- Wellness -->
+    <div class="w-card w-wellness reveal">
+      <div class="w-card-sidebar" data-letter="W">
+        <div>
+          <p class="w-card-label">Dimension One</p>
+          <p class="w-card-title">Wellness</p>
+          <p class="w-card-subtitle">Physical, sleep, energy, body</p>
+        </div>
+        <div class="w-card-question">
+          <p>"What would change if you had 40% more physical energy tomorrow?"</p>
+        </div>
+      </div>
+      <div class="w-card-body">
+        <div class="w-card-description">
+          <p>Wellness is the foundation — the one W that affects every other W simultaneously. Not because your body is more important than your relationships or your work, but because the body is the medium. Everything you think, feel, decide, and create moves through it.</p>
+          <p>The question is rarely "what should I add" — more gym, better supplements, a new protocol. The more useful question is what has been interfering with the sleep you already know how to get, the movement your body already wants, the recovery you've been deferring.</p>
+          <p>Most people don't have a Wellness knowledge problem. They have a friction problem. Something is making the easier path harder than it should be.</p>
+        </div>
+        <div class="experiment">
+          <p class="experiment-label">One experiment</p>
+          <p class="experiment-title">The Energy Audit</p>
+          <p>For three days, notice when your energy rises and when it drops. Not what you think should happen — what actually does. Note the time, what preceded it, what you were doing.</p>
+          <p class="experiment-prompt">Ask: what is the single thing most consistently draining my physical energy that I could actually change?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- With-ness -->
+    <div class="w-card w-withness reveal">
+      <div class="w-card-sidebar" data-letter="W">
+        <div>
+          <p class="w-card-label">Dimension Two</p>
+          <p class="w-card-title">With-ness</p>
+          <p class="w-card-subtitle">Relationships, presence, belonging</p>
+        </div>
+        <div class="w-card-question">
+          <p>"Who in your life sees you accurately — not the role you play, but the actual person?"</p>
+        </div>
+      </div>
+      <div class="w-card-body">
+        <div class="w-card-description">
+          <p>With-ness is the dimension of being-in-relation — not just having relationships, but the quality of presence within them. Whether you feel genuinely accompanied, witnessed, and known. Whether the people around you are experiencing you, or just your performance of you.</p>
+          <p>There is a specific kind of loneliness that is possible in a room full of people, and even in a long marriage, and even in a successful team. It is the loneliness of not being actually seen. With-ness is the W that addresses that directly.</p>
+          <p>The subtraction question here is often about the roles and masks that have accumulated. Not because there's anything wrong with them, but because some of them have become the only way people know you — including, sometimes, yourself.</p>
+        </div>
+        <div class="experiment">
+          <p class="experiment-label">One experiment</p>
+          <p class="experiment-title">The Unfiltered Conversation</p>
+          <p>Have one conversation this week where you say something true that you would normally soften or omit — with someone you trust. Not to unload, but to be known more accurately than you usually allow.</p>
+          <p class="experiment-prompt">Ask: what part of me is consistently absent from my important relationships?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wealth -->
+    <div class="w-card w-wealth reveal">
+      <div class="w-card-sidebar" data-letter="W">
+        <div>
+          <p class="w-card-label">Dimension Three</p>
+          <p class="w-card-title">Wealth</p>
+          <p class="w-card-subtitle">Income, security, creation, stewardship</p>
+        </div>
+        <div class="w-card-question">
+          <p>"If your work paid you what it's actually worth, what would be different?"</p>
+        </div>
+      </div>
+      <div class="w-card-body">
+        <div class="w-card-description">
+          <p>Wealth in the Meliorist frame is not about accumulation — it is about creation and stewardship. The difference matters. Wealth extraction borrows from the future; wealth creation adds to it. One is zero-sum; the other expands what is possible for everyone around you.</p>
+          <p>For most practitioners, coaches, and business owners, the Wealth obstacle is not capability. It's the conversation that hasn't happened yet — with a client about pricing, with yourself about what you actually want, with your business about which activities are genuinely creating value and which are friction wearing a productivity mask.</p>
+          <p>The question is rarely "how do I make more money." It is more often "what am I undervaluing, and why?"</p>
+        </div>
+        <div class="experiment">
+          <p class="experiment-label">One experiment</p>
+          <p class="experiment-title">The Value Gap</p>
+          <p>List your five main professional activities ranked by time invested. Then rank them by value created — for your clients, your audience, your business. Where do the lists diverge?</p>
+          <p class="experiment-prompt">Ask: where am I spending significant time on low-value activities while underinvesting in high-value ones?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wisdom -->
+    <div class="w-card w-wisdom reveal">
+      <div class="w-card-sidebar" data-letter="W">
+        <div>
+          <p class="w-card-label">Dimension Four</p>
+          <p class="w-card-title">Wisdom</p>
+          <p class="w-card-subtitle">Learning, reflection, discernment</p>
+        </div>
+        <div class="w-card-question">
+          <p>"What do you know that you haven't yet trusted enough to act on?"</p>
+        </div>
+      </div>
+      <div class="w-card-body">
+        <div class="w-card-description">
+          <p>Wisdom is not the accumulation of information. In an era of infinite information, that mistake is increasingly expensive. Wisdom is discernment — the ability to know what matters, what to trust, what to act on, and what to set down.</p>
+          <p>Most people reading this page have more wisdom than they are currently using. Not because they lack it, but because something is preventing them from trusting it. Competing voices, self-doubt installed by old critics, the habit of seeking another opinion before trusting one's own.</p>
+          <p>The Wisdom experiment is usually not "learn more." It is "act on what you already know."</p>
+        </div>
+        <div class="experiment">
+          <p class="experiment-label">One experiment</p>
+          <p class="experiment-title">The Already Known</p>
+          <p>Identify one decision you've been deferring — waiting for more information, more certainty, another conversation. Assume you already know what to do. Write down what that is. Then ask: what has been preventing you from acting on it?</p>
+          <p class="experiment-prompt">Ask: what am I seeking permission for that I could simply decide?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wonder -->
+    <div class="w-card w-wonder reveal">
+      <div class="w-card-sidebar" data-letter="W">
+        <div>
+          <p class="w-card-label">Dimension Five</p>
+          <p class="w-card-title">Wonder</p>
+          <p class="w-card-subtitle">Joy, creativity, aliveness, play</p>
+        </div>
+        <div class="w-card-question">
+          <p>"When was the last time you did something just to see what would happen?"</p>
+        </div>
+      </div>
+      <div class="w-card-body">
+        <div class="w-card-description">
+          <p>Wonder is the dimension that most people sacrifice first when life gets serious — and then spend years trying to recover. It is not frivolity. Wonder is the faculty that generates genuine insight, makes you interesting to other people, and sustains you through work that is otherwise hard.</p>
+          <p>The person who has lost Wonder is still functional. They can hit targets, deliver results, meet commitments. But something in them has flattened. They are no longer surprising to themselves, which means they stop surprising anyone else. The edge that came from genuine curiosity — the one that made their work feel alive — has dulled.</p>
+          <p>Wonder doesn't require travel, sabbaticals, or a complete life redesign. It usually requires recovering small permissions: to try something without knowing if it will work, to be genuinely bad at something for a while, to follow curiosity past the point where it's useful.</p>
+        </div>
+        <div class="experiment">
+          <p class="experiment-label">One experiment</p>
+          <p class="experiment-title">The Useless Hour</p>
+          <p>Protect one hour this week for something with no measurable outcome. Not "mindfulness" as productivity optimization. Something you used to love, something you've been curious about, something that has no business case. Note what happens in the days after.</p>
+          <p class="experiment-prompt">Ask: what did I stop doing because I thought I should be doing something more important instead?</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Subtraction Invitation -->
+  <section class="subtraction">
+    <div class="subtraction-inner">
+      <div class="reveal">
+        <p class="section-label">The Subtraction Question</p>
+        <h2>What is actually<br>in the <em>way?</em></h2>
+        <p>Across all five W's, the most useful question is the same: what is currently obscuring this dimension of your life, and is it something that can be removed?</p>
+        <p>Sometimes the answer is structural — a schedule that crowds out sleep, a pricing model that undervalues your work, a communication pattern that keeps people at arm's length.</p>
+        <p>Sometimes it's internal — a belief installed decades ago, a story you've been telling that stopped being accurate, a role you've been performing that you never consciously chose.</p>
+        <p>Either way: the capacity was already there. The work is getting to it.</p>
+      </div>
+      <div class="subtraction-prompts reveal">
+        <p>Five questions worth sitting with</p>
+        <ul class="prompt-list">
+          <li>Which W has the most space for something to be removed rather than added?</li>
+          <li>What have I been tolerating so long it no longer registers as a problem?</li>
+          <li>Where am I working harder than the situation actually requires?</li>
+          <li>What would I stop doing if I genuinely believed I had permission to?</li>
+          <li>What is the kindest thing I could subtract from my current week?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-strip reveal">
+    <div>
+      <h2>Want to go deeper with one of these?</h2>
+      <p>Brian works directly with coaches, trainers, and business owners on exactly this kind of clarity work.</p>
+    </div>
+    <div class="cta-links">
+      <a class="btn-forest" href="/work-with-brian.html">Work with Brian</a>
+      <a class="btn-outline" href="https://signal-os.org" target="_blank">Read Signal-OS →</a>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-mark">Meliorist Group</div>
+  <p>The better version is already there.</p>
+  <p style="margin-top:16px; font-size:0.78rem;">
+    <a href="/">Home</a> &nbsp;·&nbsp;
+    <a href="/meliorism.html">Philosophy</a> &nbsp;·&nbsp;
+    <a href="/origins.html">Origins</a> &nbsp;·&nbsp;
+    <a href="/you.html">The Five W's</a> &nbsp;·&nbsp;
+    <a href="/work-with-brian.html">Work Together</a> &nbsp;·&nbsp;
+    <a href="https://signal-os.org" target="_blank">Signal-OS</a>
+  </p>
+  <p style="margin-top:20px; font-size:0.75rem; opacity:0.5;">© 2026 Meliorist Group · San Francisco, CA</p>
+</footer>
+
+<script>
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

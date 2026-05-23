@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspirations & Origins — Meliorist Group</title>
+<meta name="description" content="The intellectual lineage of Meliorism 2.0 — from Jane Addams to Nassim Taleb, from Michelangelo to Carl Rogers. Where did these ideas come from?">
+<meta property="og:title" content="Inspirations & Origins — Meliorist Group">
+<meta property="og:description" content="Meliorism 2.0 is not invented — it is assembled from centuries of people who believed the world could be better and did something about it.">
+<meta property="og:url" content="https://melioristgroup.com/origins">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ── Reset ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Design System ── */
+:root {
+  --forest:       #1a3d2e;
+  --forest-mid:   #2d5c46;
+  --forest-hi:    #3d7a5c;
+  --forest-pale:  #e8f0eb;
+  --moss:         #4a6e52;
+  --gold:         #b8965a;
+  --gold-hi:      #d4af72;
+  --gold-dim:     rgba(184,150,90,0.25);
+  --cream:        #faf7f2;
+  --warm:         #f4efe4;
+  --white:        #ffffff;
+  --text:         #1a1a14;
+  --text-mid:     #3a3a2e;
+  --text-muted:   #7a7a6a;
+  --border:       rgba(26,61,46,0.12);
+  --border-gold:  rgba(184,150,90,0.3);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--cream);
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Spectral', Georgia, serif;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── Navigation ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(26,61,46,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,150,90,0.2);
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-mark {
+  font-family: 'Spectral', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-hi);
+  letter-spacing: 0.02em;
+}
+
+.nav-mark span { font-weight: 300; opacity: 0.8; }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(250,247,242,0.75);
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--gold-hi); }
+
+/* ── Hero ── */
+.hero {
+  min-height: 72vh;
+  background: var(--forest);
+  display: flex;
+  align-items: flex-end;
+  padding: 120px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 90% at 10% 70%, rgba(45,92,70,0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 20%, rgba(184,150,90,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Subtle marble texture */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.hero-inner {
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.18;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.4s forwards;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-hi);
+  font-weight: 400;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: rgba(250,247,242,0.68);
+  max-width: 580px;
+  line-height: 1.75;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.6s forwards;
+}
+
+/* ── Timeline / Main ── */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── Section Headers ── */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+/* ── Throughline ── */
+.throughline {
+  padding: 100px 0 60px;
+  border-bottom: 1px solid var(--border);
+}
+
+.throughline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.throughline h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  color: var(--forest);
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+
+.throughline h2 em {
+  font-style: italic;
+  color: var(--forest-mid);
+}
+
+.throughline p {
+  color: var(--text-mid);
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+.throughline-quote {
+  padding: 32px;
+  background: var(--forest);
+  border-left: 3px solid var(--gold);
+  border-radius: 2px;
+}
+
+.throughline-quote p {
+  font-family: 'Spectral', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.throughline-quote cite {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-style: normal;
+}
+
+/* ── Influences ── */
+.influences {
+  padding: 80px 0;
+}
+
+.influences-header {
+  margin-bottom: 72px;
+  max-width: 640px;
+}
+
+.influences-header h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  color: var(--forest);
+  margin-bottom: 16px;
+}
+
+.influences-header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* ── Influence Cards ── */
+.influence {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+
+.influence:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.influence-meta {}
+
+.influence-number {
+  font-family: 'Spectral', serif;
+  font-size: 4rem;
+  font-weight: 300;
+  color: var(--forest-pale);
+  line-height: 1;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.influence-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.influence-name {
+  font-family: 'Spectral', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--forest);
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.influence-dates {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.influence-body {}
+
+.influence-body h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 16px;
+}
+
+.influence-body p {
+  color: var(--text-mid);
+  margin-bottom: 18px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.influence-body p:last-child { margin-bottom: 0; }
+
+.influence-contribution {
+  margin-top: 28px;
+  padding: 20px 24px;
+  background: var(--forest-pale);
+  border-left: 3px solid var(--forest-mid);
+  border-radius: 0 2px 2px 0;
+}
+
+.influence-contribution .contrib-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.influence-contribution p {
+  font-size: 0.95rem;
+  color: var(--forest);
+  font-weight: 400;
+  margin-bottom: 0;
+  line-height: 1.65;
+}
+
+/* ── The Convergence ── */
+.convergence {
+  padding: 80px 0 100px;
+}
+
+.convergence-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.convergence-header h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  color: var(--forest);
+  margin-bottom: 20px;
+}
+
+.convergence-header p {
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+}
+
+.convergence-threads {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 60px;
+}
+
+.thread {
+  background: var(--cream);
+  padding: 36px 32px;
+}
+
+.thread-icon {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.thread h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 10px;
+}
+
+.thread p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.convergence-conclusion {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 40px;
+  background: var(--forest);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.convergence-conclusion::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(45,92,70,0.6) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.convergence-conclusion blockquote {
+  font-family: 'Spectral', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.55;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.convergence-conclusion blockquote em {
+  color: var(--gold-hi);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.convergence-conclusion cite {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-style: normal;
+  display: block;
+  position: relative;
+}
+
+/* ── CTA strip ── */
+.cta-strip {
+  border-top: 1px solid var(--border);
+  padding: 80px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.cta-strip h2 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--forest);
+  margin-bottom: 10px;
+}
+
+.cta-strip p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.cta-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 200px;
+}
+
+.btn-forest {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--forest);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 12px 22px;
+  border-radius: 2px;
+  transition: background 0.2s;
+  letter-spacing: 0.02em;
+  text-align: center;
+  justify-content: center;
+}
+
+.btn-forest:hover { background: var(--forest-mid); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 12px 22px;
+  border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+  text-align: center;
+  justify-content: center;
+}
+
+.btn-outline:hover { border-color: var(--forest-mid); color: var(--forest); }
+
+/* ── Footer ── */
+footer {
+  background: var(--forest);
+  color: rgba(250,247,242,0.6);
+  padding: 48px 40px;
+  text-align: center;
+}
+
+footer .footer-mark {
+  font-family: 'Spectral', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold-hi);
+  margin-bottom: 16px;
+}
+
+footer p {
+  font-size: 0.82rem;
+  margin-bottom: 6px;
+}
+
+footer a { color: rgba(250,247,242,0.5); transition: color 0.2s; }
+footer a:hover { color: var(--gold-hi); }
+
+/* ── Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  nav { padding: 0 20px; }
+  .nav-links { gap: 20px; }
+  .nav-links li:nth-child(n+4) { display: none; }
+
+  .hero { padding: 100px 20px 64px; }
+  main { padding: 0 20px; }
+
+  .throughline-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .influence {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 48px 0;
+  }
+
+  .influence-number { font-size: 2.5rem; }
+
+  .convergence-threads { grid-template-columns: 1fr; }
+
+  .convergence-conclusion { padding: 40px 24px; }
+
+  .cta-strip { grid-template-columns: 1fr; }
+  .cta-links { flex-direction: row; }
+
+  footer { padding: 40px 20px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a class="nav-mark" href="/">Meliorist <span>Group</span></a>
+  <ul class="nav-links">
+    <li><a href="/meliorism.html">Philosophy</a></li>
+    <li><a href="/origins.html" class="active">Origins</a></li>
+    <li><a href="/you.html">The Five W's</a></li>
+    <li><a href="/work-with-brian.html">Work Together</a></li>
+    <li><a href="https://signal-os.org" target="_blank">Signal-OS ↗</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Inspirations &amp; Origins</p>
+    <h1>None of these ideas<br>are <em>invented.</em><br>They are assembled.</h1>
+    <p class="hero-sub">Meliorism 2.0 draws from over a century of thinkers, reformers, artists, and practitioners who believed — and demonstrated — that the world could be made better, one cleared obstacle at a time.</p>
+  </div>
+</section>
+
+<!-- Main Content -->
+<main>
+
+  <!-- Throughline -->
+  <section class="throughline">
+    <div class="throughline-grid">
+      <div class="reveal">
+        <p class="section-label">The Common Thread</p>
+        <h2>They all saw potential<br>being <em>obscured.</em></h2>
+        <p>Jane Addams saw immigrants whose full humanity was buried under poverty and prejudice. Carl Rogers saw clients whose authentic self was hidden under layers of conditional regard. Nassim Taleb saw decision-makers burying their judgment under false certainty.</p>
+        <p>The question underneath all of it: what happens when you remove what doesn't belong?</p>
+        <p>That is the shared root. Not addition — subtraction. Not construction — revelation. Not imposing a better version — uncovering the one that was already there.</p>
+      </div>
+      <div class="reveal">
+        <div class="throughline-quote">
+          <p>"The sculpture is already complete within the marble block, before I start my work. It is already there — I just have to chisel away the superfluous material."</p>
+          <cite>Michelangelo Buonarroti, 1475–1564</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Influences -->
+  <section class="influences">
+    <div class="influences-header reveal">
+      <p class="section-label">The Lineage</p>
+      <h2>Seven threads. One weave.</h2>
+      <p>These are the people and ideas that most directly shaped how Meliorism 2.0 thinks, speaks, and works.</p>
+    </div>
+
+    <!-- 01 Jane Addams -->
+    <div class="influence reveal">
+      <div class="influence-meta">
+        <div class="influence-number">01</div>
+        <span class="influence-tag">Social Reform</span>
+        <div class="influence-name">Jane Addams</div>
+        <div class="influence-dates">1860–1935 · Nobel Peace Prize, 1931</div>
+      </div>
+      <div class="influence-body">
+        <h3>The woman who went to live in the problem</h3>
+        <p>Addams didn't send aid to Hull House — she moved there. She believed the path to understanding human potential was direct proximity: live alongside people, learn from them, remove the structural barriers that prevented them from living fully.</p>
+        <p>At a time when reformers debated the "causes" of poverty from comfortable distance, Addams's Hull House became a model of what reform actually looked like: art studios, a library, a labor museum, childcare, a coffee house. Not charity — infrastructure for agency.</p>
+        <p>She also laid groundwork for what became Symbolic Interactionism, working alongside George Herbert Mead at the University of Chicago and insisting that meaning is made in relationship, not in isolation.</p>
+        <div class="influence-contribution">
+          <span class="contrib-label">The Meliorist 2.0 thread</span>
+          <p>Honor existing worth before intervening. Be present, not prescriptive. Build infrastructure for agency — not dependency. The work is with people, not for them.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 George Herbert Mead -->
+    <div class="influence reveal">
+      <div class="influence-meta">
+        <div class="influence-number">02</div>
+        <span class="influence-tag">Chicago School</span>
+        <div class="influence-name">George Herbert Mead</div>
+        <div class="influence-dates">1863–1931 · Symbolic Interactionism</div>
+      </div>
+      <div class="influence-body">
+        <h3>The self is not fixed — it is performed, witnessed, and revised</h3>
+        <p>Mead's central insight was that the self is not a static internal object — it is constructed through social interaction. We become who we are through how others respond to us, and we revise ourselves through reflection.</p>
+        <p>This is both liberating and sobering. Liberating because it means identity is not destiny — the self can shift. Sobering because it means bad environments don't just cause bad outcomes; they actively suppress the person who could have been.</p>
+        <p>The Chicago School — Mead, W.I. Thomas, Charles Cooley — established that before you can understand a person, you must see them as a person of worth whose story matters. This is not soft sentiment. It is method.</p>
+        <div class="influence-contribution">
+          <span class="contrib-label">The Meliorist 2.0 thread</span>
+          <p>Understanding requires witnessing. A person's story has inherent worth and coherence before any intervention. The role of the advisor, coach, or consultant is to see clearly — then remove what prevents the person from seeing themselves clearly too.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 Michelangelo -->
+    <div class="influence reveal">
+      <div class="influence-meta">
+        <div class="influence-number">03</div>
+        <span class="influence-tag">The Michelangelo Effect</span>
+        <div class="influence-name">Michelangelo Buonarroti</div>
+        <div class="influence-dates">1475–1564 · Sculptor, architect, poet</div>
+      </div>
+      <div class="influence-body">
+        <h3>The figure is in the marble. The work is removal.</h3>
+        <p>Michelangelo's "non-finito" pieces — figures that appear to be struggling free from unfinished stone — are among his most arresting work precisely because they make the philosophy visible. The sculpture doesn't emerge from nothing. It is revealed from something that was always there.</p>
+        <p>This is not merely an artistic metaphor. It is a precision claim about where value lives. The value is intrinsic to the block. The sculptor does not bestow it. The sculptor clears what hides it.</p>
+        <p>Misuse this metaphor and you get paternalism — someone deciding what the "true form" of another person is. Applied correctly, it's more humble: the form is already there; the work is careful attention and precise removal of what genuinely doesn't belong, guided by the material itself.</p>
+        <div class="influence-contribution">
+          <span class="contrib-label">The Meliorist 2.0 thread</span>
+          <p>Improvement is subtractive. The better version is latent, not constructed. Coaching, advising, and teaching are acts of careful attention — not installation. This reframes the entire relationship between practitioner and person.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 Carl Rogers & Abraham Maslow -->
+    <div class="influence reveal">
+      <div class="influence-meta">
+        <div class="influence-number">04</div>
+        <span class="influence-tag">Humanistic Psychology</span>
+        <div class="influence-name">Carl Rogers &amp; Abraham Maslow</div>
+        <div class="influence-dates">1902–1987 · 1908–1970 · Third Force Psychology</div>
+      </div>
+      <div class="influence-body">
+        <h3>Humans have an inherent drive toward growth — if the conditions allow it</h3>
+        <p>Where Freudian psychology pathologized the inner life and behaviorism reduced it to stimulus-response, Rogers and Maslow insisted on something radical for their era: the person contains, already, a tendency toward their own flourishing.</p>
+        <p>Rogers called it the actualizing tendency. Maslow mapped the hierarchy of needs that must be met before self-actualization can emerge. Both pointed in the same direction: the human being is not a problem to be solved. The goal is to create conditions where the person's own growth becomes possible.</p>
+        <p>Rogers's unconditional positive regard — offered without condition or performance requirement — is not a soft technique. It is a structural move. It removes the conditional regard that has been suppressing the person's real self.</p>
+        <div class="influence-contribution">
+          <span class="contrib-label">The Meliorist 2.0 thread</span>
+          <p>Intrinsic worth is not a philosophical position — it is a functional premise. People expand when the conditions of worth are removed. The practitioner's job is to stop installing conditions and start clearing them.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 Nassim Nicholas Taleb -->
+    <div class="influence reveal">
+      <div class="influence-meta">
+        <div class="influence-number">05</div>
+        <span class="influence-tag">Via Negativa</span>
+        <div class="influence-name">Nassim Nicholas Taleb</div>
+        <div class="influence-dates">b. 1960 · Antifragile, The Black Swan</div>
+      </div>
+      <div class="influence-body">
+        <h3>Wisdom is knowing what not to do</h3>
+        <p>Taleb formalized something practitioners have known intuitively: interventions often create more harm than the problems they address. The doctor who prescribes less frequently has better outcomes than one who always does something. The financial advisor who removes bad bets consistently outperforms one chasing gains.</p>
+        <p>He borrows the via negativa from theology — the practice of defining what something is by what it is not — and applies it to decision-making. The knowledge of what to subtract is often more valuable, and harder to acquire, than the knowledge of what to add.</p>
+        <p>This is not passivity. Taleb is emphatic about that. The via negativa requires more discernment than addition. You have to understand the system well enough to know what is actually noise, and have the discipline not to confuse activity with improvement.</p>
+        <div class="influence-contribution">
+          <span class="contrib-label">The Meliorist 2.0 thread</span>
+          <p>Subtract before you add. Remove friction, confusion, waste, and misalignment before introducing anything new. The discipline of not-doing is harder than doing — and more powerful. Complexity is a last resort.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 Apophatic Theology -->
+    <div class="influence reveal">
+      <div class="influence-meta">
+        <div class="influence-number">06</div>
+        <span class="influence-tag">Apophatic Tradition</span>
+        <div class="influence-name">The Apophatic Tradition</div>
+        <div class="influence-dates">Pseudo-Dionysius · Maimonides · Ibn Arabi · Meister Eckhart</div>
+      </div>
+      <div class="influence-body">
+        <h3>Sometimes the truest description is what something is not</h3>
+        <p>Across traditions — Christian mysticism, Jewish philosophy, Islamic Sufism — there is a thread of thought that says: some things are beyond positive description. To say what God is risks reducing something infinite to something finite. The wiser path is to remove the false descriptions and let the silence teach.</p>
+        <p>Apophasis is not agnosticism. It is not "we cannot know." It is "our positive claims are inadequate, and the practice of their removal gets us closer." The via negativa in theology and in Taleb trace the same arc from different starting points.</p>
+        <p>Applied to people, the same logic holds: the full person is irreducible. Every fixed description — every label, role, category, diagnosis, identity tag — is a subtraction from the whole. The practitioner who holds this understands that they cannot capture a person in a framework, only work with what the moment actually shows.</p>
+        <div class="influence-contribution">
+          <span class="contrib-label">The Meliorist 2.0 thread</span>
+          <p>Hold frameworks lightly. The person in front of you exceeds every category. Witnessing — real witnessing — requires the discipline of not-knowing just enough to actually see.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 Meliorism 1.0 / William James & John Dewey -->
+    <div class="influence reveal">
+      <div class="influence-meta">
+        <div class="influence-number">07</div>
+        <span class="influence-tag">American Pragmatism</span>
+        <div class="influence-name">William James &amp; John Dewey</div>
+        <div class="influence-dates">1842–1910 · 1859–1952 · Pragmatist Philosophy</div>
+      </div>
+      <div class="influence-body">
+        <h3>The world is not fixed. It responds to effort.</h3>
+        <p>The word "meliorism" comes from William James — the pragmatist philosopher who argued against both pessimism (the world is doomed) and optimism (everything will work out). The meliorist position: the world can be made better through human effort, and there is no guarantee it will be, but acting as if it can is both rational and ethical.</p>
+        <p>John Dewey took pragmatism into education and democracy. Experience is how we learn. Reflection on experience is how we improve. Democracy is not a given — it is a practice, a discipline, a thing that must be actively maintained. Dewey and Addams were close colleagues; Hull House is partly a Dewey project made physical.</p>
+        <p>This is Meliorism 1.0 — the foundation. The world responds to effort. Agency matters. The Meliorist is not passive. Meliorism 2.0 adds the layer: the effort is often most powerful when it removes obstacles rather than erects new structures.</p>
+        <div class="influence-contribution">
+          <span class="contrib-label">The Meliorist 2.0 thread</span>
+          <p>The foundation. Everything above builds on this: the world is not fixed, effort matters, agency is the central human endowment. Meliorism 2.0 is what happens when you take this seriously and ask: what kind of effort is actually most effective?</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- The Convergence -->
+  <section class="convergence">
+    <div class="convergence-header reveal">
+      <p class="section-label">Where They Meet</p>
+      <h2>The convergence point</h2>
+      <p>These seven threads, drawn from very different contexts, point to the same thing.</p>
+    </div>
+
+    <div class="convergence-threads">
+      <div class="thread reveal">
+        <span class="thread-icon">🌿</span>
+        <h3>Worth is prior</h3>
+        <p>Every tradition in this lineage assumes human worth before any intervention. Not earned. Not demonstrated. Prior. The work begins there.</p>
+      </div>
+      <div class="thread reveal">
+        <span class="thread-icon">🪨</span>
+        <h3>The form is latent</h3>
+        <p>Addams, Rogers, Mead, Michelangelo — all of them found that the better version was already present, suppressed by conditions that could be changed.</p>
+      </div>
+      <div class="thread reveal">
+        <span class="thread-icon">✂️</span>
+        <h3>Subtraction over addition</h3>
+        <p>The via negativa, the actualizing tendency, the Michelangelo Effect — they all point to clearing rather than constructing as the primary movement.</p>
+      </div>
+      <div class="thread reveal">
+        <span class="thread-icon">👁️</span>
+        <h3>Witnessing precedes action</h3>
+        <p>The Chicago School established that you cannot help someone whose story you haven't genuinely heard. Addams lived it. Rogers built a therapy on it.</p>
+      </div>
+      <div class="thread reveal">
+        <span class="thread-icon">⚡</span>
+        <h3>Agency is the goal</h3>
+        <p>Dewey's democracy, Addams's Hull House, Maslow's self-actualization — all are pointing toward the same condition: a person who can act from their own center.</p>
+      </div>
+      <div class="thread reveal">
+        <span class="thread-icon">🔄</span>
+        <h3>The world responds</h3>
+        <p>James's meliorism: not guaranteed, not hopeless. Responsive. The world is not fixed, and that means what you do actually matters — which raises the stakes for doing it wisely.</p>
+      </div>
+    </div>
+
+    <div class="convergence-conclusion reveal">
+      <blockquote>"The better version of a person — or a business, or a world — is <em>already there.</em> The work is not construction. The work is careful, precise, respectful removal of everything that is not it."</blockquote>
+      <cite>Meliorism 2.0 — The Core Premise</cite>
+    </div>
+  </section>
+
+  <!-- CTA Strip -->
+  <div class="cta-strip reveal">
+    <div>
+      <h2>See this in practice.</h2>
+      <p>Explore the philosophy in full, or discover what Meliorism 2.0 looks like for you personally.</p>
+    </div>
+    <div class="cta-links">
+      <a class="btn-forest" href="/meliorism.html">What is Meliorism 2.0?</a>
+      <a class="btn-outline" href="/you.html">The Five W's — for you →</a>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-mark">Meliorist Group</div>
+  <p>The better version is already there.</p>
+  <p style="margin-top:16px; font-size:0.78rem;">
+    <a href="/">Home</a> &nbsp;·&nbsp;
+    <a href="/meliorism.html">Philosophy</a> &nbsp;·&nbsp;
+    <a href="/origins.html">Origins</a> &nbsp;·&nbsp;
+    <a href="/you.html">The Five W's</a> &nbsp;·&nbsp;
+    <a href="/work-with-brian.html">Work Together</a> &nbsp;·&nbsp;
+    <a href="https://signal-os.org" target="_blank">Signal-OS</a>
+  </p>
+  <p style="margin-top:20px; font-size:0.75rem; opacity:0.5;">© 2026 Meliorist Group · San Francisco, CA</p>
+</footer>
+
+<script>
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work with Brian — Meliorist Group</title>
+<meta name="description" content="Brian Oney advises coaches, trainers, and business owners who want their work to count — not just perform. Three ways to work together.">
+<meta property="og:title" content="Work with Brian Oney — Meliorist Group">
+<meta property="og:description" content="Advisory, CTCSP, and Signal-OS. For practitioners and business owners who are ready to remove what's in the way.">
+<meta property="og:url" content="https://melioristgroup.com/work-with-brian">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --forest:       #1a3d2e;
+  --forest-mid:   #2d5c46;
+  --forest-hi:    #3d7a5c;
+  --forest-pale:  #e8f0eb;
+  --moss:         #4a6e52;
+  --gold:         #b8965a;
+  --gold-hi:      #d4af72;
+  --gold-dim:     rgba(184,150,90,0.25);
+  --cream:        #faf7f2;
+  --warm:         #f4efe4;
+  --white:        #ffffff;
+  --text:         #1a1a14;
+  --text-mid:     #3a3a2e;
+  --text-muted:   #7a7a6a;
+  --border:       rgba(26,61,46,0.12);
+  --border-gold:  rgba(184,150,90,0.3);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--cream);
+}
+
+h1, h2, h3, h4 { font-family: 'Spectral', Georgia, serif; line-height: 1.2; font-weight: 600; }
+a { color: inherit; text-decoration: none; }
+
+/* ── Navigation ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(26,61,46,0.97); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,150,90,0.2);
+  padding: 0 40px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-mark { font-family: 'Spectral', serif; font-size: 1.05rem; font-weight: 600; color: var(--gold-hi); letter-spacing: 0.02em; }
+.nav-mark span { font-weight: 300; opacity: 0.8; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 0.85rem; font-weight: 500; color: rgba(250,247,242,0.75); letter-spacing: 0.03em; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold-hi); }
+
+/* ── Hero ── */
+.hero {
+  background: var(--forest);
+  padding: 140px 40px 100px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 70% 50%, rgba(45,92,70,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 10% 30%, rgba(184,150,90,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
+.hero-eyebrow { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+.hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 300; color: var(--cream); line-height: 1.2; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards; }
+.hero h1 em { font-style: italic; color: var(--gold-hi); font-weight: 400; }
+.hero-sub { font-size: 1.05rem; color: rgba(250,247,242,0.68); line-height: 1.75; font-weight: 300; opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
+.hero-photo { opacity: 0; animation: fadeUp 1s ease 0.5s forwards; }
+.hero-photo img { width: 100%; max-width: 420px; border-radius: 3px; display: block; object-fit: cover; aspect-ratio: 4/5; filter: grayscale(15%) contrast(1.05); }
+.photo-caption { margin-top: 16px; font-size: 0.8rem; color: rgba(250,247,242,0.45); font-style: italic; }
+
+/* ── Main ── */
+main { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+.section-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+
+/* ── About Strip ── */
+.about-strip {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--border);
+}
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.about-grid h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; color: var(--forest); margin-bottom: 24px; }
+.about-grid h2 em { font-style: italic; }
+.about-grid p { color: var(--text-mid); margin-bottom: 18px; line-height: 1.75; font-size: 1.02rem; }
+.about-grid p:last-child { margin-bottom: 0; }
+.credentials { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.credentials li {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 20px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  line-height: 1.55;
+}
+.credentials li strong { color: var(--forest); display: block; font-size: 0.88rem; margin-bottom: 2px; }
+.cred-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+
+/* ── Ways to Work ── */
+.ways {
+  padding: 80px 0;
+}
+.ways-header { margin-bottom: 64px; }
+.ways-header h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 400; color: var(--forest); margin-bottom: 16px; }
+.ways-header p { color: var(--text-muted); max-width: 560px; font-size: 1.02rem; }
+
+.way-card {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.way-card:hover { border-color: var(--forest-mid); box-shadow: 0 4px 24px rgba(26,61,46,0.08); }
+
+.way-sidebar {
+  padding: 40px 32px;
+  background: var(--forest);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.way-sidebar.gold { background: linear-gradient(135deg, #1a3d2e 0%, #2d5c46 100%); }
+.way-sidebar.mid  { background: var(--forest-mid); }
+.way-sidebar.hi   { background: var(--forest-hi); }
+
+.way-number { font-family: 'Spectral', serif; font-size: 3.5rem; font-weight: 300; color: rgba(250,247,242,0.15); line-height: 1; margin-bottom: 16px; }
+.way-type { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+.way-title { font-family: 'Spectral', serif; font-size: 1.55rem; font-weight: 600; color: var(--cream); line-height: 1.2; margin-bottom: 6px; }
+.way-target { font-size: 0.85rem; color: rgba(250,247,242,0.55); font-style: italic; font-family: 'Spectral', serif; }
+.way-availability { margin-top: 20px; }
+.way-badge { display: inline-block; padding: 5px 12px; background: rgba(184,150,90,0.2); border: 1px solid rgba(184,150,90,0.3); border-radius: 2px; font-size: 0.75rem; font-weight: 500; color: var(--gold-hi); letter-spacing: 0.06em; }
+
+.way-body { padding: 40px; background: white; }
+.way-body h3 { font-size: 1.15rem; font-weight: 600; color: var(--forest); margin-bottom: 16px; }
+.way-body p { color: var(--text-mid); margin-bottom: 16px; font-size: 0.98rem; line-height: 1.75; }
+.way-body p:last-of-type { margin-bottom: 24px; }
+.way-includes { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.way-includes li { padding: 5px 12px; background: var(--forest-pale); border-radius: 2px; font-size: 0.8rem; color: var(--forest-mid); font-weight: 500; }
+.way-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 600; color: var(--forest); border-bottom: 1px solid var(--border-gold); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+.way-link:hover { color: var(--forest-mid); border-color: var(--gold); }
+
+/* ── For Whom ── */
+.for-whom {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+}
+.for-whom h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 400; color: var(--forest); margin-bottom: 40px; }
+.for-whom h2 em { font-style: italic; }
+.fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 60px; }
+.fit-card { padding: 32px; border: 1px solid var(--border); border-radius: 2px; background: white; }
+.fit-card h3 { font-size: 1rem; font-weight: 600; color: var(--forest); margin-bottom: 12px; }
+.fit-card p { font-size: 0.92rem; color: var(--text-mid); line-height: 1.65; }
+.fit-yes { border-top: 3px solid var(--forest-hi); }
+.fit-no  { border-top: 3px solid rgba(180,100,80,0.5); }
+
+.not-for { padding: 32px 40px; background: var(--warm); border: 1px solid var(--border-gold); border-radius: 2px; }
+.not-for p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.75; }
+.not-for strong { color: var(--forest); }
+
+/* ── Process ── */
+.process {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+}
+.process h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; color: var(--forest); margin-bottom: 48px; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--border); }
+.step { background: white; padding: 32px 24px; }
+.step-num { font-family: 'Spectral', serif; font-size: 2.4rem; font-weight: 300; color: var(--forest-pale); line-height: 1; margin-bottom: 16px; }
+.step h3 { font-size: 0.95rem; font-weight: 600; color: var(--forest); margin-bottom: 10px; }
+.step p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+/* ── CTA ── */
+.cta {
+  padding: 80px 0 100px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.cta h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; color: var(--forest); margin-bottom: 16px; }
+.cta p { color: var(--text-muted); max-width: 500px; margin: 0 auto 40px; font-size: 1.02rem; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--forest); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600; padding: 15px 32px; border-radius: 2px; transition: background 0.2s, transform 0.15s; letter-spacing: 0.02em; }
+.btn-primary:hover { background: var(--gold-hi); transform: translateY(-1px); }
+.btn-forest { display: inline-flex; align-items: center; gap: 8px; background: var(--forest); color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; padding: 15px 32px; border-radius: 2px; transition: background 0.2s; }
+.btn-forest:hover { background: var(--forest-mid); }
+
+/* ── Footer ── */
+footer { background: var(--forest); color: rgba(250,247,242,0.6); padding: 48px 40px; text-align: center; }
+footer .footer-mark { font-family: 'Spectral', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold-hi); margin-bottom: 16px; }
+footer p { font-size: 0.82rem; margin-bottom: 6px; }
+footer a { color: rgba(250,247,242,0.5); transition: color 0.2s; }
+footer a:hover { color: var(--gold-hi); }
+
+/* ── Reveal ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { gap: 20px; }
+  .nav-links li:nth-child(n+4) { display: none; }
+  .hero { padding: 100px 20px 64px; }
+  .hero-inner, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-photo { order: -1; }
+  .hero-photo img { max-width: 100%; aspect-ratio: 16/9; object-position: center top; }
+  main { padding: 0 20px; }
+  .way-card { grid-template-columns: 1fr; }
+  .fit-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  footer { padding: 40px 20px; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-mark" href="/">Meliorist <span>Group</span></a>
+  <ul class="nav-links">
+    <li><a href="/meliorism.html">Philosophy</a></li>
+    <li><a href="/origins.html">Origins</a></li>
+    <li><a href="/you.html">The Five W's</a></li>
+    <li><a href="/work-with-brian.html" class="active">Work Together</a></li>
+    <li><a href="https://signal-os.org" target="_blank">Signal-OS ↗</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Work with Brian</p>
+      <h1>The work is<br>removing what's<br>in the <em>way.</em></h1>
+      <p class="hero-sub">Brian Oney advises coaches, trainers, and business owners who want their work to count — not just perform. The approach is subtractive: find what's obscuring the better version of your business or practice, and remove it with precision.</p>
+    </div>
+    <div class="hero-photo">
+      <img src="images/brian-bookstore.jpg"
+           alt="Brian Oney, founder of Meliorist Group, in a San Francisco bookstore"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <div style="display:none; width:100%; aspect-ratio:4/5; background:var(--forest-mid); border-radius:3px; align-items:center; justify-content:center;">
+        <span style="font-family:'Spectral',serif; font-size:1.1rem; color:rgba(250,247,242,0.5); font-style:italic;">Brian Oney</span>
+      </div>
+      <p class="photo-caption">Brian Oney · Founder, Meliorist Group · San Francisco</p>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- About -->
+  <section class="about-strip">
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="section-label">The founder</p>
+        <h2>A practitioner,<br>not a <em>theorist.</em></h2>
+        <p>Brian has spent his career at the intersection of philosophy and practice — advising business owners, training practitioners, and writing about what it actually means to do work that counts.</p>
+        <p>He is a Meliorist: someone who believes the world gets better through constructive stewardship, wise action, better systems, and collaborative agency. Not through performance. Not through consumption of frameworks. Through removal of what's in the way.</p>
+        <p>He works with people who are already good at what they do and want to stop getting in their own way.</p>
+      </div>
+      <div class="reveal">
+        <ul class="credentials">
+          <li>
+            <span class="cred-icon">🎓</span>
+            <div>
+              <strong>Master's in Public Administration</strong>
+              Syracuse University — grounding in policy, systems, and the Chicago School tradition that runs through Meliorism 2.0
+            </div>
+          </li>
+          <li>
+            <span class="cred-icon">🏙️</span>
+            <div>
+              <strong>San Francisco-based</strong>
+              Two decades advising coaches, trainers, and business owners — from solo practitioners to growing teams
+            </div>
+          </li>
+          <li>
+            <span class="cred-icon">📡</span>
+            <div>
+              <strong>Co-creator, CTCSP</strong>
+              Cracking the Code Sales &amp; Practitioner program, co-run with Scott Sylvan Bell — a working lab for the philosophy in practice
+            </div>
+          </li>
+          <li>
+            <span class="cred-icon">✍️</span>
+            <div>
+              <strong>Writer &amp; Editorial Director</strong>
+              Signal-OS — a daily applied-intelligence briefing for trainers, coaches, and practitioners staying sharp in an AI-accelerated world
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three Ways -->
+  <section class="ways">
+    <div class="ways-header reveal">
+      <p class="section-label">Three ways in</p>
+      <h2>How we might work together</h2>
+      <p>Three different modes of engagement — from direct advisory to community membership. All three are grounded in the same premise: the better version is already there.</p>
+    </div>
+
+    <!-- Advisory -->
+    <div class="way-card reveal">
+      <div class="way-sidebar gold">
+        <div>
+          <div class="way-number">01</div>
+          <span class="way-type">Direct Advisory</span>
+          <p class="way-title">One-on-One<br>Advisory</p>
+          <p class="way-target">For coaches, trainers &amp; advisors ready to work differently</p>
+        </div>
+        <div class="way-availability">
+          <span class="way-badge">Limited Engagements</span>
+        </div>
+      </div>
+      <div class="way-body">
+        <h3>Targeted, practical, and grounded in what's actually happening in your business</h3>
+        <p>This is not coaching in the traditional sense. Brian works as an advisor — someone who looks at what you've built, identifies what is working but underused and what is creating friction but persisting anyway, and helps you remove the latter while protecting the former.</p>
+        <p>Engagements are structured around real decisions: pricing, positioning, how you spend your time, what you stop doing. The philosophy is always in the room, but it shows up through what actually changes — not through additional frameworks to carry.</p>
+        <ul class="way-includes">
+          <li>Business clarity sessions</li>
+          <li>Practice positioning</li>
+          <li>Subtraction audit</li>
+          <li>Decision support</li>
+          <li>Ongoing access</li>
+        </ul>
+        <a class="way-link" href="mailto:brian@melioristgroup.com">Start the conversation →</a>
+      </div>
+    </div>
+
+    <!-- CTCSP -->
+    <div class="way-card reveal">
+      <div class="way-sidebar mid">
+        <div>
+          <div class="way-number">02</div>
+          <span class="way-type">Group Program</span>
+          <p class="way-title">Cracking the Code<br>Sales &amp; Practitioner</p>
+          <p class="way-target">For business owners ready to grow without the noise</p>
+        </div>
+        <div class="way-availability">
+          <span class="way-badge">Cohorts Available</span>
+        </div>
+      </div>
+      <div class="way-body">
+        <h3>The working lab for Meliorism 2.0 in a business context</h3>
+        <p>CTCSP (co-created with Scott Sylvan Bell) is a cohort-based program for business owners and practitioners who want to close more business without selling in ways that feel wrong — and without adding complexity to a business that already has too much of it.</p>
+        <p>The program applies the subtractive logic directly: what is currently preventing you from enrolling the clients you're already good for? Remove that, and the sales conversation changes. Not because you learned new techniques, but because you stopped doing the things that were getting in the way.</p>
+        <ul class="way-includes">
+          <li>Sales clarity</li>
+          <li>Practitioner positioning</li>
+          <li>Live cohort sessions</li>
+          <li>Business HUD review</li>
+          <li>Community access</li>
+        </ul>
+        <a class="way-link" href="mailto:brian@melioristgroup.com">Ask about the next cohort →</a>
+      </div>
+    </div>
+
+    <!-- Signal-OS -->
+    <div class="way-card reveal">
+      <div class="way-sidebar hi">
+        <div>
+          <div class="way-number">03</div>
+          <span class="way-type">Daily Intelligence</span>
+          <p class="way-title">Signal-OS</p>
+          <p class="way-target">For practitioners who want to stay sharp — daily</p>
+        </div>
+        <div class="way-availability">
+          <span class="way-badge">Open Membership</span>
+        </div>
+      </div>
+      <div class="way-body">
+        <h3>Applied intelligence for the practitioner who is always in the room</h3>
+        <p>Signal-OS is a daily briefing community for trainers, coaches, educators, managers, and leaders. Every issue is a self-contained research-grounded HTML experience — a different visual world, a different dimension, one thing you can reach for the next time your usual approach stops working.</p>
+        <p>It is not a newsletter. It is not motivational content. It is peer-reviewed research translated into practitioner language, delivered in a format designed for the neuro-spicy brain — dense, surprising, and actually worth opening.</p>
+        <ul class="way-includes">
+          <li>Daily briefings</li>
+          <li>Full archive access</li>
+          <li>Research library</li>
+          <li>Practitioner community</li>
+          <li>$97/year founding rate</li>
+        </ul>
+        <a class="way-link" href="https://signal-os.org/join" target="_blank">Become a founding member →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- For Whom -->
+  <section class="for-whom">
+    <div class="reveal">
+      <p class="section-label">Right fit</p>
+      <h2>This work is for people who are<br><em>already good at what they do.</em></h2>
+      <div class="fit-grid">
+        <div class="fit-card fit-yes reveal">
+          <h3>This tends to work well when…</h3>
+          <p>You've been doing this long enough to have real results — and a few persistent frustrations. You suspect the obstacle is something you're doing rather than something you don't know yet. You want a practitioner-to-practitioner conversation, not a motivational speaker. You're willing to subtract things, not just add them.</p>
+        </div>
+        <div class="fit-card fit-yes reveal">
+          <h3>Also a good fit if…</h3>
+          <p>You're a trainer or coach moving into a more advisory role and want to position yourself differently. You have ADHD or think in non-linear ways and are tired of programs that weren't designed for your brain. You want your work to be philosophically coherent — not just tactically optimized.</p>
+        </div>
+      </div>
+      <div class="not-for reveal">
+        <p><strong>Not the right fit:</strong> If you're looking for someone to build your business for you, install new systems, or generate motivation to keep going — this probably isn't it. The work here assumes you already have the engine. We're looking for what's clogging it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process reveal">
+    <p class="section-label">How it starts</p>
+    <h2>Four steps, in order</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>A real conversation</h3>
+        <p>Not a discovery call. An actual conversation about what you're building, what's working, and what keeps recurring. No pitch on either side.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Clarity on fit</h3>
+        <p>We both decide if this is a good use of our time. If it isn't, Brian will say so and point you toward something that is.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>A defined engagement</h3>
+        <p>Scope, format, timeline, what done looks like. Not open-ended. Not indefinite. Structured around real decisions you need to make.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>The work</h3>
+        <p>Actual engagement: sessions, observations, honest feedback, targeted removal. The goal is a measurably clearer path — not more to carry.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta reveal">
+    <h2>Ready to start the conversation?</h2>
+    <p>Send a note about what you're working on. No form. No funnel. Just an email.</p>
+    <div class="cta-buttons">
+      <a class="btn-primary" href="mailto:brian@melioristgroup.com">Email Brian directly</a>
+      <a class="btn-forest" href="https://signal-os.org/join" target="_blank">Join Signal-OS first</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-mark">Meliorist Group</div>
+  <p>The better version is already there.</p>
+  <p style="margin-top:16px; font-size:0.78rem;">
+    <a href="/">Home</a> &nbsp;·&nbsp;
+    <a href="/meliorism.html">Philosophy</a> &nbsp;·&nbsp;
+    <a href="/origins.html">Origins</a> &nbsp;·&nbsp;
+    <a href="/you.html">The Five W's</a> &nbsp;·&nbsp;
+    <a href="/work-with-brian.html">Work Together</a> &nbsp;·&nbsp;
+    <a href="https://signal-os.org" target="_blank">Signal-OS</a>
+  </p>
+  <p style="margin-top:20px; font-size:0.75rem; opacity:0.5;">© 2026 Meliorist Group · San Francisco, CA</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Cloudflare Pages — URL routing
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Clean URLs (no .html extension needed)
+/meliorism          /meliorism.html     200
+/origins            /origins.html       200
+/you                /you.html           200
+/work-with-brian    /work-with-brian.html 200
+
+# Aliases
+/philosophy         /meliorism.html     301
+/5ws                /you.html           301
+/five-ws            /you.html           301
+/work               /work-with-brian.html 301
+/advisory           /work-with-brian.html 301
+/about              /work-with-brian.html 301
+/contact            /work-with-brian.html 301
+/ctcsp              /work-with-brian.html 301
+
+# 404 fallback
+/*                  /index.html         404
