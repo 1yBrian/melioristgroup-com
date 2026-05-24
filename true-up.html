@@ -189,6 +189,13 @@
   .homelink a{color:var(--gold-dim);font-family:var(--mono);font-size:11px;letter-spacing:2px;
     text-transform:uppercase;text-decoration:none;}
   .homelink a:hover{color:var(--gold);}
+  .mirrors-list{display:flex;flex-direction:column;gap:18px;margin:16px 0;}
+  .mirror-item .guess{font-family:'Crimson Text',Georgia,serif;font-size:1.15rem;
+    color:var(--text-dim);font-style:italic;margin-bottom:10px;line-height:1.4;}
+  .mirror-item .cwm{display:flex;gap:8px;}
+  .trade2-block{margin:0 0 20px;border-top:1px solid var(--line);padding-top:18px;}
+  .trade2-block:first-of-type{border-top:none;padding-top:0;}
+  .band-spacer{height:16px;}
 </style>
 </head>
 <body>
@@ -242,147 +249,148 @@ function heroArt(){
 
 /* ================= CONTENT ================= */
 var P=[
- {kind:"intro"},
- {kind:"voice",sp:"brian",nm:"Brian Oney",st:"",creed:[
-   "I believe you have intrinsic worth.",
-   "I believe you have hidden value worthy of being discovered.",
-   "I've watched society, circumstances, and structures diminish and distract people from thriving — in life, business, joy, relationships, wisdom, wellness, and wonder."],
-   body:["What I want is to discover, with others, how we overcome that resistance — and reveal our best selves.","Let me hand you to someone better at this than I am."]},
- {kind:"voice",sp:"brian",nm:"Brian Oney",st:"",body:[
-   "Hi — I'm Brian Oney. San Francisco. A dad. I consult with business owners, lead trainings, design presentations — probably, like you, I do most of whatever gets asked.",
-   "Outside work I write, walk Golden Gate Park, and miss the electric motorcycle someone stole.",
-   "The person taking you through this is Mac. She runs the floor. I think; she wrenches. Listen to her."]},
+ {kind:”intro”},
 
- /* roll-in */
- {kind:"voice",sp:"mac",nm:"Mac",st:"ROLL-IN",body:[
-   "Pull it in, kill the engine, pop the hood. I'm Mac — I run this floor.",
-   "The deal: I won't tell you what's wrong with you. I'll tell you what I see, and you tell me where I'm off. Nothing here gets graded.",
-   "First I'll take some guesses. I'll get them wrong on purpose — your job is to notice which wrong one makes you flinch."]},
- {kind:"mirror",st:"ROLL-IN",n:1,guess:"Your real problem is just that you've got too much on your plate."},
- {kind:"mirror",st:"ROLL-IN",n:2,guess:"You'd be fine if you just had more discipline."},
- {kind:"mirror",st:"ROLL-IN",n:3,guess:"The thing draining you is something you secretly enjoy."},
- {kind:"mirror",st:"ROLL-IN",n:4,guess:"You already know exactly what to cut. You just haven't."},
- {kind:"mirror",st:"ROLL-IN",n:5,guess:"Your sharpest hours are going to other people's priorities."},
- {kind:"debrief",sp:"mac",nm:"Mac",st:"ROLL-IN"},
+ /* ROLL-IN — Brian intro folded into Mac's opener */
+ {kind:”voice”,sp:”brian”,nm:”Brian Oney”,st:””,creed:[
+   “I believe you have intrinsic worth.”,
+   “I believe you have hidden value worthy of being discovered.”,
+   “I've watched society, circumstances, and structures diminish and distract people from thriving — in life, business, joy, relationships, wisdom, wellness, and wonder.”],
+   body:[“What I want is to discover, with others, how we overcome that resistance — and reveal our best selves.”,
+         “Hi — I'm Brian Oney. San Francisco. A dad. I consult with business owners, lead trainings, design presentations.”,
+         “The person taking you through this is Mac. She runs the floor. I think; she wrenches. Listen to her.”]},
 
- /* logbook */
- {kind:"voice",sp:"mac",nm:"Mac",st:"THE LOGBOOK",body:[
-   "Every machine has a logbook — where it's been, what it was built for. This part's easy. Short answers are real answers."]},
- {kind:"trade",st:"THE LOGBOOK",key:"t1",
-   ask:["The short version — how'd you get here? Brian went first."],
-   brian:"UC Santa Cruz, then a Master of Public Administration at Syracuse. My foundation is Symbolic Interactionism — meaning is made in interaction. I spent a career in rooms where smart people couldn't see what they already had. That became the practice.",
-   ph:"How you got here."},
- {kind:"trade",st:"THE LOGBOOK",key:"education",
-   ask:["Where did you actually learn what you're good at? Brian first."],
-   brian:"A decade in hospitality. Rolling silverware, the difficult clients, leading BEO meetings, staffing surf-and-turf for hundreds. I also learned to squat down and meet a kid eye to eye to find what they wanted. That decade taught me to read a person better than any degree.",
-   ph:"Where you really learned it."},
- {kind:"inputs",st:"THE LOGBOOK",items:[
-   {type:"prompt",key:"interests",ask:"What pulls your attention when nobody's paying you to care?",ph:"For free."},
-   {type:"prompt",key:"hobbies",ask:"What do you do with your hands or time that has nothing to do with money? If nothing, write nothing.",ph:"What doesn't pay."}]},
- {kind:"voice",sp:"mac",nm:"Mac",st:"THE LOGBOOK",body:[
-   "Quick one about Brian: he got advanced-certified on scuba. Not a resort dunk — he wanted to know what he was doing forty feet down. All the way, or not at the door."]},
- {kind:"trade",st:"THE LOGBOOK",key:"t2",
-   ask:["Name something you made sure you did — on purpose. Brian first."],
-   brian:"Advanced scuba. One skydive. One bungee off a canyon in New Zealand. Most of a year traveling the world in my twenties. Proof I'd act when it counted.",
-   ph:"Something you made sure you did."},
- {kind:"trade",st:"THE LOGBOOK",key:"t3",
-   ask:["What are you most grateful for? Don't polish it. Brian didn't."],
-   brian:"I just watched my daughter graduate from college. Of everything — that's what came up first.",
-   ph:"What you're grateful for."},
+ /* Mac's roll-in + first 3 mirrors on one page */
+ {kind:”mirrors”,st:”ROLL-IN”,
+   mac_intro:[“Pull it in, kill the engine, pop the hood. I'm Mac — I run this floor.”,
+     “The deal: I won't tell you what's wrong with you. I'll tell you what I see, and you tell me where I'm off.”,
+     “First I'll take some guesses. Notice which wrong one makes you flinch.”],
+   guesses:[
+     {n:1,guess:”Your real problem is just that you've got too much on your plate.”},
+     {n:2,guess:”You'd be fine if you just had more discipline.”},
+     {n:3,guess:”The thing draining you is something you secretly enjoy.”}
+   ]},
+ {kind:”mirrors”,st:”ROLL-IN”,
+   guesses:[
+     {n:4,guess:”You already know exactly what to cut. You just haven't.”},
+     {n:5,guess:”Your sharpest hours are going to other people's priorities.”}
+   ]},
+ {kind:”debrief”,sp:”mac”,nm:”Mac”,st:”ROLL-IN”},
 
- /* dents */
- {kind:"voice",sp:"mac",nm:"Mac",st:"THE DENTS",body:[
-   "Every machine worth anything has dents. I won't buff them out and pretend. You decide how much to say — pointing at it is enough."]},
- {kind:"prompt",st:"THE DENTS",key:"dent",reflect:true,
-   ask:"Name a dent. Something that hit hard.",ph:"A dent. As much or little as you want."},
- {kind:"prompt",st:"THE DENTS",key:"reframe",
-   ask:"Now the other half. What did that dent leave you able to do that you couldn't before? I call this move liquid sunshine — it doesn't deny the rain, it names what the rain watered.",
-   ph:"What the dent left you able to do."},
- {kind:"voice",sp:"mac",nm:"Mac",st:"THE DENTS",body:[
-   "Brian jumped out of a plane once, threw himself off a New Zealand canyon once. He'll tell you the number was right — he was after knowing he'd do it, not a hobby."]},
- {kind:"trade",st:"THE DENTS",key:"t4",
-   ask:["A dent of Brian's, since he asked for one of yours."],
-   brian:"At seventeen I stopped seeing the point of homework, and it spiraled — into questioning whether my existence had value at all. Depressed, lonely. Then a high school let me co-design my own curriculum, and it handed my agency back. Everything I've believed since started there: people are rarely broken — usually just blocked.",
-   ph:"Anything that surfaced — optional."},
- {kind:"trade",st:"THE DENTS",key:"t5",
-   ask:["If you had one year left, what would you change about how you're living? Brian first."],
-   brian:"More time with my kids — and making sure they knew it. Travel, a spa, actually relax. Pull the messages worth sharing out of my soul and share them. Take the brakes off love. Maybe even meditate.",
-   ph:"What you'd change with a year left."},
+ /* LOGBOOK — two trade pairs, each on one page */
+ {kind:”trades2”,st:”THE LOGBOOK”,
+   mac_intro:[“Every machine has a logbook — where it's been, what it was built for. Short answers are real answers.”],
+   items:[
+     {key:”t1”,ask:”The short version — how'd you get here?”,
+       brian:”UC Santa Cruz, then a Master of Public Administration at Syracuse. I spent a career in rooms where smart people couldn't see what they already had. That became the practice.”,
+       ph:”How you got here.”},
+     {key:”education”,ask:”Where did you actually learn what you're good at?”,
+       brian:”A decade in hospitality. Rolling silverware, difficult clients, leading BEO meetings. I also learned to squat down and meet a kid eye to eye. That decade taught me to read a person better than any degree.”,
+       ph:”Where you really learned it.”}
+   ]},
+ {kind:”inputs”,st:”THE LOGBOOK”,items:[
+   {type:”prompt”,key:”interests”,ask:”What pulls your attention when nobody's paying you to care?”,ph:”For free.”},
+   {type:”prompt”,key:”hobbies”,ask:”What do you do with your hands or time that has nothing to do with money?”,ph:”What doesn't pay.”}]},
+ {kind:”trades2”,st:”THE LOGBOOK”,
+   mac_intro:[“Quick one about Brian: he got advanced-certified on scuba. All the way, or not at the door.”],
+   items:[
+     {key:”t2”,ask:”Name something you made sure you did — on purpose.”,
+       brian:”Advanced scuba. One skydive. One bungee off a canyon in New Zealand. Most of a year traveling the world. Proof I'd act when it counted.”,
+       ph:”Something you made sure you did.”},
+     {key:”t3”,ask:”What are you most grateful for? Don't polish it.”,
+       brian:”I just watched my daughter graduate from college. Of everything — that's what came up first.”,
+       ph:”What you're grateful for.”}
+   ]},
 
- /* warning lights — 3 varied tools on one page */
- {kind:"voice",sp:"mac",nm:"Mac",st:"WARNING LIGHTS",body:[
-   "Now the gauges — the only part I put numbers on. Three at once. Higher always means more wear. Be honest about the redline.",
-   "One on Brian: he runs an ADHD engine and isn't quiet about it. Half of why this shop is short and clutter-free is that he built it for the brain he's actually got."]},
- {kind:"gauges",st:"WARNING LIGHTS",items:[
-   {key:"load",tool:"slider",name:"Load Limit",ask:"How close to your sustainable redline are you running?",
-     anchors:[[20,"Coasting. Real margin."],[50,"Working. Sustainable."],[75,"Loaded — weeks, not quarters."],[95,"Redline. Heat building."],[100,"Seized."]]},
-   {key:"drag",tool:"tube",name:"Drag Factor",ask:"How much of your effort goes to things you do because you “should”?",
-     anchors:[[20,"Clean line."],[50,"Normal drag."],[75,"Heavy — the Spark is starving."],[100,"Towing a wall."]]},
-   {key:"identity",tool:"geared",name:"Identity Friction",ask:"How much effort still goes to proving who you used to be?",
-     anchors:[[20,"Clean handoff."],[50,"Mostly moved."],[75,"Split — two identities."],[100,"Stuck."]]}]},
- {kind:"inputs",st:"WARNING LIGHTS",items:[
-   {type:"choose",key:"loadDuration",ask:"How long have you been at roughly that load? Heat is load times time.",options:["Days","Weeks","Months","Can't remember"]},
-   {type:"prompt",key:"shoulds",ask:"Name the three heaviest “should” blocks in your week.",ph:"The three heaviest shoulds."},
-   {type:"choose",key:"peopleRead",ask:"The people who drain you — a crowd, a handful, one or two, or nobody?",options:["A crowd","A handful","One or two","Nobody really"]}]},
- {kind:"gauges",st:"WARNING LIGHTS",items:[
-   {key:"rhythm",tool:"dial",name:"Rhythm Dial",ask:"Are you doing your hardest work when you're sharp — or spending your gold hours on junk? Higher means more inverted.",
-     anchors:[[20,"Tuned."],[50,"Mostly aligned."],[75,"Off-beat."],[100,"Inverted — fighting your own clock."]]},
-   {key:"timeWealth",tool:"tube",name:"Time Wealth",ask:"How much genuinely unclaimed time do you have?",
-     anchors:[[25,"Nearly empty."],[55,"Some slack."],[100,"Time is yours to point."]]},
-   {key:"powerWealth",tool:"tube",name:"Power Wealth",ask:"Money, access, leverage — how full is that tank?",
-     anchors:[[25,"Low leverage."],[55,"Workable."],[100,"Real reach."]]}]},
- {kind:"inputs",st:"WARNING LIGHTS",items:[
-   {type:"prompt",key:"gaugeReaction",ask:"Looking at all four gauges — what reading surprised you most?",ph:"The one that landed differently."},
-   {type:"prompt",key:"becoming",ask:"In one line — who are you becoming?",ph:"One line."}]},
- {kind:"daydial",st:"WARNING LIGHTS"},
- {kind:"gtrap",sp:"mac",nm:"Mac",st:"WARNING LIGHTS"},
+ /* DENTS — dent + reframe on one page */
+ {kind:”inputs”,st:”THE DENTS”,
+   mac_intro:[“Every machine worth anything has dents. You decide how much to say — pointing at it is enough.”],
+   items:[
+     {type:”prompt”,key:”dent”,ask:”Name a dent. Something that hit hard.”,ph:”A dent. As much or little as you want.”},
+     {type:”prompt”,key:”reframe”,ask:”What did that dent leave you able to do that you couldn't before? (Mac calls this liquid sunshine — it doesn't deny the rain, it names what the rain watered.)”,ph:”What the dent left you able to do.”}
+   ]},
+ {kind:”trades2”,st:”THE DENTS”,
+   mac_intro:[“Brian jumped out of a plane once, threw himself off a New Zealand canyon once. He was after knowing he'd do it, not a hobby.”],
+   items:[
+     {key:”t4”,ask:”A dent of Brian's, since he asked for one of yours.”,
+       brian:”At seventeen I stopped seeing the point of homework — into questioning whether my existence had value. Depressed, lonely. Then a high school let me co-design my own curriculum, and it handed my agency back. People are rarely broken — usually just blocked.”,
+       ph:”Anything that surfaced — optional.”},
+     {key:”t5”,ask:”If you had one year left, what would you change about how you're living?”,
+       brian:”More time with my kids. Travel, actually relax. Pull the messages worth sharing out of my soul. Take the brakes off love.”,
+       ph:”What you'd change with a year left.”}
+   ]},
 
- /* plates */
- {kind:"voice",sp:"mac",nm:"Mac",st:"THE PLATES",body:[
-   "The plates. Not the registration — the real ones. Who you answer to, and who you're done answering to."]},
- {kind:"inputs",st:"THE PLATES",items:[
-   {type:"prompt",key:"plates",ask:"What do people call you — and what do you wish they'd call you?",ph:"Called, and wished."},
-   {type:"prompt",key:"twoModels",ask:"Who were you built to be — and who are you rebuilding into?",ph:"Old model, and the rebuild."},
-   {type:"prompt",key:"doneWith",ask:"Name one label you're done wearing.",ph:"One label."}]},
- {kind:"trade",st:"THE PLATES",key:"t7",
-   ask:["Who are you — the real plates? Brian first."],
-   brian:"Father. Advisor. Writer. San Francisco. And mid-rebuild: I spent years advising owners one at a time, and I'm becoming someone who trains the trainers. So I'm not asking who you're becoming from a finished place.",
-   ph:"Your real plates."},
- {kind:"trade",st:"THE PLATES",key:"t8",
-   ask:["If you woke up with one new ability, what would it be? Brian first."],
-   brian:"To transform beliefs and identity while subtracting the diversions and shoulds — aligning a person with their true intentions, so they could awaken to their best life right now.",
-   ph:"One ability."},
- {kind:"prompt",st:"THE PLATES",key:"worldValues",reflect:true,
-   ask:"One more, and it matters. What do you wish the world valued about you?",ph:"What you wish the world valued."},
+ /* WARNING LIGHTS */
+ {kind:”voice”,sp:”mac”,nm:”Mac”,st:”WARNING LIGHTS”,body:[
+   “Now the gauges. Three at once. Higher always means more wear. Be honest about the redline.”,
+   “Brian note: he runs an ADHD engine and isn't quiet about it. Half of why this shop is short and clutter-free is that he built it for the brain he's actually got.”]},
+ {kind:”gauges”,st:”WARNING LIGHTS”,items:[
+   {key:”load”,tool:”slider”,name:”Load Limit”,ask:”How close to your sustainable redline are you running?”,
+     anchors:[[20,”Coasting. Real margin.”],[50,”Working. Sustainable.”],[75,”Loaded — weeks, not quarters.”],[95,”Redline. Heat building.”],[100,”Seized.”]]},
+   {key:”drag”,tool:”tube”,name:”Drag Factor”,ask:”How much of your effort goes to things you do because you ‘should’?”,
+     anchors:[[20,”Clean line.”],[50,”Normal drag.”],[75,”Heavy — the Spark is starving.”],[100,”Towing a wall.”]]},
+   {key:”identity”,tool:”geared”,name:”Identity Friction”,ask:”How much effort still goes to proving who you used to be?”,
+     anchors:[[20,”Clean handoff.”],[50,”Mostly moved.”],[75,”Split — two identities.”],[100,”Stuck.”]]}]},
+ {kind:”inputs”,st:”WARNING LIGHTS”,items:[
+   {type:”choose”,key:”loadDuration”,ask:”How long have you been at roughly that load?”,options:[“Days”,”Weeks”,”Months”,”Can't remember”]},
+   {type:”prompt”,key:”shoulds”,ask:”Name the three heaviest ‘should’ blocks in your week.”,ph:”The three heaviest shoulds.”},
+   {type:”choose”,key:”peopleRead”,ask:”The people who drain you — a crowd, a handful, one or two, or nobody?”,options:[“A crowd”,”A handful”,”One or two”,”Nobody really”]}]},
+ {kind:”gauges”,st:”WARNING LIGHTS”,items:[
+   {key:”rhythm”,tool:”dial”,name:”Rhythm Dial”,ask:”Are you doing your hardest work when you're sharp — or spending your gold hours on junk? Higher means more inverted.”,
+     anchors:[[20,”Tuned.”],[50,”Mostly aligned.”],[75,”Off-beat.”],[100,”Inverted — fighting your own clock.”]]},
+   {key:”timeWealth”,tool:”tube”,name:”Time Wealth”,ask:”How much genuinely unclaimed time do you have?”,
+     anchors:[[25,”Nearly empty.”],[55,”Some slack.”],[100,”Time is yours to point.”]]},
+   {key:”powerWealth”,tool:”tube”,name:”Power Wealth”,ask:”Money, access, leverage — how full is that tank?”,
+     anchors:[[25,”Low leverage.”],[55,”Workable.”],[100,”Real reach.”]]}]},
+ {kind:”inputs”,st:”WARNING LIGHTS”,items:[
+   {type:”prompt”,key:”gaugeReaction”,ask:”Looking at all four gauges — what reading surprised you most?”,ph:”The one that landed differently.”},
+   {type:”prompt”,key:”becoming”,ask:”In one line — who are you becoming?”,ph:”One line.”}]},
+ {kind:”daydial”,st:”WARNING LIGHTS”},
+ {kind:”gtrap”,sp:”mac”,nm:”Mac”,st:”WARNING LIGHTS”},
 
- /* engine room */
- {kind:"voice",sp:"mac",nm:"Mac",st:"THE ENGINE ROOM",body:[
-   "Now we open it up — the engine room. Three things run in here: the engine (what you raw-crave), the governor (every should you swallowed), the driver (what actually picks).",
-   "And the out, plain: you can keep the engine room shut. The True-Up still gives a real reading. No penalty, no lecture."]},
- {kind:"choose",st:"THE ENGINE ROOM",key:"engineRoom",ask:"Open the engine room?",options:["Open it up","Keep it shut"]},
- {kind:"inputs",st:"THE ENGINE ROOM",skipKey:"engineRoom",skipVal:"Keep it shut",items:[
-   {type:"prompt",key:"engine",ask:"THE ENGINE. It wants what it wants. What does yours crave — rest, money, freedom, recognition, to be wanted? Don't dress it up.",ph:"What the engine craves."},
-   {type:"prompt",key:"governor",ask:"THE GOVERNOR. The voice of every should. What does yours insist you're supposed to want?",ph:"What the governor insists."},
-   {type:"prompt",key:"driver",ask:"THE DRIVER. Hands on the wheel. What are you actually steering toward?",ph:"What you're steering toward."}]},
- {kind:"trade",st:"THE ENGINE ROOM",key:"t9",
-   ask:["If a crystal ball told you one true thing about your life, what would you ask? Brian first."],
-   brian:"What am I not seeing — the thing that, if I understood it, would let me live a flourishing life of contribution, care, and joy?",
-   ph:"What you'd ask the crystal ball."},
- {kind:"trade",st:"THE ENGINE ROOM",key:"t10",
-   ask:["Last trade. What do you most want to discover — and with whom? Brian first."],
-   brian:"To discover, with others, how humans overcome the resistance in systems and structures — and reveal our best selves.",
-   ph:"What you want to discover, and with whom."},
+ /* THE PLATES */
+ {kind:”inputs”,st:”THE PLATES”,
+   mac_intro:[“The plates. Not the registration — the real ones. Who you answer to, and who you're done answering to.”],
+   items:[
+     {type:”prompt”,key:”plates”,ask:”What do people call you — and what do you wish they'd call you?”,ph:”Called, and wished.”},
+     {type:”prompt”,key:”twoModels”,ask:”Who were you built to be — and who are you rebuilding into?”,ph:”Old model, and the rebuild.”},
+     {type:”prompt”,key:”doneWith”,ask:”Name one label you're done wearing.”,ph:”One label.”}
+   ]},
+ {kind:”trades2”,st:”THE PLATES”,
+   items:[
+     {key:”t7”,ask:”Who are you — the real plates?”,
+       brian:”Father. Advisor. Writer. San Francisco. And mid-rebuild: I spent years advising owners one at a time, and I'm becoming someone who trains the trainers.”,
+       ph:”Your real plates.”},
+     {key:”t8”,ask:”If you woke up with one new ability, what would it be?”,
+       brian:”To transform beliefs and identity while subtracting the diversions — aligning a person with their true intentions, so they could awaken to their best life right now.”,
+       ph:”One ability.”}
+   ]},
+ {kind:”prompt”,st:”THE PLATES”,key:”worldValues”,reflect:true,
+   ask:”One more, and it matters. What do you wish the world valued about you?”,ph:”What you wish the world valued.”},
 
- /* readout */
- {kind:"voice",sp:"mac",nm:"Mac",st:"THE READOUT",body:[
-   "Almost done. Here's the full picture."]},
- {kind:"readout",st:"THE READOUT"},
- {kind:"trade",st:"THE READOUT",key:"t11",
-   ask:["Off the record. If this were the last thing you could say to someone — what would you most regret leaving unsaid? Brian first."],
-   brian:"I regret the choices that caused pain. But I'm grateful for what followed my hardest things — I wouldn't trade it. To my kids: I don't want you to hurt, but I want you to find the wisdom on the other side of it.",
-   ph:"What you'd regret leaving unsaid — optional."},
- {kind:"contact",st:"THE READOUT"},
- {kind:"end",st:"THE READOUT"}
+ /* THE ENGINE ROOM — combined choose + inputs */
+ {kind:”engineroom”,st:”THE ENGINE ROOM”,
+   mac_intro:[“Now we open it up — the engine room. Three things run in here: the engine (what you raw-crave), the governor (every should you swallowed), the driver (what actually picks).”,
+     “You can keep the engine room shut. The True-Up still gives a real reading. No penalty.”]},
+ {kind:”trades2”,st:”THE ENGINE ROOM”,
+   items:[
+     {key:”t9”,ask:”If a crystal ball told you one true thing about your life, what would you ask?”,
+       brian:”What am I not seeing — the thing that, if I understood it, would let me live a flourishing life of contribution, care, and joy?”,
+       ph:”What you'd ask the crystal ball.”},
+     {key:”t10”,ask:”What do you most want to discover — and with whom?”,
+       brian:”To discover, with others, how humans overcome the resistance in systems and structures — and reveal our best selves.”,
+       ph:”What you want to discover, and with whom.”}
+   ]},
+
+ /* THE READOUT */
+ {kind:”voice”,sp:”mac”,nm:”Mac”,st:”THE READOUT”,body:[
+   “Almost done. Here's the full picture.”]},
+ {kind:”readout”,st:”THE READOUT”},
+ {kind:”prompt”,st:”THE READOUT”,key:”t11”,
+   ask:”Off the record. If this were the last thing you could say to someone — what would you most regret leaving unsaid?”,
+   ph:”What you'd regret leaving unsaid — optional.”},
+ {kind:”contact”,st:”THE READOUT”},
+ {kind:”end”,st:”THE READOUT”}
 ];
 
 /* ================= HELPERS ================= */
@@ -452,7 +460,7 @@ function render(){
       promptBox(p.key,p.ph,p.reflect)+nav(true);
   }
   else if(p.kind==="inputs"){
-    h=band(p.st)+spk("mac","Mac");
+    h=band(p.st)+(p.mac_intro?spk("mac","Mac")+lns(p.mac_intro):spk("mac","Mac"));
     p.items.forEach(function(it){
       h+='<div class="block"><p class="line" style="font-size:15.5px;">'+it.ask+'</p>';
       if(it.type==="prompt"){
@@ -477,6 +485,57 @@ function render(){
     h=band(p.st)+spk("mac","Mac");
     p.items.forEach(function(g){h+=gaugeHtml(g);});
     h+=nav(true);
+  }
+  else if(p.kind==="mirrors"){
+    var macIntro=p.mac_intro?lns(p.mac_intro):'';
+    h=band(p.st)+spk("mac","Mac")+macIntro;
+    h+='<div class="mirrors-list">';
+    p.guesses.forEach(function(g){
+      var sel=state.mirror[g.n];
+      h+='<div class="mirror-item" data-mn="'+g.n+'">'+
+        '<div class="guess">'+g.guess+'</div>'+
+        '<div class="cwm">'+
+          cwmBtn2(g.n,"cold","b-cold","◦","Cold")+
+          cwmBtn2(g.n,"warm","b-warm","◆","Warm")+
+          cwmBtn2(g.n,"stung","b-stung","✦","That one stung")+
+        '</div></div>';
+    });
+    h+='</div>';
+    var allAnswered=p.guesses.every(function(g){return !!state.mirror[g.n];});
+    h+='<div class="nav"><button class="back" data-act="back">← Back</button><div class="spacer"></div>'+
+      (allAnswered?'<button class="primary" data-act="next">Continue</button>':'')+'</div>';
+  }
+  else if(p.kind==="trades2"){
+    var macIntro=p.mac_intro?band(p.st)+spk("mac","Mac")+lns(p.mac_intro):band(p.st);
+    h=macIntro;
+    p.items.forEach(function(it,i){
+      h+='<div class="trade2-block">'+
+        '<p class="line" style="font-weight:600;font-size:15px;">'+it.ask+'</p>'+
+        '<div class="brian-card"><div class="speaker brian"><span class="dot"></span>BRIAN — GOES FIRST</div><p>'+it.brian+'</p></div>'+
+        '<div class="your-turn">Your turn</div>'+
+        '<textarea data-t2key="'+it.key+'" placeholder="'+escA(it.ph)+'">'+esc(state.answers[it.key]||"")+'</textarea>'+
+        '</div>';
+    });
+    h+=nav(true);
+  }
+  else if(p.kind==="engineroom"){
+    var open=state.choices.engineRoom==="Open it up";
+    var shut=state.choices.engineRoom==="Keep it shut";
+    h=band(p.st)+spk("mac","Mac")+lns(p.mac_intro||[]);
+    h+='<div class="opt-col" style="margin:16px 0;">'+
+      ['Open it up','Keep it shut'].map(function(o){
+        return '<button class="'+(state.choices.engineRoom===o?"sel":"")+'" data-choose="engineRoom" data-val="'+escA(o)+'">'+o+'</button>';
+      }).join('')+'</div>';
+    if(open){
+      h+='<div class="trade2-block"><p class="line" style="font-size:15px;">THE ENGINE — what does yours crave?</p>'+
+        '<textarea data-key="engine" placeholder="What the engine craves.">'+esc(state.answers.engine||"")+'</textarea></div>';
+      h+='<div class="trade2-block"><p class="line" style="font-size:15px;">THE GOVERNOR — what does it insist you\'re supposed to want?</p>'+
+        '<textarea data-key="governor" placeholder="What the governor insists.">'+esc(state.answers.governor||"")+'</textarea></div>';
+      h+='<div class="trade2-block"><p class="line" style="font-size:15px;">THE DRIVER — what are you actually steering toward?</p>'+
+        '<textarea data-key="driver" placeholder="What you\'re steering toward.">'+esc(state.answers.driver||"")+'</textarea></div>';
+    }
+    h+='<div class="nav"><button class="back" data-act="back">← Back</button><div class="spacer"></div>'+
+      (open||shut?'<button class="primary" data-act="next">Continue</button>':'')+'</div>';
   }
   else if(p.kind==="daydial"){
     h=band(p.st)+spk("mac","Mac")+'<p class="line">The Day-Dial. Two marks.</p>'+
@@ -515,6 +574,11 @@ function nav(showCont){
 function cwmBtn(val,cls,ic,label){
   var sel=state.mirror[P[current].n]===val;
   return '<button class="'+cls+(sel?' sel':'')+'" data-mirror="'+val+'">'+
+    '<span class="ic">'+ic+'</span>'+label+'</button>';
+}
+function cwmBtn2(n,val,cls,ic,label){
+  var sel=state.mirror[n]===val;
+  return '<button class="'+cls+(sel?' sel':'')+'" data-mirror2="'+n+'" data-val2="'+val+'">'+
     '<span class="ic">'+ic+'</span>'+label+'</button>';
 }
 function promptBox(key,ph,reflect){
@@ -693,6 +757,12 @@ function saveStep(){
   } else if(p.kind==="inputs"){
     document.querySelectorAll("#app textarea[data-key]").forEach(function(t){
       state.answers[t.getAttribute("data-key")]=t.value;});
+  } else if(p.kind==="trades2"){
+    document.querySelectorAll("#app textarea[data-t2key]").forEach(function(t){
+      state.answers[t.getAttribute("data-t2key")]=t.value;});
+  } else if(p.kind==="engineroom"){
+    document.querySelectorAll("#app textarea[data-key]").forEach(function(t){
+      state.answers[t.getAttribute("data-key")]=t.value;});
   } else if(p.kind==="contact"){
     var cv=document.getElementById("cVal"),cn=document.getElementById("cName");
     if(cv)state.answers.contactVal=cv.value;if(cn)state.answers.contactName=cn.value;
@@ -745,6 +815,15 @@ function bindAll(){
   app.querySelectorAll("[data-choose]").forEach(function(b){
     b.addEventListener("click",function(){
       saveStep();state.choices[b.getAttribute("data-choose")]=b.getAttribute("data-val");render();});
+  });
+  app.querySelectorAll("[data-mirror2]").forEach(function(b){
+    b.addEventListener("click",function(){
+      saveStep();
+      var n=parseInt(b.getAttribute("data-mirror2"),10);
+      var val=b.getAttribute("data-val2");
+      state.mirror[n]=val;
+      render();
+    });
   });
   app.querySelectorAll("[data-cm]").forEach(function(b){
     b.addEventListener("click",function(){saveStep();state.choices.contactMethod=b.getAttribute("data-cm");render();});
