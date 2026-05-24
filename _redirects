@@ -1,11 +1,6 @@
-# Cloudflare Pages — URL routing (build trigger 2026-05-23)
+# Cloudflare Pages — URL routing
 # https://developers.cloudflare.com/pages/configuration/redirects/
-
-# Clean URLs (no .html extension needed)
-/meliorism          /meliorism.html     200
-/origins            /origins.html       200
-/you                /you.html           200
-/work-with-brian    /work-with-brian.html 200
+# Note: Clean URLs handled natively by Pages (no 200 rewrites needed)
 
 # Aliases
 /philosophy         /meliorism.html     301
