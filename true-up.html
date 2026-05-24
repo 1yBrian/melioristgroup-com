@@ -15,22 +15,22 @@
     --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;}
   body{background:var(--bg);color:var(--text);font-family:var(--sans);
-    line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
+    line-height:1.6;-webkit-font-smoothing:antialiased;}
   #progress-track{position:fixed;top:0;left:0;right:0;height:3px;background:var(--line);z-index:10;}
   #progress-fill{height:100%;width:0%;background:var(--gold);transition:width .4s ease;}
-  #app{max-width:680px;margin:0 auto;padding:34px 26px 90px;}
+  #app{max-width:680px;margin:0 auto;padding:34px 26px 20px;height:100vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .panel{opacity:0;transform:translateY(8px);transition:opacity .32s ease,transform .32s ease;}
   .panel.in{opacity:1;transform:translateY(0);}
   @media (prefers-reduced-motion:reduce){.panel{transition:none;transform:none;}#progress-fill{transition:none;}}
 
   /* header art band */
-  .band{margin:0 0 22px;}
+  .band{margin:0 0 4px;}
   .band svg{display:block;width:100%;height:auto;}
 
   .speaker{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;
-    text-transform:uppercase;margin-bottom:9px;}
+    text-transform:uppercase;margin-bottom:6px;}
   .speaker.mac{color:var(--gold);}
   .speaker.brian{color:var(--gold-dim);}
   .speaker .dot{display:inline-block;width:6px;height:6px;border-radius:50%;
@@ -86,13 +86,13 @@
   .cwm .ic{font-size:17px;}
 
   /* gauges */
-  .gauge{margin:0 0 26px;}
-  .gauge:last-child{margin-bottom:6px;}
-  .g-ask{font-size:15px;margin-bottom:12px;}
+  .gauge{margin:0 0 10px;}
+  .gauge:last-child{margin-bottom:4px;}
+  .g-ask{font-size:15px;margin-bottom:4px;}
   .g-name{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--gold);margin-bottom:8px;}
+    color:var(--gold);margin-bottom:2px;}
   .g-val{font-family:var(--mono);font-size:26px;color:var(--gold);}
-  .g-anchor{font-size:13px;color:var(--text-dim);min-height:34px;margin-top:2px;}
+  .g-anchor{font-size:13px;color:var(--text-dim);min-height:0;margin-top:2px;}
   /* horizontal slider — dynamic color track */
   input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;
     border-radius:5px;outline:none;cursor:pointer;
@@ -105,20 +105,20 @@
   /* identity variant — square thumb, stepped track */
   input.geared::-webkit-slider-thumb{border-radius:4px;}
   input.geared::-moz-range-thumb{border-radius:4px;}
-  .gauge-readout{display:flex;align-items:baseline;gap:16px;margin-top:10px;}
-  .gauge-readout .g-val{font-family:var(--mono);font-size:28px;color:var(--gold);min-width:42px;}
-  .gauge-readout .g-anchor{font-size:13px;color:var(--text-dim);font-style:italic;}
+  .gauge-readout{display:flex;align-items:baseline;gap:16px;margin-top:4px;}
+  .gauge-readout .g-val{font-family:var(--mono);font-size:22px;color:var(--gold);min-width:34px;}
+  .gauge-readout .g-anchor{font-size:12px;color:var(--text-dim);font-style:italic;}
   /* vertical tube */
-  .tube-wrap{display:flex;align-items:center;gap:18px;}
-  .tube{position:relative;width:62px;height:170px;border:2px solid var(--line);
+  .tube-wrap{display:flex;align-items:center;gap:14px;}
+  .tube{position:relative;width:44px;height:80px;border:2px solid var(--line);
     border-radius:8px;background:var(--bg-raised);overflow:hidden;cursor:pointer;}
   .tube-fill{position:absolute;left:0;right:0;bottom:0;
     background:linear-gradient(0deg,var(--gold-dim),var(--gold-hi));transition:height .12s;}
   .tube-scale{font-family:var(--mono);font-size:9px;color:var(--text-dim);
-    display:flex;flex-direction:column;justify-content:space-between;height:170px;}
+    display:flex;flex-direction:column;justify-content:space-between;height:80px;}
   /* rotary dial */
   .dial-wrap{display:flex;align-items:center;gap:20px;}
-  .dial{width:160px;height:160px;cursor:pointer;flex-shrink:0;}
+  .dial{width:90px;height:90px;cursor:pointer;flex-shrink:0;}
 
   /* day-dial quadrants */
   .quad{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-width:330px;}
@@ -204,7 +204,7 @@
 
 <script>
 "use strict";
-var state={answers:{},mirror:{},gauges:{},choices:{},consent:{},reflected:{},macReflections:{}};
+var state={answers:{},mirror:{},gauges:{},choices:{},consent:{},reflected:{},macReflections:{},pageReflected:{}};
 var current=0;
 
 /* ================= SVG ART ================= */
@@ -472,7 +472,15 @@ function render(){
       }
       h+='</div>';
     });
-    h+=nav(true);
+    var inpr=state.pageReflected[current];
+    var hasPrompts=p.items.some(function(it){return it.type==="prompt";});
+    if(hasPrompts&&inpr==="loading"){
+      h+='<div class="reflect-card"><div class="speaker mac"><span class="dot"></span>MAC — READING</div><p style="color:var(--text-dim);font-style:italic;">...</p></div>'+
+        '<div class="nav"><button class="back" data-act="back">← Back</button><div class="spacer"></div></div>';
+    } else if(hasPrompts&&inpr==="shown"){
+      h+='<div class="reflect-card"><div class="speaker mac"><span class="dot"></span>MAC</div><p>'+
+        esc((state.macReflections&&state.macReflections["page_"+current])||"")+'</p></div>'+nav(true);
+    } else {h+=nav(true);}
   }
   else if(p.kind==="choose"){
     h=band(p.st)+spk("mac","Mac")+'<p class="line">'+p.ask+'</p><div class="opt-col">'+
@@ -516,7 +524,14 @@ function render(){
         '<textarea data-t2key="'+it.key+'" placeholder="'+escA(it.ph)+'">'+esc(state.answers[it.key]||"")+'</textarea>'+
         '</div>';
     });
-    h+=nav(true);
+    var t2pr=state.pageReflected[current];
+    if(t2pr==="loading"){
+      h+='<div class="reflect-card"><div class="speaker mac"><span class="dot"></span>MAC — READING</div><p style="color:var(--text-dim);font-style:italic;">...</p></div>'+
+        '<div class="nav"><button class="back" data-act="back">← Back</button><div class="spacer"></div></div>';
+    } else if(t2pr==="shown"){
+      h+='<div class="reflect-card"><div class="speaker mac"><span class="dot"></span>MAC</div><p>'+
+        esc((state.macReflections&&state.macReflections["page_"+current])||"")+'</p></div>'+nav(true);
+    } else {h+=nav(true);}
   }
   else if(p.kind==="engineroom"){
     var open=state.choices.engineRoom==="Open it up";
@@ -534,8 +549,19 @@ function render(){
       h+='<div class="trade2-block"><p class="line" style="font-size:15px;">THE DRIVER -- what are you actually steering toward?</p>'+
         '<textarea data-key="driver" placeholder="What you\'re steering toward.">'+esc(state.answers.driver||"")+'</textarea></div>';
     }
-    h+='<div class="nav"><button class="back" data-act="back">← Back</button><div class="spacer"></div>'+
-      (open||shut?'<button class="primary" data-act="next">Continue</button>':'')+'</div>';
+    var erpr=state.pageReflected[current];
+    if(open&&erpr==="loading"){
+      h+='<div class="reflect-card"><div class="speaker mac"><span class="dot"></span>MAC — READING</div><p style="color:var(--text-dim);font-style:italic;">...</p></div>'+
+        '<div class="nav"><button class="back" data-act="back">← Back</button><div class="spacer"></div></div>';
+    } else if(open&&erpr==="shown"){
+      h+='<div class="reflect-card"><div class="speaker mac"><span class="dot"></span>MAC</div><p>'+
+        esc((state.macReflections&&state.macReflections["page_"+current])||"")+'</p></div>'+
+        '<div class="nav"><button class="back" data-act="back">← Back</button><div class="spacer"></div>'+
+        '<button class="primary" data-act="next">Continue</button></div>';
+    } else {
+      h+='<div class="nav"><button class="back" data-act="back">← Back</button><div class="spacer"></div>'+
+        (open||shut?'<button class="primary" data-act="next">Continue</button>':'')+'</div>';
+    }
   }
   else if(p.kind==="daydial"){
     h=band(p.st)+spk("mac","Mac")+'<p class="line">The Day-Dial. Two marks.</p>'+
@@ -768,6 +794,21 @@ function saveStep(){
     if(cv)state.answers.contactVal=cv.value;if(cn)state.answers.contactName=cn.value;
   }
 }
+function macReflectCall(q,a,st,cbKey){
+  fetch("/api/mac-reflect",{method:"POST",headers:{"content-type":"application/json"},
+    body:JSON.stringify({question:q,answer:a,station:st||""})
+  }).then(function(r){return r.json();})
+    .then(function(d){state.macReflections=state.macReflections||{};
+      state.macReflections[cbKey]=d.reflection||"Good. Keep going.";
+      if(cbKey.indexOf("page_")===0)state.pageReflected[current]="shown";
+      else state.reflected[cbKey]="phase2";
+      render();})
+    .catch(function(){state.macReflections=state.macReflections||{};
+      state.macReflections[cbKey]="Good. Keep going.";
+      if(cbKey.indexOf("page_")===0)state.pageReflected[current]="shown";
+      else state.reflected[cbKey]="phase2";
+      render();});
+}
 function advance(){
   var p=P[current];
   if((p.kind==="prompt"||p.kind==="trade")&&p.reflect){
@@ -776,21 +817,25 @@ function advance(){
       var ta=document.getElementById("ta");
       var answer=ta?ta.value:(state.answers[p.key]||"");
       if(!answer.trim()){go(nextIdx(current));return;}
-      state.reflected[p.key]="loading";
-      render();
-      fetch("/api/mac-reflect",{
-        method:"POST",
-        headers:{"content-type":"application/json"},
-        body:JSON.stringify({question:p.ask||(p.ask||[]).join(" "),answer:answer,station:p.st||""})
-      }).then(function(r){return r.json();})
-        .then(function(d){state.macReflections=state.macReflections||{};
-          state.macReflections[p.key]=d.reflection||"That lands. What do you want to sharpen?";
-          state.reflected[p.key]="phase2";render();})
-        .catch(function(){state.macReflections=state.macReflections||{};
-          state.macReflections[p.key]="That lands. Anything you want to sharpen or add?";
-          state.reflected[p.key]="phase2";render();});
+      state.reflected[p.key]="loading";render();
+      macReflectCall(Array.isArray(p.ask)?p.ask.join(" "):p.ask,answer,p.st||"",p.key);
       return;
     }
+  }
+  if((p.kind==="trades2"||p.kind==="inputs"||p.kind==="engineroom")&&!state.pageReflected[current]){
+    saveStep();
+    var answers=[];
+    if(p.kind==="trades2"){
+      p.items.forEach(function(it){var v=(state.answers[it.key]||"").trim();if(v)answers.push(it.ask+" | "+v);});
+    } else if(p.kind==="inputs"){
+      p.items.forEach(function(it){if(it.type==="prompt"){var v=(state.answers[it.key]||"").trim();if(v)answers.push(it.ask+" | "+v);}});
+    } else if(p.kind==="engineroom"&&state.choices.engineRoom==="Open it up"){
+      ["engine","governor","driver"].forEach(function(k){var v=(state.answers[k]||"").trim();if(v)answers.push(k+" | "+v);});
+    }
+    if(!answers.length){go(nextIdx(current));return;}
+    state.pageReflected[current]="loading";render();
+    macReflectCall("multiple",answers.join("\n\n"),p.st||"","page_"+current);
+    return;
   }
   go(nextIdx(current));
 }
