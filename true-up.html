@@ -10,7 +10,7 @@
     --gold:#d4af37; --gold-dim:#9a7f2a; --gold-hi:#f0d585;
     --text:#e8e6e0; --text-dim:#9a988f; --line:#34343d;
     --cold:#5f7e8c; --warm:#c9a44b; --stung:#e07a3f;
-    --green:#5b9c6a; --amber:#d2a23e; --red:#cf6048;
+    --green:#5b9c6a; --amber:#d2a23e; --red:#cf6048; --red-warn:#c0392b;
     --mono:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;
     --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
@@ -93,18 +93,21 @@
     color:var(--gold);margin-bottom:8px;}
   .g-val{font-family:var(--mono);font-size:26px;color:var(--gold);}
   .g-anchor{font-size:13px;color:var(--text-dim);min-height:34px;margin-top:2px;}
-  /* horizontal slider */
-  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;
-    border-radius:4px;background:linear-gradient(90deg,#2a2a30,var(--gold-dim));outline:none;}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;
+  /* horizontal slider — dynamic color track */
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;
+    border-radius:5px;outline:none;cursor:pointer;
+    background:linear-gradient(90deg,var(--track-color,#4a9a6a) var(--track-pct,50%),#2a2a30 var(--track-pct,50%));}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;
     border-radius:50%;background:var(--gold-hi);border:3px solid var(--bg);cursor:pointer;
-    box-shadow:0 0 0 1px var(--gold);}
-  input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;
+    box-shadow:0 0 0 1px var(--gold),0 2px 8px rgba(0,0,0,0.4);}
+  input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;
     background:var(--gold-hi);border:3px solid var(--bg);cursor:pointer;}
   /* identity variant — square thumb, stepped track */
-  input.geared{background:repeating-linear-gradient(90deg,#2a2a30 0 9px,#222 9px 12px);}
   input.geared::-webkit-slider-thumb{border-radius:4px;}
   input.geared::-moz-range-thumb{border-radius:4px;}
+  .gauge-readout{display:flex;align-items:baseline;gap:16px;margin-top:10px;}
+  .gauge-readout .g-val{font-family:var(--mono);font-size:28px;color:var(--gold);min-width:42px;}
+  .gauge-readout .g-anchor{font-size:13px;color:var(--text-dim);font-style:italic;}
   /* vertical tube */
   .tube-wrap{display:flex;align-items:center;gap:18px;}
   .tube{position:relative;width:62px;height:170px;border:2px solid var(--line);
@@ -194,7 +197,7 @@
 
 <script>
 "use strict";
-var state={answers:{},mirror:{},gauges:{},choices:{},consent:{},reflected:{}};
+var state={answers:{},mirror:{},gauges:{},choices:{},consent:{},reflected:{},macReflections:{}};
 var current=0;
 
 /* ================= SVG ART ================= */
@@ -323,10 +326,15 @@ var P=[
    {type:"choose",key:"peopleRead",ask:"The people who drain you — a crowd, a handful, one or two, or nobody?",options:["A crowd","A handful","One or two","Nobody really"]}]},
  {kind:"gauges",st:"WARNING LIGHTS",items:[
    {key:"rhythm",tool:"dial",name:"Rhythm Dial",ask:"Are you doing your hardest work when you're sharp — or spending your gold hours on junk? Higher means more inverted.",
-     anchors:[[20,"Tuned."],[50,"Mostly aligned."],[75,"Off-beat."],[100,"Inverted — fighting your own clock."]]}]},
- {kind:"daydial",st:"WARNING LIGHTS"},
+     anchors:[[20,"Tuned."],[50,"Mostly aligned."],[75,"Off-beat."],[100,"Inverted — fighting your own clock."]]},
+   {key:"timeWealth",tool:"tube",name:"Time Wealth",ask:"How much genuinely unclaimed time do you have?",
+     anchors:[[25,"Nearly empty."],[55,"Some slack."],[100,"Time is yours to point."]]},
+   {key:"powerWealth",tool:"tube",name:"Power Wealth",ask:"Money, access, leverage — how full is that tank?",
+     anchors:[[25,"Low leverage."],[55,"Workable."],[100,"Real reach."]]}]},
  {kind:"inputs",st:"WARNING LIGHTS",items:[
+   {type:"prompt",key:"gaugeReaction",ask:"Looking at all four gauges — what reading surprised you most?",ph:"The one that landed differently."},
    {type:"prompt",key:"becoming",ask:"In one line — who are you becoming?",ph:"One line."}]},
+ {kind:"daydial",st:"WARNING LIGHTS"},
  {kind:"gtrap",sp:"mac",nm:"Mac",st:"WARNING LIGHTS"},
 
  /* plates */
@@ -367,12 +375,7 @@ var P=[
 
  /* readout */
  {kind:"voice",sp:"mac",nm:"Mac",st:"THE READOUT",body:[
-   "Almost done. Two last reads — a lens, not a gauge. Wealth comes in two tanks: Time Wealth, and Power Wealth — money, access, leverage. The reading is the gap."]},
- {kind:"gauges",st:"THE READOUT",items:[
-   {key:"timeWealth",tool:"tube",name:"Time Wealth",ask:"How much genuinely unclaimed time do you have?",
-     anchors:[[25,"Nearly empty."],[55,"Some slack."],[100,"Time is yours to point."]]},
-   {key:"powerWealth",tool:"tube",name:"Power Wealth",ask:"Money, access, leverage — how full is that tank?",
-     anchors:[[25,"Low leverage."],[55,"Workable."],[100,"Real reach."]]}]},
+   "Almost done. Here's the full picture."]},
  {kind:"readout",st:"THE READOUT"},
  {kind:"trade",st:"THE READOUT",key:"t11",
    ask:["Off the record. If this were the last thing you could say to someone — what would you most regret leaving unsaid? Brian first."],
@@ -515,9 +518,15 @@ function cwmBtn(val,cls,ic,label){
     '<span class="ic">'+ic+'</span>'+label+'</button>';
 }
 function promptBox(key,ph,reflect){
+  if(reflect && state.reflected[key]==="loading"){
+    return '<div class="reflect-card"><div class="speaker mac"><span class="dot"></span>MAC — READING</div>'+
+      '<p style="color:var(--text-dim);font-style:italic;">...</p></div>'+
+      '<div class="your-turn">Hang on</div><textarea id="ta" placeholder="" disabled></textarea>';
+  }
   if(reflect && state.reflected[key]==="phase2"){
+    var macText=(state.macReflections&&state.macReflections[key])||"That lands. Anything to sharpen?";
     return '<div class="reflect-card"><div class="speaker mac"><span class="dot"></span>MAC — REFLECTING</div>'+
-      '<p>So — what I\'m hearing is: '+esc(state.answers[key]||"")+' Did I land it? Sharpen, add, or correct anything below.</p></div>'+
+      '<p>'+esc(macText)+'</p></div>'+
       '<div class="your-turn">Adjust it</div>'+
       '<textarea id="ta" placeholder="Sharpen or correct — or leave it as is.">'+esc(state.answers[key]||"")+'</textarea>';
   }
@@ -550,9 +559,10 @@ function gaugeHtml(g){
   var head='<div class="g-name">'+g.name+'</div><p class="g-ask">'+g.ask+'</p>';
   if(g.tool==="dial") return '<div class="gauge" data-gauge="'+g.key+'">'+head+tool+'</div>';
   return '<div class="gauge" data-gauge="'+g.key+'">'+head+tool+
-    '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;">'+
-    '<span class="g-val" id="gv-'+g.key+'">'+v+'</span></div>'+
-    '<div class="g-anchor" id="ga-'+g.key+'"></div></div>';
+    '<div class="gauge-readout">'+
+    '<span class="g-val" id="gv-'+g.key+'">'+v+'</span>'+
+    '<span class="g-anchor" id="ga-'+g.key+'">'+anchorFor(g.anchors,v)+'</span>'+
+    '</div></div>';
 }
 function dialSvg(v){
   var a0=135,a1=405,ang=a0+(a1-a0)*v/100;
@@ -574,6 +584,14 @@ function initGauge(g){
   function setVal(v){v=Math.max(0,Math.min(100,Math.round(v)));state.gauges[key]=v;
     var gv=document.getElementById("gv-"+key),ga=document.getElementById("ga-"+key);
     if(gv)gv.textContent=v;if(ga)ga.textContent=anchorFor(g.anchors,v);
+    if(g.tool==="slider"||g.tool==="geared"){
+      var inp=document.querySelector('[data-gkey="'+key+'"]');
+      if(inp){
+        var color=v<=39?'#4a9a6a':v<=69?'#d4a017':'#c0392b';
+        inp.style.setProperty('--track-color',color);
+        inp.style.setProperty('--track-pct',v+'%');
+      }
+    }
     if(g.tool==="tube"){var f=document.querySelector('[data-tube="'+key+'"] .tube-fill');if(f)f.style.height=v+"%";}
     if(g.tool==="dial"){var d=document.querySelector('[data-dial="'+key+'"]');if(d)d.innerHTML=dialSvg(v);}
   }
@@ -683,7 +701,26 @@ function saveStep(){
 function advance(){
   var p=P[current];
   if((p.kind==="prompt"||p.kind==="trade")&&p.reflect){
-    if(state.reflected[p.key]!=="phase2"){state.reflected[p.key]="phase2";render();return;}
+    if(state.reflected[p.key]!=="phase2"){
+      saveStep();
+      var ta=document.getElementById("ta");
+      var answer=ta?ta.value:(state.answers[p.key]||"");
+      if(!answer.trim()){go(nextIdx(current));return;}
+      state.reflected[p.key]="loading";
+      render();
+      fetch("/api/mac-reflect",{
+        method:"POST",
+        headers:{"content-type":"application/json"},
+        body:JSON.stringify({question:p.ask||(p.ask||[]).join(" "),answer:answer,station:p.st||""})
+      }).then(function(r){return r.json();})
+        .then(function(d){state.macReflections=state.macReflections||{};
+          state.macReflections[p.key]=d.reflection||"That lands. What do you want to sharpen?";
+          state.reflected[p.key]="phase2";render();})
+        .catch(function(){state.macReflections=state.macReflections||{};
+          state.macReflections[p.key]="That lands. Anything you want to sharpen or add?";
+          state.reflected[p.key]="phase2";render();});
+      return;
+    }
   }
   go(nextIdx(current));
 }
