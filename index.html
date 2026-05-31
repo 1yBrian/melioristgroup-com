@@ -596,6 +596,10 @@ footer {
   .signal-strip { padding: 48px 24px; }
   footer { padding: 48px 24px; }
   .footer-inner { flex-direction: column; gap: 32px; }
+    /* Mobile fix 2026-05-31: IntersectionObserver-driven .reveal animation was failing on touch-scroll,
+     leaving the marble image and other reveal elements stuck at opacity:0. Disable reveal animation
+     for narrow viewports — content appears immediately. See 00 - Meta/SITE-DESIGN-ESSENTIALS.md Rule 1. */
+  .reveal { opacity: 1 !important; transform: none !important; }
 }
 
 </style>
