@@ -596,10 +596,37 @@ footer {
   .signal-strip { padding: 48px 24px; }
   footer { padding: 48px 24px; }
   .footer-inner { flex-direction: column; gap: 32px; }
-    /* Mobile fix 2026-05-31: IntersectionObserver-driven .reveal animation was failing on touch-scroll,
-     leaving the marble image and other reveal elements stuck at opacity:0. Disable reveal animation
-     for narrow viewports — content appears immediately. See 00 - Meta/SITE-DESIGN-ESSENTIALS.md Rule 1. */
-  .reveal { opacity: 1 !important; transform: none !important; }
+  /* Mobile fix 2026-05-31 (v2): IntersectionObserver + opacity:0 patterns failing on iOS Safari
+     touch-scroll. Reveal everything that started invisible — including hero animations (which
+     also use opacity:0 + CSS animation that can be skipped under prefers-reduced-motion or when
+     the page is restored from bfcache). See 00 - Meta/SITE-DESIGN-ESSENTIALS.md Rule 1. */
+  .reveal,
+  .hero-eyebrow,
+  .hero h1,
+  .hero-sub,
+  .hero-actions,
+  .scroll-hint {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Safety net for users with Reduce Motion enabled (iOS Accessibility setting) — without this,
+   Safari skips CSS animations entirely, leaving any element with `opacity: 0` initial state
+   permanently invisible. Applies to all viewports. See SITE-DESIGN-ESSENTIALS.md Rule 3. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .hero-eyebrow,
+  .hero h1,
+  .hero-sub,
+  .hero-actions,
+  .scroll-hint {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 </style>
@@ -614,7 +641,6 @@ footer {
     <li><a href="/origins">Origins</a></li>
     <li><a href="/true-up">The True-Up</a></li>
     <li><a href="/work-with-brian">Work Together</a></li>
-    <li><a href="https://meliorism2.com" target="_blank" rel="noopener">Meliorism 2.0 ↗</a></li>
   </ul>
 </nav>
 
@@ -718,7 +744,7 @@ footer {
 <div class="paths-section">
   <div class="section-inner">
     <p class="frame-label reveal">Ways to go deeper</p>
-    <h2 class="reveal" style="font-family:'Spectral',serif; font-size:clamp(1.9rem,4vw,2.6rem); font-weight:300; color:var(--forest); line-height:1.25;">Three ways to engage<br><em>with the work</em>.</h2>
+    <h2 class="reveal" style="font-family:'Spectral',serif; font-size:clamp(1.9rem,4vw,2.6rem); font-weight:300; color:var(--forest); line-height:1.25;">Two ways to engage<br><em>with the work</em>.</h2>
 
     <div class="paths-grid">
       <div class="path-card reveal">
@@ -733,24 +759,7 @@ footer {
         <p>Weekly sessions for business owners growing in an AI-accelerated world. Live Mondays 9AM. A room of people doing the actual work.</p>
         <a href="https://ctcsp.com" target="_blank" rel="noopener" class="path-link">Join the room →</a>
       </div>
-      <div class="path-card reveal">
-        <span class="path-num">Daily Briefing</span>
-        <h3>Meliorism 2.0</h3>
-        <p>Applied research for practitioners — trainers, coaches, educators, leaders. A different visual world every issue. Built on peer-reviewed research.</p>
-        <a href="https://meliorism2.com" target="_blank" rel="noopener" class="path-link">Explore Meliorism 2.0 →</a>
-      </div>
     </div>
-  </div>
-</div>
-
-<!-- Meliorism 2.0 Strip -->
-<div class="signal-strip">
-  <div class="signal-strip-inner">
-    <div>
-      <h3>Join <em>Meliorism 2.0</em> — the daily briefing.</h3>
-      <p>Research for the room you're in. Delivered each morning to practitioners who want their methods to keep working.</p>
-    </div>
-    <a href="https://meliorism2.com" target="_blank" rel="noopener">Read today's issue →</a>
   </div>
 </div>
 
@@ -777,7 +786,6 @@ footer {
         <ul>
           <li><a href="/work-with-brian">Work with Brian</a></li>
           <li><a href="https://ctcsp.com" target="_blank" rel="noopener">CTCSP</a></li>
-          <li><a href="https://meliorism2.com" target="_blank" rel="noopener">Meliorism 2.0 ↗</a></li>
         </ul>
       </div>
       <div class="footer-col">
