@@ -20,10 +20,15 @@
     line-height:1.6;-webkit-font-smoothing:antialiased;}
   #progress-track{position:fixed;top:0;left:0;right:0;height:3px;background:var(--line);z-index:10;}
   #progress-fill{height:100%;width:0%;background:var(--gold);transition:width .4s ease;}
-  #app{max-width:680px;margin:0 auto;padding:34px 26px 20px;height:100vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-  .panel{opacity:0;transform:translateY(8px);transition:opacity .32s ease,transform .32s ease;}
-  .panel.in{opacity:1;transform:translateY(0);}
-  @media (prefers-reduced-motion:reduce){.panel{transition:none;transform:none;}#progress-fill{transition:none;}}
+  #app{max-width:680px;margin:0 auto;
+    padding:34px 26px 20px;
+    padding-bottom:max(20px,env(safe-area-inset-bottom));
+    height:100vh;height:100dvh;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;}
+  /* Progressive Enhancement: panels start visible; JS animates as enhancement */
+  .panel{opacity:1;transform:none;transition:opacity .32s ease,transform .32s ease;}
+  .panel.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.panel{transition:none;}#progress-fill{transition:none;}}
 
   /* header art band */
   .band{margin:0 0 4px;}
@@ -584,8 +589,12 @@ function render(){
   bindAll();
   if(p.kind==="gauges")p.items.forEach(initGauge);
   document.getElementById("progress-fill").style.width=(current/(P.length-1)*100)+"%";
-  requestAnimationFrame(function(){var el=document.getElementById("panel");if(el)el.classList.add("in");});
-  window.scrollTo(0,0);
+  /* Fade-in: set opacity via inline style so CSS default (opacity:1) is never blocked */
+  var _pan=document.getElementById("panel");
+  if(_pan){_pan.style.opacity="0";_pan.style.transform="translateY(8px)";}
+  requestAnimationFrame(function(){var el=document.getElementById("panel");if(el){el.style.opacity="";el.style.transform="";el.classList.add("in");}});
+  /* Scroll the app container (not body) to top on each new panel */
+  app.scrollTop=0;
 }
 
 function bandArt(p){ /* brian pages: hero-ish mac mark band */
