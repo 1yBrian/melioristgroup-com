@@ -1,7 +1,19 @@
 export async function onRequestPost(context) {
   try {
     const payload = await context.request.json();
-    const { contact, consent, scores, answers, wealthLens, mirror, dayDial, submittedAt } = payload;
+    const { contact, consent, scores, answers, wealthLens, mirror, dayDial, submittedAt, map } = payload;
+
+    // HUD feed: log the submission to Supabase captures (publishable key — already public on the HUD page)
+    try {
+      const SB_URL = 'https://wqqgsjjfsrgtaybmpsqk.supabase.co';
+      const SB_KEY = 'sb_publishable_2Ij4N3-jn6eQkh94jQXfrA_5WJ8Lgkm';
+      const capture = `True-Up submission: ${contact?.name || 'anonymous'} (${contact?.method || '—'}: ${contact?.handle || '—'}) · binding: ${scores?.bindingConstraint || '—'} · pressure: ${scores?.systemPressure ?? '—'} red · may respond: ${consent?.brianMayRespond ? 'YES' : 'no'}`;
+      await fetch(`${SB_URL}/rest/v1/captures`, {
+        method: 'POST',
+        headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+        body: JSON.stringify({ content: capture, tag: 'true-up' })
+      });
+    } catch (e) { console.error('captures log failed:', e); }
 
     const RESEND_KEY = context.env.RESEND_API_KEY;
     const BRIAN_EMAIL = 'brianoney@gmail.com';
@@ -59,7 +71,7 @@ Energy low: ${dayDial?.energyLow || '—'}
 MIRROR REACTIONS
 ${mirrorLines}
 
-ANSWERS
+${map ? `THEIR MAP\n${map}\n\n` : ''}ANSWERS
 ${answerLines}
 `;
 
@@ -68,7 +80,7 @@ ${answerLines}
     if (consent?.sendCopy && contact?.method === 'Email' && contact?.handle?.includes('@')) {
       const respondentBody = `Here's what you put down in the True-Up — ${new Date(submittedAt || Date.now()).toLocaleString()}
 
-${answerLines}
+${map ? `${map}\n\n—\n\n` : ''}${answerLines}
 
 —
 The True-Up · Meliorist Group

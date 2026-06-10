@@ -201,6 +201,22 @@
   .trade2-block{margin:0 0 20px;border-top:1px solid var(--line);padding-top:18px;}
   .trade2-block:first-of-type{border-top:none;padding-top:0;}
   .band-spacer{height:16px;}
+  /* Your Map */
+  .map-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0;}
+  @media(max-width:540px){.map-grid{grid-template-columns:1fr;}}
+  .map-q{background:var(--bg-card);border:1px solid var(--line);border-radius:6px;padding:14px 15px;}
+  .map-q .mq-h{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:8px;}
+  .map-q p{margin:0 0 7px;font-size:14px;line-height:1.5;}
+  .map-q p:last-child{margin-bottom:0;}
+  .map-q .mq-you{color:#e2ddcf;}
+  .map-q .mq-you::before{content:"\201C";color:var(--gold-dim);}
+  .map-q .mq-you::after{content:"\201D";color:var(--gold-dim);}
+  .map-q .mq-note{font-size:12.5px;color:var(--text-dim);font-style:italic;}
+  .map-agency{border-left:3px solid var(--gold);}
+  .map-actions{display:flex;gap:10px;margin-top:6px;}
+  .map-actions button{flex:1;}
+  .map-share{font-size:12.5px;color:var(--text-dim);margin-top:10px;text-align:center;}
 </style>
 </head>
 <body>
@@ -232,7 +248,7 @@ function band(station){
     '<text x="300" y="34" text-anchor="middle" fill="#d4af37" font-family="'+"'Courier New',monospace"+'" '+
       'font-size="15" letter-spacing="3">'+(station||'THE TRUE-UP')+'</text>'+
     ticks+
-    '<text x="565" y="34" text-anchor="end" fill="#564726" font-family="'+"'Courier New',monospace"+'" font-size="9" letter-spacing="1">MELIORIST-GROUP</text>'+
+    '<text x="565" y="34" text-anchor="end" fill="#564726" font-family="'+"'Courier New',monospace"+'" font-size="9" letter-spacing="1">MELIORIST GROUP</text>'+
     '</svg></div>'; }
 function macMarkInline(sz,cx,cy){
   return '<g transform="translate('+(cx-sz/2)+','+(cy-sz/2)+') scale('+(sz/100)+')">'+
@@ -259,7 +275,7 @@ var P=[
  /* ROLL-IN -- Brian intro folded into Mac\'s opener */
  {kind:"voice",sp:"brian",nm:"Brian Oney",st:"",creed:[
    "I believe you have intrinsic worth.",
-   "I believe the version of you worth seeing is already there -- life just buries it.",
+   "I believe you have hidden value worthy of being discovered.",
    "I\'ve watched society, circumstances, and structures diminish and distract people from thriving -- in life, business, joy, relationships, wisdom, wellness, and wonder."],
    body:["What I want is to discover, with others, how we overcome that resistance -- and reveal our best selves.",
          "Hi -- I\'m Brian Oney. San Francisco. A dad. I consult with business owners, lead trainings, design presentations.",
@@ -391,6 +407,7 @@ var P=[
  {kind:"voice",sp:"mac",nm:"Mac",st:"THE READOUT",body:[
    "Almost done. Here\'s the full picture."]},
  {kind:"readout",st:"THE READOUT"},
+ {kind:"yourmap",st:"YOUR MAP"},
  {kind:"prompt",st:"THE READOUT",key:"t11",
    ask:"Off the record. If this were the last thing you could say to someone -- what would you most regret leaving unsaid?",
    ph:"What you\'d regret leaving unsaid -- optional."},
@@ -429,8 +446,9 @@ var CLINE={"Load Limit":"You\'re running hottest on capacity. Nothing else gets 
   "Rhythm Dial":"Your binding constraint is rhythm -- your best hours and hardest work aren\'t meeting. Usually the fastest fix."};
 
 /* ================= RENDER ================= */
-function render(){
+function render(opts){
   var p=P[current],app=document.getElementById("app"),h="";
+  var keepScroll=(opts&&opts.preserve)?app.scrollTop:null;
 
   if(p.kind==="intro"){
     h='<div class="intro-wrap">'+heroArt()+'<h1>THE TRUE-UP</h1>'+
@@ -578,6 +596,7 @@ function render(){
       (state.choices.peak&&state.choices.low?'<button class="primary" data-act="next">Continue</button>':'')+'</div>';
   }
   else if(p.kind==="readout"){h=band(p.st)+readoutHtml()+nav(true);}
+  else if(p.kind==="yourmap"){h=band(p.st)+yourMapHtml()+nav(true);}
   else if(p.kind==="contact"){h=band(p.st)+contactHtml();}
   else if(p.kind==="end"){
     h=band("THE TRUE-UP")+spk("mac","Mac")+lns(endLines())+
@@ -589,6 +608,12 @@ function render(){
   bindAll();
   if(p.kind==="gauges")p.items.forEach(initGauge);
   document.getElementById("progress-fill").style.width=(current/(P.length-1)*100)+"%";
+  if(keepScroll!==null){
+    /* In-place update (a selection on the same page): no fade, no scroll jump */
+    var _kp=document.getElementById("panel");if(_kp)_kp.classList.add("in");
+    app.scrollTop=keepScroll;
+    return;
+  }
   /* Fade-in: set opacity via inline style so CSS default (opacity:1) is never blocked */
   var _pan=document.getElementById("panel");
   if(_pan){_pan.style.opacity="0";_pan.style.transform="translateY(8px)";}
@@ -726,6 +751,7 @@ function endLines(){var l=["That\'s the True-Up. I\'ve got a real picture of the
   "You weren\'t tested. You were read -- and most of what showed up was already there."];
   if(state.consent.copy)l.push("You asked for your responses -- they\'ll reach you the way you said. Re-run this whenever something feels off.");
   if(state.consent.brian)l.push("And Brian may reach out -- because something you said was worth a real conversation.");
+  l.push("If your map showed you something you\'d rather not work on alone -- Brian does this for a living. The door is <a href=\"https://melioristgroup.com/work-with-brian\" style=\"color:var(--gold);\">work-with-brian</a>. I just point at doors; walking through them is yours.");
   l.push("Take care of the machine. It\'s the only one you\'ve got.");return l;}
 
 function readoutHtml(){
@@ -759,10 +785,68 @@ function picture(r){
   return s.trim();
 }
 
+/* ================= YOUR MAP ================= */
+function firstLine(s){return (s||"").trim().split(/[\n]/)[0].trim();}
+function mapData(){
+  var r=readoutData();
+  var subtract=[],reveal=[],curious=[],agency=[];
+  var sh=firstLine((state.answers.shoulds||"").split(/[,;]/)[0]);
+  if(sh)subtract.push({you:sh,note:"the heaviest should you named"});
+  if((state.answers.doneWith||"").trim())subtract.push({you:firstLine(state.answers.doneWith),note:"a label you\'re done wearing"});
+  subtract.push({note:CLINE[r.binding]});
+  if((state.answers.worldValues||"").trim())reveal.push({you:firstLine(state.answers.worldValues),note:"what you wish the world valued -- so show it the world"});
+  if((state.answers.becoming||"").trim())reveal.push({you:firstLine(state.answers.becoming),note:"who you\'re becoming"});
+  if((state.answers.driver||"").trim())reveal.push({you:firstLine(state.answers.driver),note:"what you\'re actually steering toward"});
+  if((state.answers.interests||"").trim())curious.push({you:firstLine(state.answers.interests),note:"what pulls you when nobody pays you to care"});
+  if((state.answers.hobbies||"").trim())curious.push({you:firstLine(state.answers.hobbies),note:"what your hands already know"});
+  if((state.answers.t9||"").trim())curious.push({you:firstLine(state.answers.t9),note:"what you\'d ask the crystal ball"});
+  if((state.answers.t10||"").trim())curious.push({you:firstLine(state.answers.t10),note:"what you want to discover -- and with whom"});
+  if((state.answers.reframe||"").trim())agency.push({you:firstLine(state.answers.reframe),note:"what the dent left you able to do"});
+  if((state.answers.t2||"").trim())agency.push({you:firstLine(state.answers.t2),note:"something you made sure you did -- on purpose"});
+  if(state.choices.peak)agency.push({note:"Your good stuff shows up at "+state.choices.peak+". That hour is yours to claim."});
+  agency.push({note:"You answered every question on this map yourself. The hand on the wrench was yours the whole time."});
+  return {subtract:subtract,reveal:reveal,curious:curious,agency:agency};
+}
+function mapQ(title,items,extraClass){
+  var inner=items.map(function(it){
+    var h="";
+    if(it.you)h+='<p class="mq-you">'+esc(it.you)+'</p>';
+    if(it.note)h+='<p class="mq-note">'+esc(it.note)+'</p>';
+    return h;}).join('');
+  if(!inner)inner='<p class="mq-note">Quiet here today. That\'s a reading too.</p>';
+  return '<div class="map-q'+(extraClass?' '+extraClass:'')+'"><div class="mq-h">'+title+'</div>'+inner+'</div>';
+}
+function yourMapHtml(){
+  var d=mapData();
+  return spk("mac","Mac")+
+    '<p class="line">Your Map. Not a diagnosis -- a map. You drew it; I just held the pen.</p>'+
+    '<div class="map-grid">'+
+    mapQ("What you might subtract",d.subtract)+
+    mapQ("What you could reveal or express",d.reveal)+
+    mapQ("Curiosities that might inspire",d.curious)+
+    mapQ("Where your agency is",d.agency,"map-agency")+
+    '</div>'+
+    '<p class="line dim" style="font-size:13.5px;">Where your agency is -- yes, that\'s right where you are.</p>'+
+    '<div class="map-actions"><button data-act="copymap" id="copymap-btn">Copy my map</button></div>'+
+    '<div class="map-share">It\'s yours. Share it with a friend, a class, a fellow trainer -- anyone who should see it.</div>';
+}
+function mapText(){
+  var d=mapData();
+  function block(t,items){return t.toUpperCase()+"\n"+items.map(function(it){
+    return (it.you?'"'+it.you+'"'+(it.note?" -- "+it.note:""):"-- "+it.note);}).join("\n");}
+  return "MY MAP -- The True-Up · Meliorist Group\n\n"+
+    block("What I might subtract",d.subtract)+"\n\n"+
+    block("What I could reveal or express",d.reveal)+"\n\n"+
+    block("Curiosities that might inspire me",d.curious)+"\n\n"+
+    block("Where my agency is",d.agency)+"\n\n"+
+    "Drawn at melioristgroup.com/true-up";
+}
+
 function contactHtml(){
   var m=state.choices.contactMethod,methods=["Email","Text","LinkedIn DM","Instagram DM"];
   return spk("mac","Mac")+
-    '<p class="line">One last thing. If you want anything to come of this -- your own copy, or a word from Brian -- I need a way to reach you.</p>'+
+    '<p class="line">One last thing. If you want anything to come of this -- your own copy, your map, or a word from Brian -- I need a way to reach you.</p>'+
+    '<p class="line dim" style="font-size:14px;">Brian\'s lane is email -- that\'s how he usually reaches out. If email works for you, go with that. If not, put what you\'re comfortable with; he\'s on LinkedIn and Instagram too.</p>'+
     '<div class="field-label">Best way to reach you</div><div class="opt-row">'+
     methods.map(function(o){return '<button class="'+(m===o?"sel":"")+'" data-cm="'+escA(o)+'">'+o+'</button>';}).join('')+'</div>'+
     '<div class="field-label">The handle / address</div>'+
@@ -861,6 +945,14 @@ function bindAll(){
           state.reflected[p.key]="";render();return;}
         go(prevIdx(current));}
       else if(a==="submit"){saveStep();submit();}
+      else if(a==="copymap"){
+        var txt=mapText();
+        function flash(ok){var bt=document.getElementById("copymap-btn");
+          if(bt){bt.textContent=ok?"Copied ✓":"Select & copy below";setTimeout(function(){if(bt)bt.textContent="Copy my map";},2200);}}
+        if(navigator.clipboard&&navigator.clipboard.writeText){
+          navigator.clipboard.writeText(txt).then(function(){flash(true);}).catch(function(){flash(false);});
+        }else{flash(false);}
+      }
     });
   });
   app.querySelectorAll("[data-mirror]").forEach(function(b){
@@ -868,7 +960,7 @@ function bindAll(){
   });
   app.querySelectorAll("[data-choose]").forEach(function(b){
     b.addEventListener("click",function(){
-      saveStep();state.choices[b.getAttribute("data-choose")]=b.getAttribute("data-val");render();});
+      saveStep();state.choices[b.getAttribute("data-choose")]=b.getAttribute("data-val");render({preserve:true});});
   });
   app.querySelectorAll("[data-mirror2]").forEach(function(b){
     b.addEventListener("click",function(){
@@ -876,15 +968,15 @@ function bindAll(){
       var n=parseInt(b.getAttribute("data-mirror2"),10);
       var val=b.getAttribute("data-val2");
       state.mirror[n]=val;
-      render();
+      render({preserve:true});
     });
   });
   app.querySelectorAll("[data-cm]").forEach(function(b){
-    b.addEventListener("click",function(){saveStep();state.choices.contactMethod=b.getAttribute("data-cm");render();});
+    b.addEventListener("click",function(){saveStep();state.choices.contactMethod=b.getAttribute("data-cm");render({preserve:true});});
   });
   app.querySelectorAll("[data-consent]").forEach(function(el){
     el.addEventListener("click",function(){saveStep();var k=el.getAttribute("data-consent");
-      state.consent[k]=!state.consent[k];render();});
+      state.consent[k]=!state.consent[k];render({preserve:true});});
   });
 }
 
@@ -896,6 +988,7 @@ function buildPayload(){var r=readoutData();
     scores:{wear:r.g,bands:r.bands,bindingConstraint:r.binding,systemPressure:r.red},
     wealthLens:{timeWealth:state.gauges.timeWealth||null,powerWealth:state.gauges.powerWealth||null},
     mirror:state.mirror,dayDial:{creativePeak:state.choices.peak||"",energyLow:state.choices.low||""},
+    map:mapText(),
     answers:state.answers};}
 function submit(){
   var payload=buildPayload();
