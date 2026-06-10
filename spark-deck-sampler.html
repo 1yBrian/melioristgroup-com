@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Spark Deck — For Trainers · Meliorist Group</title>
+<style>
+  :root{
+    --bg:#14161a; --raised:#1c1f24; --card:#22262c; --paper:#f5f1e6;
+    --gold:#d4af37; --gold-dim:#9a7f2a; --gold-hi:#f0d585;
+    --text:#e9e7e1; --dim:#9b998f; --line:#33373e; --ink:#23201a;
+    --mono:'SFMono-Regular',Consolas,Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --serif:'Spectral',Georgia,serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  #wrap{max-width:760px;margin:0 auto;padding:38px 22px 90px;}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);text-align:center;}
+  h1{font-family:var(--serif);font-size:36px;font-weight:600;text-align:center;margin:8px 0 2px;}
+  .sub{text-align:center;color:var(--dim);font-size:15.5px;max-width:520px;margin:0 auto 8px;}
+  .suit-legend{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--dim);margin:0 0 26px;}
+  .suit-legend b{color:var(--gold);font-weight:400;}
+  .controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:30px;}
+  button{font-family:var(--mono);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;
+    background:transparent;color:var(--text);border:1px solid var(--line);border-radius:30px;padding:12px 22px;transition:all .15s;}
+  button:hover{border-color:var(--gold);color:var(--gold);}
+  button.primary{border-color:var(--gold-dim);color:var(--gold);}
+  button.primary:hover{background:var(--gold);color:var(--bg);}
+  button.on{background:var(--raised);border-color:var(--gold);color:var(--gold);}
+
+  /* the playing card */
+  .table{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;perspective:1400px;}
+  .pcard{width:300px;min-height:430px;border-radius:14px;background:var(--paper);color:var(--ink);
+    padding:20px 20px 16px;position:relative;display:flex;flex-direction:column;
+    box-shadow:0 12px 34px rgba(0,0,0,.5);transform-style:preserve-3d;animation:deal .5s ease;}
+  @keyframes deal{from{transform:rotateY(70deg) translateY(14px);opacity:0;}to{transform:none;opacity:1;}}
+  @media (prefers-reduced-motion:reduce){.pcard{animation:none;}}
+  .corner{font-family:var(--mono);font-size:15px;line-height:1.1;position:absolute;top:14px;left:16px;text-align:center;}
+  .corner.br{top:auto;left:auto;bottom:14px;right:16px;transform:rotate(180deg);}
+  .corner .r{font-size:17px;font-weight:700;display:block;}
+  .pcard.s-reveal .corner,.pcard.s-curiosity .corner{color:#a03c2e;}
+  .pcard.s-subtract .corner,.pcard.s-agency .corner{color:#23201a;}
+  .suit-tag{font-family:var(--mono);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+    text-align:center;color:#8a8270;margin:4px 0 10px;}
+  .pcard h3{font-family:var(--serif);font-size:21px;font-weight:600;text-align:center;margin:18px 8px 12px;line-height:1.25;}
+  .spark{font-size:14.5px;margin:0 6px 14px;flex:1;}
+  .itr{font-size:12.5px;color:#6f6655;border-top:1px solid #ddd5c2;padding-top:10px;margin:0 6px;}
+  .itr b{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#9a7f2a;display:block;margin-bottom:3px;font-weight:400;}
+  .fine{font-size:11.5px;font-style:italic;color:#8a8270;margin:10px 6px 16px;}
+  .deal-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-align:center;width:100%;margin:-6px 0 4px;}
+  .card-actions{text-align:center;margin-top:18px;width:100%;}
+  .card-actions button{font-size:10px;padding:9px 16px;}
+
+  /* browse grid */
+  #browse{display:none;margin-top:8px;}
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+  .bcell{background:var(--raised);border:1px solid var(--line);border-radius:8px;padding:13px 14px;cursor:pointer;transition:border-color .15s;}
+  .bcell:hover{border-color:var(--gold-dim);}
+  .bcell .bc-c{font-family:var(--mono);font-size:11px;color:var(--gold);margin-bottom:4px;}
+  .bcell .bc-t{font-family:var(--serif);font-size:15.5px;}
+  .footer{text-align:center;margin-top:46px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+  .footer a{color:var(--gold-dim);text-decoration:none;}
+  .footer a:hover{color:var(--gold);}
+
+  /* print: full deck as physical cards */
+  #printdeck{display:none;}
+  @media print{
+    body{background:#fff;}
+    #wrap{display:none;}
+    #printdeck{display:block;}
+    .psheet{display:grid;grid-template-columns:1fr 1fr;gap:6mm;padding:6mm;}
+    .pc{border:1px solid #bbb;border-radius:4mm;padding:7mm 7mm 5mm;page-break-inside:avoid;
+      min-height:120mm;position:relative;color:#23201a;font-family:var(--sans);display:flex;flex-direction:column;}
+    .pc .corner{position:absolute;top:5mm;left:5mm;font-family:var(--mono);font-size:13px;text-align:center;}
+    .pc .corner.br{top:auto;left:auto;bottom:5mm;right:5mm;transform:rotate(180deg);}
+    .pc .corner .r{font-weight:700;display:block;}
+    .pc.s-reveal .corner,.pc.s-curiosity .corner{color:#a03c2e;}
+    .pc .suit-tag{margin-top:0;}
+    .pc h3{font-family:var(--serif);font-size:16px;text-align:center;margin:8mm 4mm 4mm;}
+    .pc .spark{font-size:11px;flex:1;}
+    .pc .itr{font-size:9.5px;}
+    .pc .fine{font-size:9px;}
+  }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div class="kicker">Meliorist Group · For Trainers</div>
+  <h1>The Spark Deck — Sampler</h1>
+  <p class="sub">Ten of the fifty-two. Run them in real rooms this week — the full deck is at <a href="/spark-deck" style="color:var(--gold);">melioristgroup.com/spark-deck</a>.</p>
+  <div class="suit-legend"><b>♠ Subtract</b> remove &amp; watch what appears &nbsp;·&nbsp; <b>♥ Reveal</b> make the present visible &nbsp;·&nbsp; <b>♦ Curiosity</b> make the familiar strange &nbsp;·&nbsp; <b>♣ Agency</b> end with a choice</div>
+
+  <div class="controls">
+    <button class="primary" id="drawBtn">Draw a card</button>
+    <button id="dealBtn">Deal a session (3)</button>
+    <button id="browseBtn">Browse the 10</button>
+    <button onclick="window.print()">Print the deck</button>
+  </div>
+
+  <div class="table" id="table"></div>
+  <div id="browse"><div class="bgrid" id="bgrid"></div></div>
+
+  <div class="footer">The Spark Deck · <a href="https://melioristgroup.com">Meliorist Group</a> · the room was already interesting — this just opens a window</div>
+</div>
+<div id="printdeck"></div>
+
+<script>
+"use strict";
+var DECK=[{"suit": "subtract", "sym": "♠", "suitName": "SUBTRACT", "rank": "A", "title": "The Agenda Funeral", "spark": "Pick the agenda item everyone secretly knows is dead weight. Announce its passing out loud, thank it for its service, and cross it off in front of the room. Then ask: what does the meeting want to do with its inheritance?", "in_the_room": "Do this in the first ten minutes, before the room has invested in the item; watch for the shoulders that drop two inches when it dies.", "fine_print": "Agenda items, like houseplants, deserve an honest goodbye when nobody has watered them in weeks."}, {"suit": "subtract", "sym": "♠", "suitName": "SUBTRACT", "rank": "4", "title": "Kill the Icebreaker", "spark": "Open with: 'We're skipping the icebreaker. You're already interesting.' Then start the actual work thirty seconds in. Watch the relief travel around the room like weather.", "in_the_room": "Especially potent in rooms with neurodivergent participants who pre-rehearse small talk; the gift is the silence where the performance was scheduled.", "fine_print": "Ice melts on its own when the room is warm. That was always the plan."}, {"suit": "subtract", "sym": "♠", "suitName": "SUBTRACT", "rank": "J", "title": "The Quietest Version", "spark": "Take any activity you planned and ask: what is the quietest version of this? Discussion becomes paired whisper. Standing share becomes written card. Run the quiet version today and watch who arrives in the room who was never able to before.", "in_the_room": "Built for mixed-wiring rooms; the participants who flourish in the quiet version were always present — the volume was the wall.", "fine_print": "Libraries figured this out centuries ago and have been smug about it ever since."}, {"suit": "reveal", "sym": "♥", "suitName": "REVEAL", "rank": "4", "title": "Whispered Ovation", "spark": "Close a retro this way: each person turns to a neighbor and, at actual whisper volume, names one thing that neighbor did this sprint that deserved applause. The whisper makes it land as truth instead of performance.", "in_the_room": "Last five minutes of a retro; model it first with a real whisper to a real person so the room knows you mean it.", "fine_print": "Volume and sincerity are inversely correlated in most conference rooms; this card exploits the physics."}, {"suit": "reveal", "sym": "♥", "suitName": "REVEAL", "rank": "6", "title": "The Receipt", "spark": "One-on-one coaching move: ask 'What's a value you hold?' — then immediately ask for the receipt: 'Tell me about a moment in the last two weeks when you acted on it.' The value was already in motion; the receipt makes it visible.", "in_the_room": "Use when a client talks about who they want to become; the receipt redirects the conversation to who is already operating.", "fine_print": "Most people are carrying proof of their own character around in their pockets, unexamined, like grocery receipts."}, {"suit": "reveal", "sym": "♥", "suitName": "REVEAL", "rank": "K", "title": "Liquid Sunshine", "spark": "After rain, name what the rain watered. Invite the room: name one capability you own now that only exists because something once went sideways. The sideways part can stay private — the capability goes on the board.", "in_the_room": "Board fills left to right with capabilities only; the privacy split is what makes honest answers possible in a work room.", "fine_print": "Rain gets all the blame and none of the credit for the garden."}, {"suit": "curiosity", "sym": "♦", "suitName": "CURIOSITY", "rank": "J", "title": "Arm's Reach Oracle", "spark": "Send everyone to find one thing within arm's reach — pocket, bag, window view — that accidentally comments on today's problem. Two minutes. The stretch to connect it is the point.", "in_the_room": "Kinetic and quick; take the most far-fetched connection seriously first and the room will go further on the next round.", "fine_print": "Oracles are mostly attention with good marketing."}, {"suit": "curiosity", "sym": "♦", "suitName": "CURIOSITY", "rank": "Q", "title": "The Foley Artist", "spark": "Film sound is faked with celery, gloves, and coconuts — and the gallop still feels real. Ask the room: if you had to fake the sound of this team working at its best, what would you use?", "in_the_room": "Let answers be literal (objects, rhythms) before anyone translates them into meaning; the translation will volunteer itself.", "fine_print": "In the movies, hoofbeats are coconuts. The riding is real anyway."}, {"suit": "agency", "sym": "♣", "suitName": "AGENCY", "rank": "7", "title": "Two Doors Out", "spark": "Close the session with two doors: \"Door one — you apply something within 48 hours, and you name it now. Door two — you sit with it deliberately, and you name what you're sitting with.\" Both doors are exits in good standing. Each person says which one they're walking through.", "in_the_room": "State plainly that door two is a full-status choice, then keep a poker face during the go-around so nobody choice-shops off your eyebrows.", "fine_print": "Sitting with something, chosen on purpose, is a verb. The dictionary is slowly catching up."}, {"suit": "agency", "sym": "♣", "suitName": "AGENCY", "rank": "J", "title": "The Standing Eight", "spark": "Boxing keeps a standing eight count so the fighter — not the crowd — decides whether to continue. Offer it mid-exercise: anyone can call eight seconds, the room holds, and then they choose: go on, or pass.", "in_the_room": "Introduce it before the exercise starts so calling it costs nothing; the option being there changes the room even if nobody uses it.", "fine_print": "The count exists because sometimes courage just needs eight seconds to catch up."}];
+function esc(s){return (s||"").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+var lastDrawn=[];
+function cardHtml(c,label){
+  return (label?'<div class="deal-label">'+label+'</div>':'')+
+    '<div class="pcard s-'+c.suit+'">'+
+    '<div class="corner"><span class="r">'+c.rank+'</span>'+c.sym+'</div>'+
+    '<div class="corner br"><span class="r">'+c.rank+'</span>'+c.sym+'</div>'+
+    '<div class="suit-tag">'+c.sym+' '+c.suitName+'</div>'+
+    '<h3>'+esc(c.title)+'</h3>'+
+    '<p class="spark">'+esc(c.spark)+'</p>'+
+    '<div class="itr"><b>In the room</b>'+esc(c.in_the_room)+'</div>'+
+    '<p class="fine">'+esc(c.fine_print)+'</p>'+
+    '</div>';
+}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function copyText(c){return c.rank+c.sym+' '+c.title+' — '+c.spark+' IN THE ROOM: '+c.in_the_room+' ('+c.fine_print+') · The Spark Deck, melioristgroup.com';}
+function showCards(cards,labels){
+  lastDrawn=cards;
+  var t=document.getElementById("table");
+  document.getElementById("browse").style.display="none";
+  t.innerHTML=cards.map(function(c,i){return cardHtml(c,labels?labels[i]:null);}).join('')+
+    '<div class="card-actions"><button id="copyDrawn">Copy '+(cards.length>1?'these':'this card')+'</button></div>';
+  document.getElementById("copyDrawn").addEventListener("click",function(){
+    var txt=lastDrawn.map(copyText).join('\n\n');
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt);
+      this.textContent="Copied ✓";var b=this;setTimeout(function(){b.textContent="Copy "+(lastDrawn.length>1?"these":"this card");},2000);}
+  });
+}
+document.getElementById("drawBtn").addEventListener("click",function(){
+  showCards([DECK[Math.floor(Math.random()*DECK.length)]]);
+});
+document.getElementById("dealBtn").addEventListener("click",function(){
+  /* one opener-ish (subtract or curiosity), one middle (reveal), one closer (agency) */
+  var open=shuffle(DECK.filter(function(c){return c.suit==="subtract"||c.suit==="curiosity";}))[0];
+  var mid=shuffle(DECK.filter(function(c){return c.suit==="reveal";}))[0];
+  var close=shuffle(DECK.filter(function(c){return c.suit==="agency";}))[0];
+  showCards([open,mid,close],["Open the room","Mid-session","Close the room"]);
+});
+document.getElementById("browseBtn").addEventListener("click",function(){
+  var b=document.getElementById("browse"),g=document.getElementById("bgrid");
+  document.getElementById("table").innerHTML="";
+  g.innerHTML=DECK.map(function(c,i){return '<div class="bcell" data-i="'+i+'">'+
+    '<div class="bc-c">'+c.rank+' '+c.sym+' '+c.suitName+'</div><div class="bc-t">'+esc(c.title)+'</div></div>';}).join('');
+  b.style.display="block";
+  g.querySelectorAll(".bcell").forEach(function(el){
+    el.addEventListener("click",function(){showCards([DECK[parseInt(el.getAttribute("data-i"),10)]]);window.scrollTo({top:0,behavior:"smooth"});});
+  });
+});
+/* print sheet */
+document.getElementById("printdeck").innerHTML='<div class="psheet">'+DECK.map(function(c){
+  return '<div class="pc s-'+c.suit+'">'+
+    '<div class="corner"><span class="r">'+c.rank+'</span>'+c.sym+'</div>'+
+    '<div class="corner br"><span class="r">'+c.rank+'</span>'+c.sym+'</div>'+
+    '<div class="suit-tag">'+c.sym+' '+c.suitName+'</div>'+
+    '<h3>'+esc(c.title)+'</h3><p class="spark">'+esc(c.spark)+'</p>'+
+    '<div class="itr"><b>In the room</b>'+esc(c.in_the_room)+'</div>'+
+    '<p class="fine">'+esc(c.fine_print)+'</p></div>';}).join('')+'</div>';
+/* draw one on load so the page opens alive */
+showCards([DECK[Math.floor(Math.random()*DECK.length)]]);
+</script>
+</body>
+</html>
