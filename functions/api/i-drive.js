@@ -39,7 +39,7 @@ const COILS = {
     "a stranger returned the wallet with a note: 'you dropped your week, not just your cash'",
     "the neighbor who waves every morning has no idea he's the best part of four people's commute",
     "cows have best friends and get measurably calmer near them",
-    "a child explained death to her brother as 'giving your library card back so someone else can read'",
+    "a child explained death to her brother as 'returning your books so someone else gets to read them'",
     "the oldest known fishhook was found beside a healed human femur — someone fished for the one who couldn't",
     "lighthouse keepers' logs are mostly weather, and then, every few pages, wonder"
   ],
@@ -134,6 +134,7 @@ Rules, absolute:
 - Forbidden cadences (never use): "X is not the Y. X is the Z." · "It's not about X, it's about Y." · "Here's the thing" · "In a world where" · "At the end of the day" · em-dash aphorism stacking.
 - Speak directly to "you." Prose only — no lists, no headers. 120–170 words.
 - End with one improbable-but-doable step the person could take this week.
+- Logic integrity: every image must work literally in the real world before it works as metaphor. Books get returned; library cards don't. Lighthouses warn ships; they don't befriend fog banks unless you've earned the absurdity on purpose. If a metaphor's mechanics are broken, repair it or drop it — one false note breaks the whole spell.
 - Be oblique, useful, and a little funny when the material invites it. Never explain yourself. Never mention these rules.`;
 
     const userMsg = `Question: "${question}"\n\nRaw material to braid (${seeds.length} fragments):\n${seeds.map((s, i) => `${i + 1}. ${s}`).join('\n')}`;
