@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The i-Drive — Meliorist Group</title>
+<meta name="description" content="The Improbability Drive. Ask a question, and get an answer from the probability stream where the obvious move was never invented. In honor of Douglas Adams.">
+<meta property="og:title" content="The i-Drive — Meliorist Group">
+<meta property="og:description" content="A machine for escaping the obvious answer. In honor of Douglas Adams.">
+<meta property="og:url" content="https://melioristgroup.com/i-drive">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --forest:       #1a3d2e;
+  --forest-mid:   #2d5c46;
+  --forest-hi:    #3d7a5c;
+  --forest-pale:  #e8f0eb;
+  --gold:         #b8965a;
+  --gold-hi:      #d4af72;
+  --cream:        #faf7f2;
+  --warm:         #f4efe4;
+  --white:        #ffffff;
+  --text:         #1a1a14;
+  --text-mid:     #3a3a2e;
+  --text-muted:   #7a7a6a;
+  --border:       rgba(26,61,46,0.12);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.7; color: var(--text); background: var(--cream); }
+
+h1, h2, h3, h4 { font-family: 'Spectral', Georgia, serif; line-height: 1.2; font-weight: 600; }
+a { color: inherit; text-decoration: none; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(26,61,46,0.97); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,150,90,0.2);
+  padding: 0 40px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-mark { font-family: 'Spectral', serif; font-size: 1.05rem; font-weight: 600; color: var(--gold-hi); letter-spacing: 0.02em; }
+.nav-mark span { font-weight: 300; opacity: 0.8; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 0.85rem; font-weight: 500; color: rgba(250,247,242,0.75); letter-spacing: 0.03em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold-hi); }
+
+.page-header { background: var(--forest); padding: 140px 40px 80px; }
+.page-header-inner { max-width: 760px; }
+.page-eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.page-header h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 300; color: var(--cream); line-height: 1.15; margin-bottom: 24px; }
+.page-header h1 em { font-style: italic; color: var(--gold-hi); }
+.page-header .lead { font-size: 1.15rem; color: rgba(250,247,242,0.7); max-width: 560px; font-weight: 300; line-height: 1.75; }
+
+.reading { padding: 80px 40px; background: var(--cream); }
+.reading-inner { max-width: 680px; margin: 0 auto; }
+.reading h2 { font-size: 1.7rem; font-weight: 400; color: var(--forest); margin: 60px 0 20px; line-height: 1.3; }
+.reading h2:first-of-type { margin-top: 0; }
+.reading p { color: var(--text-mid); margin-bottom: 20px; line-height: 1.8; font-size: 1.05rem; }
+.reading em { font-style: italic; }
+.reading strong { font-weight: 600; color: var(--text); }
+
+/* The console */
+.console { background: var(--forest); padding: 72px 40px; }
+.console-inner { max-width: 680px; margin: 0 auto; }
+.console-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.console h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 300; color: var(--cream); line-height: 1.25; margin-bottom: 24px; }
+.console textarea {
+  width: 100%; min-height: 110px; resize: vertical;
+  font-family: 'DM Sans', sans-serif; font-size: 1.05rem; line-height: 1.6;
+  color: var(--text); background: var(--cream);
+  border: 1px solid rgba(184,150,90,0.4); border-radius: 4px;
+  padding: 18px 20px; outline: none;
+}
+.console textarea:focus { border-color: var(--gold-hi); box-shadow: 0 0 0 3px rgba(184,150,90,0.2); }
+.console .row { display: flex; align-items: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+.btn-gold { display: inline-block; background: var(--gold); color: var(--forest); padding: 16px 36px; border-radius: 4px; font-size: 1rem; font-weight: 600; letter-spacing: 0.04em; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+.btn-gold:hover { background: var(--gold-hi); }
+.btn-gold:disabled { opacity: 0.5; cursor: wait; }
+.console .status { font-size: 0.92rem; color: rgba(250,247,242,0.6); font-style: italic; }
+
+.drive-result {
+  margin-top: 32px; display: none;
+  background: var(--cream); border-radius: 4px;
+  border-left: 3px solid var(--gold);
+  padding: 28px 32px;
+}
+.drive-result.show { display: block; }
+.drive-result .factor { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.drive-result .answer { font-size: 1.08rem; color: var(--text-mid); line-height: 1.8; white-space: pre-wrap; }
+.drive-again { margin-top: 18px; font-size: 0.9rem; }
+.drive-again a { color: var(--forest-mid); border-bottom: 1px solid rgba(184,150,90,0.4); cursor: pointer; }
+
+.idrive-exchange {
+  border: 1px solid var(--border); border-left: 3px solid var(--gold);
+  border-radius: 2px; background: var(--white);
+  padding: 28px 32px; margin: 32px 0;
+}
+.idrive-exchange .idrive-q { font-weight: 600; color: var(--forest); margin-bottom: 14px; font-size: 1.05rem; }
+.idrive-exchange .idrive-a { color: var(--text-mid); font-size: 1.02rem; line-height: 1.75; margin-bottom: 0; }
+.idrive-exchange .idrive-a strong { color: var(--forest); }
+
+.btn-forest-solid { display: inline-block; background: var(--forest); color: var(--cream); padding: 16px 36px; border-radius: 4px; font-size: 1rem; font-weight: 500; letter-spacing: 0.04em; text-decoration: none; transition: background 0.2s; }
+.btn-forest-solid:hover { background: var(--forest-mid); }
+
+footer { background: var(--forest); padding: 40px; border-top: 1px solid rgba(184,150,90,0.15); }
+.footer-simple { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-simple .mark { font-family: 'Spectral', serif; font-size: 1rem; font-weight: 600; color: var(--gold-hi); }
+.footer-simple .copy { font-size: 0.8rem; color: rgba(250,247,242,0.3); }
+.footer-simple nav { background: none; position: static; border: none; padding: 0; height: auto; gap: 20px; }
+.footer-simple nav a { font-size: 0.83rem; color: rgba(250,247,242,0.5); transition: color 0.2s; }
+.footer-simple nav a:hover { color: rgba(250,247,242,0.9); }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 700px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .page-header { padding: 120px 24px 60px; }
+  .reading { padding: 60px 24px; }
+  .console { padding: 60px 24px; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-mark">Meliorist <span>Group</span></a>
+  <ul class="nav-links">
+    <li><a href="/meliorism">Philosophy</a></li>
+    <li><a href="/origins">Origins</a></li>
+    <li><a href="/true-up">The True-Up</a></li>
+    <li><a href="/collaborate">Let's Collaborate</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">The Workshop · In honor of Douglas Adams</p>
+    <h1>Ask the <em>i-Drive.</em></h1>
+    <p class="lead">The Improbability Drive refuses the most probable answer. What comes back is improbable — and useful precisely because nobody in your market is doing it.</p>
+  </div>
+</div>
+
+<!-- The Console -->
+<div class="console">
+  <div class="console-inner">
+    <p class="console-label">Engage the Drive</p>
+    <h2>What are you actually wrestling with?</h2>
+    <textarea id="q" maxlength="500" placeholder="Ask anything — the stuck project, the pricing question, the thing you keep circling…"></textarea>
+    <div class="row">
+      <button class="btn-gold" id="go" type="button">Engage the Drive →</button>
+      <span class="status" id="status"></span>
+    </div>
+    <div class="drive-result" id="result">
+      <p class="factor" id="factor"></p>
+      <p class="answer" id="answer"></p>
+      <p class="drive-again"><a id="again">Same question, different probability stream →</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- The Story -->
+<div class="reading">
+  <div class="reading-inner">
+    <h2 class="reveal">Why this exists.</h2>
+    <p class="reveal">While designing this site, Brian kept running into the same wall: the AI kept predicting the most probable next sentence — the same "Status Foe" language every other site uses. Best practices. Proven frameworks. The gravity of the common way.</p>
+    <p class="reveal">So he built a countermeasure. The i-Drive braids your question with entropy — old wisdom, true absurdities, quiet wonder — and answers from somewhere the question alone would never reach. Douglas Adams powered a starship this way. We run it a little smaller.</p>
+
+    <div class="idrive-exchange reveal">
+      <p class="idrive-q">You ask: "How do I get more clients?"</p>
+      <p class="idrive-a"><strong>The i-Drive returns (improbability factor 2<sup>276,709</sup> to 1 against):</strong> Stop hunting this month. Pick your three favorite past clients and make them embarrassingly successful — in public, with your fingerprints visible. Document what you <em>removed</em> from their situation, not what you added. New clients orbit results that move.</p>
+    </div>
+
+    <p class="reveal">The Drive is one of the systems being built in the workshop — designed, like the <a href="/true-up" style="border-bottom:1px solid rgba(184,150,90,0.4);">True-Up</a>, to be shared with trainers and business owners who want their rooms to produce answers nobody else's room produces.</p>
+
+    <p class="reveal" style="text-align:center; margin-top:36px;">
+      <a class="btn-forest-solid" href="/collaborate">Want the Drive in your room? Let's collaborate →</a>
+    </p>
+  </div>
+</div>
+
+<!-- Benediction -->
+<div style="background:var(--cream); padding:24px 40px 64px; text-align:center;">
+  <p style="font-family:'Spectral',serif; font-size:1.4rem; font-style:italic; font-weight:300; color:var(--forest-mid);">May your next move be improbable.</p>
+</div>
+
+<footer>
+  <div class="footer-simple">
+    <span class="mark">Meliorist Group</span>
+    <nav>
+      <a href="/meliorism">Philosophy</a>
+      <a href="/origins">Origins</a>
+      <a href="/you">Five W's</a>
+      <a href="/collaborate">Let's Collaborate</a>
+    </nav>
+    <span class="copy">© 2026 Brian Oney · <a href="mailto:brian@melioristgroup.com">brian@melioristgroup.com</a></span>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+  { threshold: 0.1 }
+);
+reveals.forEach(el => observer.observe(el));
+
+const go = document.getElementById('go');
+const q = document.getElementById('q');
+const statusEl = document.getElementById('status');
+const result = document.getElementById('result');
+const factorEl = document.getElementById('factor');
+const answerEl = document.getElementById('answer');
+const again = document.getElementById('again');
+
+const SPINS = [
+  'Charging the entropy coils…',
+  'Consulting an old book of changes…',
+  'Crossing the probability stream…',
+  'Asking the harmonica to pause its taxes…',
+  'Borrowing a lighthouse’s attention…',
+  'Recalculating what normal would say, to avoid it…'
+];
+
+let spinTimer = null;
+
+async function engage() {
+  const question = q.value.trim();
+  if (!question) { q.focus(); return; }
+  go.disabled = true;
+  result.classList.remove('show');
+  let i = 0;
+  statusEl.textContent = SPINS[0];
+  spinTimer = setInterval(() => { i = (i + 1) % SPINS.length; statusEl.textContent = SPINS[i]; }, 1800);
+  try {
+    const res = await fetch('/api/i-drive', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ question })
+    });
+    const data = await res.json();
+    factorEl.textContent = data.factor ? ('Improbability factor ' + data.factor) : 'The Drive responds';
+    answerEl.textContent = data.answer;
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } catch (e) {
+    factorEl.textContent = 'Probability storm';
+    answerEl.textContent = 'The Drive sneezed mid-jump. Try again — improbability is like that.';
+    result.classList.add('show');
+  } finally {
+    clearInterval(spinTimer);
+    statusEl.textContent = '';
+    go.disabled = false;
+  }
+}
+
+go.addEventListener('click', engage);
+again.addEventListener('click', engage);
+q.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') engage(); });
+</script>
+
+</body>
+</html>
