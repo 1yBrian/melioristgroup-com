@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Let's Collaborate — Meliorist Group</title>
+<meta name="description" content="Brian builds wins that get shared. Advisory and collaboration for people who've built something real and want to see it more clearly.">
+<meta property="og:title" content="Let's Collaborate — Meliorist Group">
+<meta property="og:description" content="The work here is engineering profits — and systems — that more than one person gets to keep.">
+<meta property="og:url" content="https://melioristgroup.com/collaborate">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --forest:       #1a3d2e;
+  --forest-mid:   #2d5c46;
+  --forest-hi:    #3d7a5c;
+  --forest-pale:  #e8f0eb;
+  --gold:         #b8965a;
+  --gold-hi:      #d4af72;
+  --cream:        #faf7f2;
+  --warm:         #f4efe4;
+  --white:        #ffffff;
+  --text:         #1a1a14;
+  --text-mid:     #3a3a2e;
+  --text-muted:   #7a7a6a;
+  --border:       rgba(26,61,46,0.12);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.7; color: var(--text); background: var(--cream); }
+
+h1, h2, h3, h4 { font-family: 'Spectral', Georgia, serif; line-height: 1.2; font-weight: 600; }
+a { color: inherit; text-decoration: none; }
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(26,61,46,0.97); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,150,90,0.2);
+  padding: 0 40px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-mark { font-family: 'Spectral', serif; font-size: 1.05rem; font-weight: 600; color: var(--gold-hi); letter-spacing: 0.02em; }
+.nav-mark span { font-weight: 300; opacity: 0.8; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 0.85rem; font-weight: 500; color: rgba(250,247,242,0.75); letter-spacing: 0.03em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold-hi); }
+
+/* Page header */
+.page-header {
+  background: var(--forest);
+  padding: 140px 40px 80px;
+}
+.page-header-inner { max-width: 760px; }
+.page-eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.page-header h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 300; color: var(--cream); line-height: 1.15; margin-bottom: 24px; }
+.page-header h1 em { font-style: italic; color: var(--gold-hi); }
+.page-header .lead { font-size: 1.15rem; color: rgba(250,247,242,0.7); max-width: 540px; font-weight: 300; line-height: 1.75; }
+.page-header .terms { margin-top: 28px; font-size: 0.95rem; color: var(--gold-hi); font-style: italic; letter-spacing: 0.02em; }
+
+/* Reading body */
+.reading { padding: 80px 40px; background: var(--cream); }
+.reading-inner { max-width: 680px; margin: 0 auto; }
+
+.reading h2 {
+  font-size: 1.7rem; font-weight: 400; color: var(--forest);
+  margin: 60px 0 20px; line-height: 1.3;
+}
+.reading h2:first-of-type { margin-top: 0; }
+
+.reading p { color: var(--text-mid); margin-bottom: 20px; line-height: 1.8; font-size: 1.05rem; }
+
+.reading em { font-style: italic; }
+
+.reading strong { font-weight: 600; color: var(--text); }
+
+/* Pull quote inline */
+.inline-quote {
+  border-left: 3px solid var(--gold);
+  padding: 20px 28px;
+  margin: 40px 0;
+  background: var(--warm);
+}
+.inline-quote p {
+  font-family: 'Spectral', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--forest);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Section break */
+.section-divider {
+  display: flex; align-items: center; gap: 16px;
+  margin: 60px 0 40px;
+  color: var(--text-muted); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.section-divider::before, .section-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* The two architectures visual */
+.architecture {
+  background: var(--forest);
+  padding: 72px 40px;
+}
+.arch-inner { max-width: 760px; margin: 0 auto; }
+.arch-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; }
+.arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.arch-card { background: rgba(255,255,255,0.05); padding: 36px 28px; border-top: 2px solid rgba(184,150,90,0.3); }
+.arch-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--gold-hi); margin-bottom: 12px; letter-spacing: 0.02em; }
+.arch-card p { font-size: 0.95rem; color: rgba(250,247,242,0.65); line-height: 1.65; }
+
+/* Engagement / applications grid */
+.applications { padding: 80px 40px; background: var(--warm); }
+.app-inner { max-width: 900px; margin: 0 auto; }
+.app-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 40px; }
+.app-card { background: var(--white); padding: 36px 28px; }
+.app-num { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+.app-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--forest); margin-bottom: 10px; }
+.app-card p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.65; }
+
+/* Big quote */
+.big-quote { background: var(--forest-mid); padding: 80px 40px; text-align: center; }
+.big-quote blockquote { max-width: 640px; margin: 0 auto; }
+.big-quote p { font-family: 'Spectral', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.55; margin-bottom: 20px; }
+.big-quote cite { font-size: 0.83rem; font-style: normal; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; display: block; line-height: 1.7; }
+
+/* i-Drive exchange */
+.idrive-exchange {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 2px;
+  background: var(--white);
+  padding: 28px 32px;
+  margin: 32px 0;
+}
+.idrive-exchange .idrive-q { font-weight: 600; color: var(--forest); margin-bottom: 14px; font-size: 1.05rem; }
+.idrive-exchange .idrive-a { color: var(--text-mid); font-size: 1.02rem; line-height: 1.75; margin-bottom: 0; }
+.idrive-exchange .idrive-a strong { color: var(--forest); }
+
+/* Buttons */
+.btn-gold { display: inline-block; background: var(--gold); color: var(--forest); padding: 16px 36px; border-radius: 4px; font-size: 1rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; transition: background 0.2s; }
+.btn-gold:hover { background: var(--gold-hi); }
+.btn-forest-solid { display: inline-block; background: var(--forest); color: var(--cream); padding: 16px 36px; border-radius: 4px; font-size: 1rem; font-weight: 500; letter-spacing: 0.04em; text-decoration: none; transition: background 0.2s; }
+.btn-forest-solid:hover { background: var(--forest-mid); }
+
+/* Footer */
+footer { background: var(--forest); padding: 40px; border-top: 1px solid rgba(184,150,90,0.15); }
+.footer-simple { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-simple .mark { font-family: 'Spectral', serif; font-size: 1rem; font-weight: 600; color: var(--gold-hi); }
+.footer-simple .copy { font-size: 0.8rem; color: rgba(250,247,242,0.3); }
+.footer-simple nav { background: none; position: static; border: none; padding: 0; height: auto; gap: 20px; }
+.footer-simple nav a { font-size: 0.83rem; color: rgba(250,247,242,0.5); transition: color 0.2s; }
+.footer-simple nav a:hover { color: rgba(250,247,242,0.9); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 700px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .page-header { padding: 120px 24px 60px; }
+  .reading, .applications { padding: 60px 24px; }
+  .architecture { padding: 60px 24px; }
+  .arch-grid { grid-template-columns: 1fr; }
+  .app-grid { grid-template-columns: 1fr; }
+  .big-quote { padding: 60px 24px; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-mark">Meliorist <span>Group</span></a>
+  <ul class="nav-links">
+    <li><a href="/meliorism">Philosophy</a></li>
+    <li><a href="/origins">Origins</a></li>
+    <li><a href="/true-up">The True-Up</a></li>
+    <li><a href="/collaborate" style="color:var(--gold-hi);">Let's Collaborate</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">Advisory · Collaboration · Shared Wins</p>
+    <h1>Let's <em>collaborate.</em></h1>
+    <p class="lead">Brian builds wins that get shared. The work here is engineering profits — and systems — that more than one person gets to keep. If you've built something real and want to see it more clearly, this is the room.</p>
+    <p class="terms">$2K–$3K / month · One conversation to start</p>
+  </div>
+</div>
+
+<!-- The Premise -->
+<div class="reading">
+  <div class="reading-inner">
+    <h2 class="reveal">The answer you're looking for is usually already <em>yours.</em></h2>
+    <p class="reveal">Most people don't need more information. They need the right question at the right moment — and someone willing to sit with them until what's real becomes visible.</p>
+    <p class="reveal">That's not consulting. It's not coaching. It's what Meliorism actually means: the better version is already present — the work is revealing it. And when it's revealed, the win is built to be shared.</p>
+  </div>
+</div>
+
+<!-- The Engagement -->
+<div class="applications">
+  <div class="app-inner">
+    <p class="reveal" style="font-size:0.78rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest-mid);margin-bottom:16px;">The Engagement</p>
+    <h2 class="reveal" style="font-family:'Spectral',serif;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:300;color:var(--forest);line-height:1.25;margin-bottom:0;">What working together looks like.</h2>
+
+    <div class="app-grid">
+      <div class="app-card reveal">
+        <span class="app-num">01 — The Conversation</span>
+        <h3>A thinking partnership, not a session</h3>
+        <p>The kind of conversation that doesn't end when the call does. No rigid agenda, no off-the-shelf framework — just two people going deep on what's actually true.</p>
+      </div>
+      <div class="app-card reveal">
+        <span class="app-num">02 — Clarity by Subtraction</span>
+        <h3>Remove what's in the way</h3>
+        <p>Most clarity work tries to add more — more strategy, more steps, more tools. This works the other direction: removing what's obscuring what's real, until what you already know becomes visible again.</p>
+      </div>
+      <div class="app-card reveal">
+        <span class="app-num">03 — Honest Presence</span>
+        <h3>Truth without the performance</h3>
+        <p>Not validation. Not cheerleading. Someone who sees clearly and says so — including the things that are working that you've stopped trusting.</p>
+      </div>
+      <div class="app-card reveal">
+        <span class="app-num">04 — Real Movement</span>
+        <h3>Ideas that don't move are expensive</h3>
+        <p>Every engagement ends with something in motion. Not just insight — momentum. Clarity without action is just a more sophisticated kind of stuck.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Workshop -->
+<div class="architecture">
+  <div class="arch-inner">
+    <p class="arch-label reveal">The Workshop</p>
+    <h2 class="reveal" style="font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:300;color:var(--cream);line-height:1.25;margin-bottom:20px;">Built here, shared forward.</h2>
+    <p class="reveal" style="color:rgba(250,247,242,0.7);font-size:1.05rem;line-height:1.75;margin-bottom:32px;max-width:620px;">Brian is in the workshop designing systems that outlive any single engagement — tools other trainers and business owners will run in their own rooms:</p>
+    <div class="arch-grid">
+      <div class="arch-card reveal">
+        <h3>The True-Up</h3>
+        <p>A six-station life assessment voiced by Mac, a master mechanic who guides you to the real constraint. Not the one you assume is there.</p>
+      </div>
+      <div class="arch-card reveal">
+        <h3>The i-Drive</h3>
+        <p>See below. A machine for escaping the obvious answer.</p>
+      </div>
+    </div>
+    <p style="color:rgba(250,247,242,0.7); font-size:1rem; margin-top:28px; line-height:1.75;" class="reveal">
+      When we collaborate, you get the working versions first — and your situation makes the systems better for everyone who comes after. Wealth creation over extraction, practiced in public.
+    </p>
+  </div>
+</div>
+
+<!-- The i-Drive -->
+<div class="reading">
+  <div class="reading-inner">
+    <h2 class="reveal">Ask the i-Drive.</h2>
+    <p class="reveal" style="font-style:italic; color:var(--text-muted);">In honor of Douglas Adams and The Hitchhiker's Guide to the Galaxy.</p>
+    <p class="reveal">While designing this site, Brian kept running into the same wall: the AI kept predicting the most probable next sentence — the same "Status Foe" language every other site uses. Best practices. Proven frameworks. The gravity of the common way.</p>
+    <p class="reveal">So he built a countermeasure. The i-Drive takes your question and refuses the most probable answer. What comes back is improbable — and useful precisely because nobody in your market is doing it.</p>
+
+    <div class="section-divider reveal">Try it</div>
+
+    <div class="idrive-exchange reveal">
+      <p class="idrive-q">You ask: "How do I get more clients?"</p>
+      <p class="idrive-a"><strong>The i-Drive returns (improbability factor 2<sup>276,709</sup> to 1 against):</strong> Stop hunting this month. Pick your three favorite past clients and make them embarrassingly successful — in public, with your fingerprints visible. Document what you <em>removed</em> from their situation, not what you added. New clients orbit results that move.</p>
+    </div>
+
+    <div class="idrive-exchange reveal">
+      <p class="idrive-q">You ask: ______________________________</p>
+      <p class="idrive-a"><strong>The i-Drive returns:</strong> an answer from the probability stream where the obvious move was never invented.</p>
+    </div>
+
+    <p class="reveal" style="text-align:center; margin-top:36px;">
+      <a class="btn-forest-solid" href="mailto:brian@melioristgroup.com?subject=i-Drive%20question">Send the i-Drive your question →</a>
+    </p>
+  </div>
+</div>
+
+<!-- Fit -->
+<div class="applications" style="background:var(--cream); border-top:1px solid var(--border);">
+  <div class="app-inner">
+    <p class="reveal" style="font-size:0.78rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest-mid);margin-bottom:16px;">Fit</p>
+    <h2 class="reveal" style="font-family:'Spectral',serif;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:300;color:var(--forest);line-height:1.25;margin-bottom:20px;">Is this the right room?</h2>
+    <p class="reveal" style="color:var(--text-mid); font-size:1.05rem; line-height:1.75; max-width:620px;">I work with a small number of advisory clients at a time — it's how I make sure the work actually matters.</p>
+
+    <div class="app-grid">
+      <div class="app-card reveal" style="border-top:3px solid var(--forest-hi);">
+        <h3>This room fits if:</h3>
+        <p>You've built something real and want to see it more clearly · you have real skin in the game · you want a thinking partner who will be honest with you · you can sit with a hard question · you'd rather share a win than guard one.</p>
+      </div>
+      <div class="app-card reveal" style="border-top:3px solid rgba(180,100,80,0.5);">
+        <h3>A different room fits better if:</h3>
+        <p>You're looking for someone to execute the work for you, you need daily accountability, or you're pre-revenue and need to land your first customers before clarity work pays for itself. No judgment — timing matters, and the door stays open.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bio -->
+<div class="reading" style="border-top:1px solid var(--border);">
+  <div class="reading-inner">
+    <p class="reveal" style="font-size:0.78rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest-mid);margin-bottom:16px;">The collaborator</p>
+    <h2 class="reveal">Brian Oney · Entrepreneur · Meliorist · Advisor</h2>
+    <p class="reveal">I spent years advising business owners and watching the same pattern: smart people with real ideas who couldn't sequence them. The problem was never the vision. It was knowing what to do next — and believing it was worth doing.</p>
+    <p class="reveal">My training is in how systems shape behavior and how behavior shapes systems — AA, De Anza College; BA in Sociology, UC Santa Cruz; MPA, Syracuse. That turns out to be exactly what you need when a business is stuck: the ability to see the structure underneath the problem.</p>
+    <p class="reveal">I co-run <strong><a href="https://ctcsp.com" target="_blank" rel="noopener" style="border-bottom:1px solid rgba(184,150,90,0.3);">Cracking the Code to Success &amp; Profits</a></strong> — a weekly community for business owners using AI as a force multiplier, live Mondays 9AM. I'm building <strong>codeworth</strong>, a developer standard for code that honors human worth. And I'm in the workshop on the True-Up and the i-Drive — systems designed to be shared with other trainers and business owners.</p>
+  </div>
+</div>
+
+<!-- Testimonial -->
+<div class="big-quote">
+  <blockquote>
+    <p>"Time with Brian leaves you clearer, lighter, and more aligned than before."</p>
+    <cite>— Chance Thompson, Viridescent<br>met in the Wisdom Workshop, where he invited Brian to collaborate on one of his sessions</cite>
+  </blockquote>
+</div>
+
+<!-- Contact -->
+<div style="background:var(--warm); padding:80px 40px; text-align:center; border-top:1px solid var(--border);">
+  <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest-mid);margin-bottom:16px;" class="reveal">Contact</p>
+  <h2 style="font-family:'Spectral',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;color:var(--forest);letter-spacing:-0.02em;margin-bottom:16px;line-height:1.2;" class="reveal">Start a conversation.</h2>
+  <p style="color:var(--text-mid);font-size:1.05rem;max-width:480px;margin:0 auto 32px;line-height:1.75;" class="reveal">Tell me where you are and what's not moving. I read every message personally and reply within a day or two.</p>
+  <p class="reveal"><a class="btn-gold" href="mailto:brian@melioristgroup.com?subject=Let%27s%20Collaborate&body=Name%3A%0D%0AYour%20business%3A%0D%0AWhat%27s%20not%20moving%3A%0D%0AWhat%20a%20shared%20win%20looks%20like%3A%0D%0A">Email Brian → brian@melioristgroup.com</a></p>
+  <p class="reveal" style="color:var(--text-muted); font-size:1rem; font-style:italic; margin-top:20px;">Name / Your business / What's not moving / What a shared win looks like</p>
+</div>
+
+<!-- Benediction -->
+<div style="background:var(--cream); padding:64px 40px; text-align:center;">
+  <p style="font-family:'Spectral',serif; font-size:1.4rem; font-style:italic; font-weight:300; color:var(--forest-mid);">May you find what was already there.</p>
+</div>
+
+<footer>
+  <div class="footer-simple">
+    <span class="mark">Meliorist Group</span>
+    <nav>
+      <a href="/meliorism">Philosophy</a>
+      <a href="/origins">Origins</a>
+      <a href="/you">Five W's</a>
+      <a href="/collaborate">Let's Collaborate</a>
+    </nav>
+    <span class="copy">© 2026 Brian Oney · <a href="mailto:brian@melioristgroup.com">brian@melioristgroup.com</a></span>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+  { threshold: 0.1 }
+);
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
