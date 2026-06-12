@@ -16,7 +16,12 @@
   }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;font-size:16.5px;-webkit-font-smoothing:antialiased;}
-  .wrap{max-width:680px;margin:0 auto;padding:64px 22px 90px;}
+  .wrap{max-width:680px;margin:0 auto;padding:34px 22px 90px;}
+  .heroPhoto{background:url('/images/agency-alignment-forest.jpg') center 62%/cover no-repeat;min-height:54vh;display:flex;align-items:flex-end;}
+  .heroInner{width:100%;padding:120px 22px 34px;background:linear-gradient(180deg, rgba(20,40,30,0) 0%, rgba(250,248,244,0.55) 55%, var(--bg) 100%);}
+  .heroInner .kicker,.heroInner h1,.heroInner .lede{max-width:680px;margin-left:auto;margin-right:auto;}
+  .heroInner h1{text-shadow:0 1px 14px rgba(250,248,244,0.85);margin:12px auto 10px;}
+  .heroInner .lede{margin-bottom:6px;color:#33433c;}
   .kicker{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);text-align:center;}
   h1{font-family:var(--serif);font-size:clamp(34px,6.5vw,52px);font-weight:600;text-align:center;margin:12px 0 10px;line-height:1.12;}
   .lede{text-align:center;color:var(--dim);font-size:17px;max-width:520px;margin:0 auto 40px;}
@@ -37,10 +42,14 @@
 </style>
 </head>
 <body>
+<div class="heroPhoto">
+  <div class="heroInner">
+    <p class="kicker">Meliorist Group · Calibration</p>
+    <h1>Agency Alignment</h1>
+    <p class="lede">A few honest minutes that turn what you want into words we can both work from — your values, your why, your way back when life makes weather.</p>
+  </div>
+</div>
 <div class="wrap">
-  <p class="kicker">Meliorist Group · Calibration</p>
-  <h1>Agency Alignment</h1>
-  <p class="lede">A few honest minutes that turn what you want into words we can both work from — your values, your why, your way back when life makes weather.</p>
 
   <div class="note">
     <p class="from">A message from Brian</p>
@@ -71,6 +80,7 @@
     <a class="cta" href="https://cem3-app.pages.dev/agency-alignment">Begin the calibration →</a>
     <p class="mins">About six honest minutes · saves as you go</p>
     <p class="whisper">If Brian sent you a personal link, use that one — it greets you by name.</p>
+    <p class="whisper" style="margin-top:26px;">Photo by Brian Oney — calla lilies under the tree ferns, San Francisco.</p>
   </div>
 </div>
 </body>
